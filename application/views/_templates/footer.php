@@ -213,19 +213,25 @@ https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js
 https://cdn.datatables.net/buttons/3.0.1/js/buttons.html5.min.js
 -->
 
-    <script>
-            //make the datatable scrollable
-            $(document).ready(function() {
-                $('#data-tables').DataTable({
-                    scrollX: true,
-                    scrollCollapse: true,
-                    dom: 'Bfrtip',
-                    buttons: [
-                        'excel', 'pdf', 'print', 'copy', 'csv'
-                    ]
-                });
-            });        
-    </script>
+<script>
+        //make the datatable scrollable
+        $(document).ready(function() {
+            $('#data-tables').DataTable({
+                scrollX: true,
+                scrollCollapse: true,
+                dom: 'Bfrtip',
+                buttons: [
+                    'excel', 'pdf', 'print', 'copy', 'csv'
+                ]
+            });
+        });        
+</script>
+
+<script>
+    $(document).ready(function() {
+        $('#warningModal').modal('show');
+    });
+</script>
       
     
 

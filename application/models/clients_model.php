@@ -40,4 +40,22 @@ class Clients_model extends CI_Model
         // Implement your logic here
         $query = $this->db->delete('clients', array('client_id' => $client_id));
     }
+
+
+    public function get_client_by_name($client_name) 
+    {
+        // Retrieve a specific client by name from the database
+        // Implement your logic here
+        $query = $this->db->get_where('clients', array('client_name' => $client_name));
+        return $query->row_array();
+    }
+
+    public function get_client_by_name_and_id($client_name, $client_id) 
+    {
+        // Retrieve a specific client by name and id from the database
+        // Implement your logic here
+        $query = $this->db->get_where('clients', array('client_name' => $client_name, 'client_id !=' => $client_id));
+        return $query->row_array();
+    }
+
 }
