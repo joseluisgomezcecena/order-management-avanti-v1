@@ -11,6 +11,7 @@
 
     <!-- page css -->
     <link href="<?php echo base_url() ?>assets/vendors/datatables/dataTables.bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.7.1/css/buttons.dataTables.min.css">
 	<!-- page css -->
 	<link href="<?php echo base_url() ?>assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet">
 

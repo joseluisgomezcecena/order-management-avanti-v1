@@ -22,7 +22,11 @@ class Auth_model extends CI_Model {
     
             if (password_verify($password, $user->password)) {
                 // Password is correct, return true
-                return true;
+                //return true;
+
+                //return the user object
+                return $user;
+
             }
         }
         // User doesn't exist or password is incorrect, return false

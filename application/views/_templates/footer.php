@@ -4,7 +4,7 @@
                 <!-- Footer START -->
                 <footer class="footer">
                     <div class="footer-content justify-content-between">
-                        <p class="m-b-0">Copyright © 2019 Theme_Nate. All rights reserved.</p>
+                        <p class="m-b-0">Copyright © <?php echo date("Y") ?> Nexus Software Solutions. All rights reserved.</p>
                         <span>
                             <a href="" class="text-gray m-r-15">Term &amp; Conditions</a>
                             <a href="" class="text-gray">Privacy &amp; Policy</a>
@@ -183,15 +183,51 @@
 
     
     <!-- Core Vendors JS -->
-    <script src="assets/js/vendors.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/js/vendors.min.js"></script>
 
     <!-- page js -->
-    <script src="assets/vendors/datatables/jquery.dataTables.min.js"></script>
-    <script src="assets/vendors/datatables/dataTables.bootstrap.min.js"></script>
-    <script src="assets/js/pages/datatables.js"></script>
+    <script src="<?php echo base_url(); ?>assets/vendors/datatables/jquery.dataTables.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/vendors/datatables/dataTables.bootstrap.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/js/pages/datatables.js"></script>
 
     <!-- Core JS -->
-    <script src="assets/js/app.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/js/app.min.js"></script>
+
+
+    <!-- Datatables Buttons -->
+    <script src="https://cdn.datatables.net/buttons/1.7.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.flash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.print.min.js"></script>
+
+
+    <!--
+    https://cdn.datatables.net/buttons/3.0.1/js/dataTables.buttons.js
+https://cdn.datatables.net/buttons/3.0.1/js/buttons.dataTables.js
+https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js
+https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js
+https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js
+https://cdn.datatables.net/buttons/3.0.1/js/buttons.html5.min.js
+-->
+
+    <script>
+            //make the datatable scrollable
+            $(document).ready(function() {
+                $('#data-tables').DataTable({
+                    scrollX: true,
+                    scrollCollapse: true,
+                    dom: 'Bfrtip',
+                    buttons: [
+                        'excel', 'pdf', 'print', 'copy', 'csv'
+                    ]
+                });
+            });        
+    </script>
+      
+    
 
 </body>
 

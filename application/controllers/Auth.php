@@ -70,10 +70,24 @@ class Auth extends CI_Controller {
             $username = $this->input->post('username');
             $password = $this->input->post('password');
 
-            if ($this->auth_model->login_user($username, $password)) 
+            if ($user = $this->auth_model->login_user($username, $password)) 
             {
+                //retrieve the user object
+                
+                //write session data.
+                $session_data = array(
+                    'user_id' => $user->id,
+                    'username' => $username,
+                    'email' => $user->email,
+                    'logged_in' => TRUE
+                );
+
+                $this->session->set_userdata($session_data);
+
+                
                 // Login successful, redirect to dashboard
                 redirect(base_url() . 'dashboard');
+
             } 
             else 
             {
@@ -87,6 +101,11 @@ class Auth extends CI_Controller {
     public function logout() {
         // Destroy session and redirect to login page
         $this->session->sess_destroy();
+
+        //$this->session->unset_userdata('logged_in');
+		//$this->session->unset_userdata('data');
+		//$this->session->unset_userdata('user_name');
+
         redirect('auth/login');
     }
 
