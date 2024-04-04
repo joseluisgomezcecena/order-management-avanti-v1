@@ -10,6 +10,7 @@ class Projects_model extends CI_Model
         return $query->row_array();
     }
 
+
     public function get_projects()
     {
         // Retrieve all projects from the database
@@ -20,6 +21,7 @@ class Projects_model extends CI_Model
         return $query->result_array();
         
     }
+
 
     public function check_project_name_exists($project_name)
     {
@@ -49,6 +51,7 @@ class Projects_model extends CI_Model
         }
     }
 
+
     public function update_project($project_id, $project_data)
     {
         // Update a project in the database
@@ -56,6 +59,7 @@ class Projects_model extends CI_Model
         $this->db->update('projects', $project_data);
     }
 
+    
     public function delete_project($project_id)
     {
         // Delete a project from the database

@@ -126,39 +126,12 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header justify-content-between align-items-center">
-                            <h5 class="modal-title">Theme Config</h5>
+                            <h5 class="modal-title">Configuración del panel</h5>
                         </div>
                         <div class="modal-body scrollable">
-                            <div class="m-b-30">
-                                <h5 class="m-b-0">Header Color</h5>
-                                <p>Config header background color</p>
-                                <div class="theme-configurator d-flex m-t-10">
-                                    <div class="radio">
-                                        <input id="header-default" name="header-theme" type="radio" checked value="default">
-                                        <label for="header-default"></label>
-                                    </div>
-                                    <div class="radio">
-                                        <input id="header-primary" name="header-theme" type="radio" value="primary">
-                                        <label for="header-primary"></label>
-                                    </div>
-                                    <div class="radio">
-                                        <input id="header-success" name="header-theme" type="radio" value="success">
-                                        <label for="header-success"></label>
-                                    </div>
-                                    <div class="radio">
-                                        <input id="header-secondary" name="header-theme" type="radio" value="secondary">
-                                        <label for="header-secondary"></label>
-                                    </div>
-                                    <div class="radio">
-                                        <input id="header-danger" name="header-theme" type="radio" value="danger">
-                                        <label for="header-danger"></label>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr>
                             <div>
-                                <h5 class="m-b-0">Side Nav Dark</h5>
-                                <p>Change Side Nav to dark</p>
+                                <h5 class="m-b-0">Navegación Lateral Obscura</h5>
+                                <p>Cambiar a obscuro</p>
                                 <div class="switch d-inline">
                                     <input type="checkbox" name="side-nav-theme-toogle" id="side-nav-theme-toogle">
                                     <label for="side-nav-theme-toogle"></label>
@@ -166,12 +139,18 @@
                             </div>
                             <hr>
                             <div>
-                                <h5 class="m-b-0">Folded Menu</h5>
-                                <p>Toggle Folded Menu</p>
+                                <h5 class="m-b-0">Pantalla Completa</h5>
+                                <p>Cambiar a pantalla completa</p>
                                 <div class="switch d-inline">
                                     <input type="checkbox" name="side-nav-fold-toogle" id="side-nav-fold-toogle">
                                     <label for="side-nav-fold-toogle"></label>
                                 </div>
+                            </div>
+                            <hr>
+                            <div>
+                                <h5 class="m-b-0">Aplicar Cambios</h5>
+                                <p>Aplicar los cambios realizados</p>
+                                <button class="btn btn-primary btnapply">Aplicar</button>
                             </div>
                         </div>
                     </div>
@@ -242,7 +221,69 @@ https://cdn.datatables.net/buttons/3.0.1/js/buttons.html5.min.js
     $('.select2').select2();
     $('.datepicker-input').datepicker();
 </script>
-    
+
+<script>
+
+    function applyTheme() {
+        if (localStorage.getItem('is-side-nav-dark')) {
+            $('.app .layout').addClass("is-side-nav-dark");
+            $('#side-nav-theme-toogle').prop('checked', true);
+        } else {
+            $('.app .layout').removeClass("is-side-nav-dark");
+            $('#side-nav-theme-toogle').prop('checked', false);
+        }
+
+        if (localStorage.getItem('is-folded')) {
+            $('.app .layout').addClass("is-folded");
+            $('#side-nav-fold-toogle').prop('checked', true);
+        } else {
+            $('.app .layout').removeClass("is-folded");
+            $('#side-nav-fold-toogle').prop('checked', false);
+        }
+    }
+
+    // Apply theme on page load
+    applyTheme();
+
+    $(document).on('change', 'input[name="header-theme"]', ()=> {
+        const context = $('input[name="header"]:checked').val();
+        console.log(context)
+        $(".app").removeClass (function (index, className) {
+            return (className.match (/(^|\s)is-\S+/g) || []).join(' ');
+        }).addClass( 'is-'+ context );
+    });
+
+    $('#side-nav-theme-toogle').on('change', (e)=> {
+        e.preventDefault();
+
+        if ($('#side-nav-theme-toogle').is(':checked')) {
+            $('.app .layout').addClass("is-side-nav-dark");
+            localStorage.setItem('is-side-nav-dark', 'true');
+        } else {
+            $('.app .layout').removeClass("is-side-nav-dark");
+            localStorage.removeItem('is-side-nav-dark');
+        }
+    });
+
+    $('#side-nav-fold-toogle').on('change', (e)=> {
+        e.preventDefault();
+
+        if ($('#side-nav-fold-toogle').is(':checked')) {
+            $('.app .layout').addClass("is-folded");
+            localStorage.setItem('is-folded', 'true');
+        } else {
+            $('.app .layout').removeClass("is-folded");
+            localStorage.removeItem('is-folded');
+        }
+    });
+
+    // Add click event to the apply button
+    $('.btnapply').on('click', function(e) {
+        e.preventDefault();
+        location.reload();
+    });
+
+</script>
 
 </body>
 

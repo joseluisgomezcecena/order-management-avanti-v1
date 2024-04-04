@@ -27,6 +27,7 @@ $route['projects/delete/(:any)'] = 'projects/delete/$1';
 $route['projects/(:any)'] = 'projects/show/$1';
 
 
+//default routes.
 $route['(:any)'] = 'pages/view/$1';
 $route['default_controller'] = 'pages/view';
 $route['404_override'] = '';

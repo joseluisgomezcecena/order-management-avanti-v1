@@ -5,7 +5,7 @@ class Projects extends MY_Controller
     
     public function show($project_id) {
         // Retrieve the project from the database
-        $data['project'] = $this->projects_model->get_project($project_id);
+        $data['project'] = $this->Projects_model->get_project($project_id);
         
         // Load the view to display the project details
         $this->load->view('projects/show', $data);
