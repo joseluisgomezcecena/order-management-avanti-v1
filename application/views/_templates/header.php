@@ -14,9 +14,14 @@
 	<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.7.1/css/buttons.dataTables.min.css">
 	<!-- page css -->
 	<link href="<?php echo base_url() ?>assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet">
+	<link href="<?php echo base_url() ?>assets/vendors/select2/select2.css" rel="stylesheet">
+	<link href="<?php echo base_url() ?>assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet">
+
 
     <!-- Core css -->
     <link href="<?php echo base_url() ?>assets/css/app.min.css" rel="stylesheet">
+
+
 
 	<style>
 		/* Hide scrollbar for Chrome, Safari and Opera */

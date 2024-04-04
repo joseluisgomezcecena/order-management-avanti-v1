@@ -1,16 +1,16 @@
 <div class="page-header">
-    <h2 class="header-title">Nuevo Proceso</h2>
+    <h2 class="header-title">Nuevo Proyecto</h2>
     <div class="header-sub-title">
         <nav class="breadcrumb breadcrumb-dash">
             <a href="<?php echo base_url(); ?>" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Inicio</a>
-            <a class="breadcrumb-item" href="<?php echo base_url("operations") ?>">Procesos</a>
-            <span class="breadcrumb-item active">Nuevo Proceso</span>
+            <a class="breadcrumb-item" href="<?php echo base_url("projects") ?>">Proyectos</a>
+            <span class="breadcrumb-item active">Nuevo Proyecto</span>
         </nav>
     </div>
 </div>
 <div class="card">
     <div class="card-body">
-        <h4>Proceso</h4>
+        <h4>Proyecto</h4>
         <div class="m-t-25">
 
              <!-- echo flash messages -->
@@ -34,7 +34,7 @@
 
             
 
-            <form action="<?php echo base_url("projects/create") ?>" method="post">
+            <form action="<?php echo base_url("projects/create") ?>" method="post" enctype="multipart/form-data">
                 <div class="row">
                     
                     <div class="form-group col-lg-6">
@@ -45,51 +45,80 @@
 
                     <div class="form-group col-lg-6">
                         <label for="client_id">Cliente</label>
-                        <input type="text" class="form-control" id="client_id" name="client_id" placeholder="Cliente" value="<?php echo set_value('client_id'); ?>">
+                        <select class="select2" id="client_id" name="client_id">
+                            <?php foreach ($clients as $client): ?>
+                                <option value="<?php echo $client['client_id']; ?>" <?php echo set_select('client_id', $client['client_id']); ?>><?php echo $client['client_name']; ?></option>
+                            <?php endforeach; ?>
+                        </select>
                         <?php echo form_error('client_id', '<div class="text-danger">', '</div>'); ?>
                     </div>
+                    
 
-                    <div class="form-group col-lg-6">
+                    <div class="form-group col-lg-3">
+                       <!-- this should be a select-->
                         <label for="installation_required">Requerimiento de instalacion</label>
-                        <input type="text" class="form-control" id="installation_required" name="installation_required" placeholder="Requerimiento de instalacion" value="<?php echo set_value('installation_required'); ?>">
+                        <select class="form-control" id="installation_required" name="installation_required" required>
+                            <option value="">Seleccione una opción</option>
+                            <option value="1" <?php echo set_select('installation_required', '1'); ?>>Si</option>
+                            <option value="0" <?php echo set_select('installation_required', '0'); ?>>No</option>
+                        </select>
                         <?php echo form_error('installation_required', '<div class="text-danger">', '</div>'); ?>
                     </div>
 
-                    <div class="form-group col-lg-6">
+
+                    <div class="form-group col-lg-4">
                         <label for="qty">Cantidad</label>
-                        <input type="text" class="form-control" id="qty" name="qty" placeholder="Cantidad" value="<?php echo set_value('qty'); ?>">
+                        <input type="text" class="form-control" id="qty" name="qty" placeholder="Cantidad" value="<?php echo set_value('qty'); ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                         <?php echo form_error('qty', '<div class="text-danger">', '</div>'); ?>
                     </div>
 
-                    <div class="form-group col-lg-6">
+                    <div class="form-group col-lg-2">
                         <label for="date">Fecha</label>
-                        <input type="text" class="form-control" id="date" name="date" placeholder="Fecha" value="<?php echo set_value('date'); ?>">
+                        <div class="input-affix m-b-10">
+                            <i class="prefix-icon anticon anticon-calendar"></i>
+                            <input type="text" class="form-control datepicker-input" id="date" name="date" placeholder="Fecha" value="<?php echo set_value('date'); ?>">
+                        </div>
                         <?php echo form_error('date', '<div class="text-danger">', '</div>'); ?>
                     </div>
 
-                    <div class="form-group col-lg-6">
+                    <div class="form-group col-lg-3">
                         <label for="user">Usuario</label>
                         <input type="text" class="form-control" id="user" name="user" placeholder="Usuario" value="<?php echo set_value('user'); ?>">
                         <?php echo form_error('user', '<div class="text-danger">', '</div>'); ?>
                     </div>
 
-                    <div class="form-group col-lg-6">
+                    <div class="form-group col-lg-3">
                         <label for="area">Area</label>
                         <input type="text" class="form-control" id="area" name="area" placeholder="Area" value="<?php echo set_value('area'); ?>">
                         <?php echo form_error('area', '<div class="text-danger">', '</div>'); ?>
                     </div>
 
-                    <div class="form-group col-lg-6">
+                    <div class="form-group col-lg-4">
                         <label for="work_units">Unidades de trabajo a realizar/fabricar</label>
-                        <input type="text" class="form-control" id="work_units" name="work_units" placeholder="Unidades de trabajo a realizar/fabricar" value="<?php echo set_value('work_units'); ?>">
+                        <input type="text" class="form-control" id="work_units" name="work_units" placeholder="Unidades de trabajo a realizar/fabricar" value="<?php echo set_value('work_units'); ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                         <?php echo form_error('work_units', '<div class="text-danger">', '</div>'); ?>
                     </div>
 
-                    <div class="form-group col-lg-6">
+                    <div class="form-group col-lg-3">
                         <label for="approved_by">Aprobado por</label>
                         <input type="text" class="form-control" id="approved_by" name="approved_by" placeholder="Aprobado por" value="<?php echo set_value('approved_by'); ?>">
                         <?php echo form_error('approved_by', '<div class="text-danger">', '</div>'); ?>
                     </div>
+
+
+                    <div class="col-lg-12 mb-5">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="customFile" name="main_image">
+                            <label class="custom-file-label" for="customFile">Elige una fotografia</label>
+                        </div>
+                        <small>Solo imagenes JPG, JPEG, GIF O PNG.</small>
+                    </div>
+                    
+
+                    <div class="form-group col-lg-12 mt-5">
+                        <button type="submit" class="btn btn-primary">Guardar y continuar</button>
+                    </div>
+
                 </div>    
             </form>
         </div>

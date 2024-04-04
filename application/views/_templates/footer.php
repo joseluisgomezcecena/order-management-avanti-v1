@@ -189,6 +189,8 @@
     <script src="<?php echo base_url(); ?>assets/vendors/datatables/jquery.dataTables.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/vendors/datatables/dataTables.bootstrap.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/js/pages/datatables.js"></script>
+    <script src="<?php echo base_url(); ?>assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+
 
     <!-- Core JS -->
     <script src="<?php echo base_url(); ?>assets/js/app.min.js"></script>
@@ -202,6 +204,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.print.min.js"></script>
+
+    <!-- Select 2 -->
+    <script src="<?php echo base_url(); ?>assets/vendors/select2/select2.min.js"></script>
 
 
     <!--
@@ -232,7 +237,11 @@ https://cdn.datatables.net/buttons/3.0.1/js/buttons.html5.min.js
         $('#warningModal').modal('show');
     });
 </script>
-      
+
+<script>
+    $('.select2').select2();
+    $('.datepicker-input').datepicker();
+</script>
     
 
 </body>
