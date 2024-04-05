@@ -27,6 +27,13 @@ $route['projects/delete/(:any)'] = 'projects/delete/$1';
 $route['projects/(:any)'] = 'projects/show/$1';
 $route['projects/(:any)/operations'] = 'projects/operations/$1';
 
+//users routes.
+$route['users'] = 'users/index';
+$route['users/create'] = 'users/create';
+$route['users/update/(:any)'] = 'users/update/$1';
+$route['users/delete/(:any)'] = 'users/delete/$1';
+
+
 //default routes.
 $route['(:any)'] = 'pages/view/$1';
 $route['default_controller'] = 'pages/view';

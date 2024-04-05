@@ -6,8 +6,7 @@ class Users extends MY_Controller
     public function index()
     {
         $data['title'] = ucfirst("Usuarios"); // Capitalize the first letter
-
-        $data['users'] = $this->auth_model->get_users();
+        $data['users'] = $this->User_model->get_users();
 
         $this->load->view('_templates/header', $data);
         $this->load->view('_templates/topnav');
@@ -18,7 +17,7 @@ class Users extends MY_Controller
 
 
 
-    public function register() {
+    public function create() {
         // Validate form data
         $this->form_validation->set_rules('username', 'Username', 'required');
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
@@ -33,7 +32,7 @@ class Users extends MY_Controller
             $this->load->view('_templates/header', $data);
             $this->load->view('_templates/topnav');
             $this->load->view('_templates/sidebar');
-            $this->load->view('users/register');
+            $this->load->view('users/create', $data);
             $this->load->view('_templates/footer');
         } 
         else
@@ -42,7 +41,8 @@ class Users extends MY_Controller
             $data = array(
                 'username' => $this->input->post('username'),
                 'email' => $this->input->post('email'),
-                'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT)
+                'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
+                
             );
 
             if ($this->auth_model->register_user($data))
@@ -51,11 +51,11 @@ class Users extends MY_Controller
                 $this->session->set_flashdata('success', 'Se ha registrado al usuario '.$this->input->post('username').'. Ya puede iniciar sesion.');
 
                 // Registration successful, redirect to login page
-                redirect(base_url() . 'register');
+                redirect(base_url() . 'users');
             } else {
                 // Registration failed, display error message
                 $data['error'] = 'Registration failed. Please try again.';
-                redirect(base_url() . 'register');
+                redirect(base_url() . 'users');
 
             }
         }
@@ -65,7 +65,7 @@ class Users extends MY_Controller
     public function update($user_id)
     {
         $data['title'] = ucfirst("Actualizar usuario"); // Capitalize the first letter
-        $data['user'] = $this->auth_model->get_user($user_id);
+        $data['user'] = $this->User_model->get_user($user_id);
 
         // Validate form data
         $this->form_validation->set_rules('username', 'Username', 'required');
@@ -92,7 +92,7 @@ class Users extends MY_Controller
                 'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT)
             );
 
-            if ($this->auth_model->update_user($user_id, $data))
+            if ($this->User_model->update_user($user_id, $data))
             {
                 // Registration successful set flash message.
                 $this->session->set_flashdata('success', 'Se ha actualizado al usuario '.$this->input->post('username').'. Ya puede iniciar sesion.');
@@ -109,23 +109,38 @@ class Users extends MY_Controller
     }
 
 
-    public function delete($user_id)
-    {
-        if ($this->auth_model->delete_user($user_id))
-        {
-            // Registration successful set flash message.
-            $this->session->set_flashdata('success', 'Se ha eliminado al usuario.');
+    public function delete($user_id) {
+        // Before deleting the user, show a view to confirm the delete
+        $data['user'] = $this->User_model->get_user($user_id);
+        $data['title'] = 'Eliminar Usuario.';
 
-            // Registration successful, redirect to login page
-            redirect(base_url() . 'users');
-        } 
-        else {
-            // Registration failed, display error message
-            $data['error'] = 'Registration failed. Please try again.';
-            redirect(base_url() . 'users');
+        if ($data['user']['username'] == "administrator") {
+            // Set flash message
+            $this->session->set_flashdata('error', 'No es posible eliminar al usuario administrator.');
 
+            // Redirect to the users list page
+            redirect(base_url() . 'users');
+        }
+
+        if (!isset($_POST['confirm'])) {
+            // Validation failed, reload the delete user form with validation errors
+            $data['user'] = $this->User_model->get_user($user_id);
+
+            $this->load->view('_templates/header', $data);
+            $this->load->view('_templates/topnav');
+            $this->load->view('_templates/sidebar');
+            $this->load->view('users/delete', $data);
+            $this->load->view('_templates/footer');
+        } else {
+            // Validation passed, delete the user
+            $this->User_model->delete_user($user_id);
+
+            // Set flash message
+            $this->session->set_flashdata('success', 'Usuario eliminado exitosamente.');
+
+            // Redirect to the users list page
+            redirect(base_url() . 'users');
         }
     }
-
 
 }
