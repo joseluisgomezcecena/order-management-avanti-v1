@@ -87,7 +87,7 @@ class Auth extends CI_Controller {
 
                 
                 // Login successful, redirect to dashboard
-                redirect(base_url() . 'dashboard');
+                redirect(base_url() . 'home');
 
             } 
             else 
