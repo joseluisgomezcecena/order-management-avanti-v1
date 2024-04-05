@@ -10,6 +10,14 @@
                     <span class="title">Inicio</span>
                 </a>
             </li>
+            <li style="background-color: rgba(252, 186, 3, .15); border-right: 2px solid; border-color: #fc8c03;" class="nav-item active ">
+                <a class="dropdown-toggle" href="<?php echo base_url(); ?>">
+                    <span class="icon-holder">
+                        <i class="anticon anticon-file"></i>
+                    </span>
+                    <span class="title">Ordenes De Trabajo</span>
+                </a>
+            </li>
             <li class="nav-item dropdown">
                 <a class="dropdown-toggle" href="javascript:void(0);">
                     <span class="icon-holder">
