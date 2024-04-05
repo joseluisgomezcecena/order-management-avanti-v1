@@ -308,6 +308,20 @@ https://cdn.datatables.net/buttons/3.0.1/js/buttons.html5.min.js
 
     $(function() {
         $( ".list-group" ).sortable({
+
+            // Change cursor when dragging
+            cursor: "move",
+
+            // add active class to the list item being dragged
+            start: function(event, ui) {
+                ui.item.addClass('active');
+            },
+
+            // Remove active class when dragging stops
+            stop: function(event, ui) {
+                ui.item.removeClass('active');
+            },
+
             update: function(event, ui) {
                 var order = $(this).sortable('toArray');
                 // Make ajax call to save the new order

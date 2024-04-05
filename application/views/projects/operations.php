@@ -69,7 +69,8 @@
     <div class="col-lg-5">
     <div class="card">
         <div class="card-body">
-            <h4>Procesos Del Proyecto</h4>
+            <h4>Procesos De: <b class="text-primary"><?php echo $project['project_name']; ?></b></h4>
+            <p>Estos son los procesos que se deberan llenar en la orden de trabajo, <strong>puedes arrastrar los procesos</strong> para cambiar su orden.</p>            
             <div class="m-t-25">
 
                 <ul class="list-group list-group-flush">
