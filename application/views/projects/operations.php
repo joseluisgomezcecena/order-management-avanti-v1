@@ -73,10 +73,10 @@
             <div class="m-t-25">
 
                 <ul class="list-group list-group-flush">
-                    <?php foreach ($project_operations as $project_operation): ?>
-                        <li class="list-group-item">
-                            <?php echo $project_operation['operation_name']; ?>
-                            <a href="<?php echo base_url("projects/delete_operation/" . $project_operation['project_operation_id']) ?>" class="btn btn-sm btn-danger float-right">Eliminar</a>
+                    <?php foreach ($project_ops as $project_op): ?>
+                        <li class="list-group-item" id="<?php echo $project_op['po_id']; ?>">
+                            <?php echo $project_op['operation_name']; ?>
+                            <a href="<?php echo base_url("projects/delete_operation/" . $project_op['po_id']) ?>" class="btn btn-sm btn-danger float-right">Eliminar</a>
                         </li>
                     <?php endforeach; ?>
                 </ul>

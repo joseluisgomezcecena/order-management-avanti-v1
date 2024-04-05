@@ -139,7 +139,7 @@ class Projects extends MY_Controller
         $data['project'] = $this->Projects_model->get_project($project_id);
         
         // Retrieve all operations for the project from the database
-        // $data['operations'] = $this->Operations_model->get_operations_by_project($project_id);
+        $data['project_ops'] = $this->Projects_model->get_operations_by_project($project_id);
         
         //validate the form
         $this->form_validation->set_rules('operation_id', 'Operacion', 'required|integer');
@@ -287,6 +287,14 @@ class Projects extends MY_Controller
             redirect(base_url() . 'projects/update/' . $project_id);
 
         }
+    }
+
+
+
+    public function update_order() 
+    {
+        $order = $this->input->post('order');
+        $this->Projects_model->update_order($order);
     }
 
 

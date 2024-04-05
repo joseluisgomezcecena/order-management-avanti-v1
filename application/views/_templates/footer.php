@@ -187,6 +187,7 @@
     <!-- Select 2 -->
     <script src="<?php echo base_url(); ?>assets/vendors/select2/select2.min.js"></script>
 
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 
     <!--
     https://cdn.datatables.net/buttons/3.0.1/js/dataTables.buttons.js
@@ -299,6 +300,20 @@ https://cdn.datatables.net/buttons/3.0.1/js/buttons.html5.min.js
     $('.btnapply').on('click', function(e) {
         e.preventDefault();
         location.reload();
+    });
+
+</script>
+
+<script>
+
+    $(function() {
+        $( ".list-group" ).sortable({
+            update: function(event, ui) {
+                var order = $(this).sortable('toArray');
+                // Make ajax call to save the new order
+                $.post('<?php echo base_url(); ?>projects/update_order', {order: order});
+            }
+        });
     });
 
 </script>
