@@ -1,3 +1,5 @@
+
+
 <div class="page-header">
     <h2 class="header-title">Proyectos</h2>
     <div class="header-sub-title">
@@ -25,34 +27,43 @@
             </div>
         <?php } ?>
 
-        <table style="font-size:12px; width:100%" id="data-tables" class="table">
+        <table style="font-size:12px;" id="data-projects" class="table ">
             <thead>
                 <tr>
-                    <th style="width:40px !important;">Id</th>
-                    <th style="width:300px !important;">Proyecto</th>
-                    <td style="width:150px !important;">Cliente</td>
-                    <td style="width:150px;">Usuario</td>
-                    <td style="width:150px;">Fecha</td>
-                    <td style="width:150px;">Requiere instalación</td>
-                    <td style="width:150px;">Dirección</td>
-                    <td style="width:150px;">Area</td>
-                    <td style="width:150px;">Cantidad de piezas</td>
-                    <td style="width:150px;">Unidades de trabajo</td>
-                    <td style="width:150px;">Aprobo</td>
-                    <th style="width:150px;">Creado</th>
-                    <th style="width:150px;">Actualizado</th>
-                    <th style="width:150px;">Registro</th>
-                    <th style="width:200px;">Acciones</th>
+                    <th >Id</th>
+                    <th >Proyecto</th>
+                    <th >Cliente</th>
+                    <th >Usuario</th>
+                    <th >Fecha</th>
+                    <th >Requiere instalación</th>
+                    <th >Dirección</th>
+                    <th >Area</th>
+                    <th >Cantidad de piezas</th>
+                    <th >Unidades de trabajo</th>
+                    <th >Aprobo</th>
+                    <th >Creado</th>
+                    <th >Actualizado</th>
+                    <th >Registro</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($projects as $project):?>
                 <tr>
-                    <td style="width:50px;"><?php echo $project['project_id'] ?></td>
+                    <td><?php echo $project['project_id'] ?></td>
                     <td><a href="<?php echo base_url('projects/' . $project['project_id']) ?>"><?php echo $project['project_name']; ?></a></td>
+                    <td><?php echo $project['client_name'] ?></td>
+                    <td><?php echo $project['user'] ?></td>
+                    <td><?php echo date_format(date_create($project['date']), "M-d-Y");  ?></td>
+                    <td><?php echo ($project['installation_required'] == 1) ? 'Si' : 'No'; ?></td>
+                    <td><?php echo ($project['address'] != "") ? $project['address'] : 'N/A';  ?></td>
+                    <td><?php echo $project['area'] ?></td>
+                    <td><?php echo $project['qty'] ?></td>
+                    <td><?php echo $project['work_units'] ?></td>
+                    <td><?php echo $project['approved_by'] ?></td>
                     <td><?php echo date_format(date_create($project['created_at']), "M-d-Y H:i:s"); ?></td>
                     <td><?php echo date_format(date_create($project['updated_at']), "M-d-Y H:i:s"); ?></td>
-                    <td><?php echo $project['project_user']; ?></td>
+                    <td><?php echo $project['user_name']; ?></td>
                     <td>
                         <a href="<?php echo base_url('projects/update/' . $project['project_id']) ?>" class="btn btn-dark">Editar</a>
                         <a href="<?php echo base_url('projects/delete/' . $project['project_id']) ?>" class="btn btn-danger">Eliminar</a>

@@ -117,14 +117,73 @@ class Projects extends MY_Controller
             );
             
             // Insert the new project into the database
-            $this->Projects_model->create_project($project_data);
+            $project_id = $this->Projects_model->create_project($project_data);
             
             // Set flash message
             $this->session->set_flashdata('success', 'Proyecto registrado con exito.');
 
             // Redirect to the projects list page
-            redirect(base_url() . 'projects/create');
+            redirect(base_url() . "projects/$project_id/operations");
         }
+    }
+
+
+
+    public function operations($project_id) 
+    {
+        //Title.
+        $data['title'] = 'Procesos u Operaciones del Proyecto.';
+        //Get all operations available
+        $data['operations'] = $this->Operations_model->get_all_operations();
+        // Retrieve the project from the database
+        $data['project'] = $this->Projects_model->get_project($project_id);
+        
+        // Retrieve all operations for the project from the database
+        // $data['operations'] = $this->Operations_model->get_operations_by_project($project_id);
+        
+        //validate the form
+        $this->form_validation->set_rules('operation_id', 'Operacion', 'required|integer');
+
+        if ($this->form_validation->run() == FALSE) 
+        {
+            // Validation failed, reload the project operations form with validation errors
+            $this->load->view('_templates/header', $data);
+            $this->load->view('_templates/topnav');
+            $this->load->view('_templates/sidebar');
+            $this->load->view('projects/operations', $data);
+            $this->load->view('_templates/footer');
+        } 
+        else 
+        {
+            // Handle the form submission to add an operation to the project
+            $operation_id = $this->input->post('operation_id');
+            
+            // Check if the operation is already added to the project
+            $exists = $this->Projects_model->check_operation_exists($project_id, $operation_id);
+            
+            if ($exists) 
+            {
+                // Operation already exists, show an error message
+                $this->session->set_flashdata('error', 'La operacion ya esta agregada al proyecto.');
+                
+                $this->load->view('_templates/header', $data);
+                $this->load->view('_templates/topnav');
+                $this->load->view('_templates/sidebar');
+                $this->load->view('projects/operations', $data);
+                $this->load->view('_templates/footer');
+                return;
+            }
+            
+            // Add the operation to the project
+            $this->Projects_model->add_operation($project_id, $operation_id);
+            
+            // Set flash message
+            $this->session->set_flashdata('success', 'Operacion agregada al proyecto con exito.');
+            
+            // Redirect to the project operations page
+            redirect(base_url() . "projects/$project_id/operations");
+        }
+
     }
 
 

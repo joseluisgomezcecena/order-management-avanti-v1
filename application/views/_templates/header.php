@@ -7,7 +7,18 @@
     <title><?= $title; ?></title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="<?php echo base_url() ?>assets/images/logo/favicon.png">
+    <link rel="shortcut icon" href="<?php echo base_url() ?>assets/images/favicon.ico">
+
+	<!--icons for apple devices and android devices-->
+	<link rel="apple-touch-icon" sizes="180x180" href="<?php echo base_url() ?>assets/images/apple-touch-icon.png">
+
+	<!-- android-chrome icons -->
+	<link rel="icon" type="image/png" sizes="512x512"  href="<?php echo base_url() ?>assets/images/android-chrome-512x512.png">
+	<link rel="icon" type="image/png" sizes="192x192"  href="<?php echo base_url() ?>assets/images/android-chrome-192x192.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="<?php echo base_url() ?>assets/images/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="<?php echo base_url() ?>assets/images/favicon-16x16.png">
+
+
 
     <!-- page css -->
     <link href="<?php echo base_url() ?>assets/vendors/datatables/dataTables.bootstrap.min.css" rel="stylesheet">
@@ -42,7 +53,8 @@
 			flex-direction: column;
 			flex-wrap: nowrap;
 			overflow: hidden;
-			box-shadow: 0 0 0.5px 0 rgb(0 0 0 / 14%), 0 1px 1px 0 rgb(0 0 0 / 24%);/*shadows can be removed for styling.*/
+			/*box-shadow: 0 0 0.5px 0 rgb(0 0 0 / 14%), 0 1px 1px 0 rgb(0 0 0 / 24%);*//*shadows can be removed for styling.*/
+			box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
 		}
 
 		.containero {

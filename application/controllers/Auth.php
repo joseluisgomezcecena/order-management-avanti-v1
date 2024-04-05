@@ -59,8 +59,8 @@ class Auth extends CI_Controller {
         {
             // Display login form with validation errors
             $this->load->view('_templates/header', $data);
-            $this->load->view('_templates/topnav');
-            $this->load->view('_templates/sidebar');
+            //$this->load->view('_templates/topnav');
+            //$this->load->view('_templates/sidebar');
             $this->load->view('auth/login');
             $this->load->view('_templates/footer');
         } 

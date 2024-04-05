@@ -42,6 +42,16 @@ class Projects_model extends CI_Model
     }
 
 
+    public function check_operation_exists($operation_id, $project_id)
+    {
+        // Check if the operation exists in the project
+        $this->db->where('operation_id', $operation_id);
+        $this->db->where('project_id', $project_id);
+        $query = $this->db->get('project_operation');
+        return $query->num_rows() > 0;
+    }
+
+
     public function create_project($project_data)
     {
         // Insert the new project into the database
@@ -66,4 +76,6 @@ class Projects_model extends CI_Model
         $this->db->where('project_id', $project_id);
         $this->db->delete('projects');
     }
+
+
 }
