@@ -82,6 +82,9 @@
                     <?php endforeach; ?>
                 </ul>
 
+                <div class=" mt-5">
+                    <a class="btn btn-primary" href="<?php echo base_url("workorders/update/" . $project['project_id']); ?>" >Llenar Orden de Trabajo</a>
+                </div>
                 
 
             </div>

@@ -57,14 +57,66 @@ class Operations extends CI_Controller {
                 'operation_name' => $operationName,
                 'operation_user' => $this->session->userdata('username'),
             );
-            $this->Operations_model->insert_operation($data);
+            $operation_id = $this->Operations_model->insert_operation($data);
             
             // Show a success message
             $this->session->set_flashdata('success', 'El proceso u operación fueron registrados exitosamente.');
             
-            redirect(base_url() . 'operations/create');
+            redirect(base_url() . 'operations/customfields/' . $operation_id);
         }
     }
+
+
+
+    public function customfields($operation_id) {
+        // Title of the page.
+        $data['title'] = 'Campos Personalizados.';
+        $data['operation'] = $this->Operations_model->get_operation($operation_id);
+        // Retrieve all custom fields for the operation from the database
+        $data['customfields'] = $this->Operations_model->get_operation_customfields($operation_id);
+
+        //validate the custom fields
+        $this->form_validation->set_rules('customfield_type', 'Tipo de campo personalizado', 'required');
+        $this->form_validation->set_rules('customfield_label', 'Etiqueta', 'required');
+        
+
+        if ($this->form_validation->run() == FALSE) 
+        {
+            // Validation failed, reload the create operation form with validation errors
+            $this->load->view('_templates/header', $data);
+            $this->load->view('_templates/topnav');
+            $this->load->view('_templates/sidebar');
+            $this->load->view('operations/customfields', $data);
+            $this->load->view('_templates/footer');
+        } 
+        else
+        {
+
+            //make a customfield for name based on the label and withou spaces or special characters
+            $customfield_label = $this->input->post('customfield_label');
+            $customfield_name = strtolower(str_replace(' ', '_', $customfield_label));
+            $customfield_name = preg_replace('/[^A-Za-z0-9\-]/', '', $customfield_name);
+
+
+            // Insert the new custom field into the database
+            $data = array(
+                'customfield_name' => $customfield_name,
+                'customfield_type' => $this->input->post('customfield_type'),
+                'customfield_label' => $this->input->post('customfield_label'),
+                'customfield_operation_id' => $operation_id,
+                'customfield_user' => $this->session->userdata('username'),
+            );
+            $this->Operations_model->insert_customfield($data);
+            
+            // Show a success message
+            $this->session->set_flashdata('success', 'El campo personalizado fue registrado exitosamente.');
+            
+            redirect(base_url() . 'operations/customfields/' . $operation_id);
+        }
+
+    }
+
+
     
 
     public function update($operation_id) {

@@ -7,7 +7,21 @@ class Operations_model extends CI_Model {
         $query = $this->db->get('operations');
         return $query->result_array();
     }
+
     
+    public function get_operation_customfields($operation_id) {
+        // Retrieve all custom fields for a specific operation from the database
+        $this->db->where('customfield_operation_id', $operation_id);
+        $query = $this->db->get('operation_custom_field');
+        return $query->result_array();
+    }
+
+
+    public function insert_customfield($data) {
+        // Insert a new custom field into the database
+        $this->db->insert('operation_custom_field', $data);
+    }
+
     
     public function check_operation_name_exists($operationName) {
         // Check if the operation name exists in the database
@@ -20,6 +34,7 @@ class Operations_model extends CI_Model {
     public function insert_operation($data) {
         // Insert a new operation into the database
         $this->db->insert('operations', $data);
+        return $this->db->insert_id();
     }
     
 
