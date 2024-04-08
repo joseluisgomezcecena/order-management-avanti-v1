@@ -9,15 +9,37 @@ class Workorders extends CI_Controller {
     
     public function index() {
         // Display a list of work orders
+        //workorders are the same as projects
+        $data['title'] = "Ordenes de Trabajo";
+        $data['projects'] = $this->Projects_model->get_projects();
+
+        $this->load->view('_templates/header', $data);
+        $this->load->view('_templates/topnav');
+        $this->load->view('_templates/sidebar');
+        $this->load->view('workorders/index', $data);
+        $this->load->view('_templates/footer');
+
     }
 
 
+    /*
     public function update($id)
     {
         $data['title'] = "Llenar Orden de Trabajo";
         $data['project'] = $this->Projects_model->get_project($id);
         $data['sharedfields'] = $this->Sharedfields_model->get_shared_fields();
-        $data['operations'] = $this->Projects_model->get_operations_by_project($id);
+        
+        // Fetch the operations for the project
+        $data['operations'] = $this->Projects_model-> get_operations_by_project($id);
+
+        // For each operation, fetch the custom fields
+        foreach ($data['operations'] as $operation) {
+            $data['custom_fields'] = $this->Operations_model->get_operation_customfields($operation['po_operation_id']);
+        }
+                
+                
+    
+
 
         $this->form_validation->set_rules('shared_project_id', 'Proyecto', 'required');
 
@@ -39,7 +61,43 @@ class Workorders extends CI_Controller {
 
     }
 
+    */
+
+
+    public function update($id)
+{
+    $data['title'] = "Llenar Orden de Trabajo";
+    $data['project'] = $this->Projects_model->get_project($id);
+    $data['sharedfields'] = $this->Sharedfields_model->get_shared_fields();
     
+    // Fetch the operations for the project
+    $data['operations'] = $this->Projects_model->get_operations_by_project($id);
+
+    // For each operation, fetch the custom fields
+    foreach ($data['operations'] as &$operation) {
+        $operation['custom_fields'] = $this->Operations_model->get_operation_customfields($operation['po_operation_id']);
+    }
+            
+    $this->form_validation->set_rules('shared_project_id', 'Proyecto', 'required');
+
+    if ($this->form_validation->run() == FALSE) 
+    {
+        // Validation failed, reload the update project form with validation errors
+        $this->load->view('_templates/header', $data);
+        $this->load->view('_templates/topnav');
+        $this->load->view('_templates/sidebar');
+        $this->load->view('workorders/update', $data);
+        $this->load->view('_templates/footer');
+    } 
+    else 
+    {
+        // Validation passed, update the project in the database
+        $this->Projects_model->update_project($id);
+        redirect('projects');
+    }
+}
+
+
     public function create() {
         // Create a new work order
         

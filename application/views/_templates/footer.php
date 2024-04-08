@@ -238,7 +238,7 @@ https://cdn.datatables.net/buttons/3.0.1/js/buttons.html5.min.js
 
 <script>
     $('.select2').select2();
-    $('.datepicker-input').datepicker();
+    
 </script>
 
 <script>
@@ -331,6 +331,12 @@ https://cdn.datatables.net/buttons/3.0.1/js/buttons.html5.min.js
     });
 
 </script>
+
+
+<script>
+    $('.datepicker-input').datepicker();
+</script>
+
 
 </body>
 

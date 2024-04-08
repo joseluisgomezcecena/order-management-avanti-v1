@@ -5,8 +5,12 @@ class Projects_model extends CI_Model
 
     public function get_project($project_id)
     {
-        // Retrieve the project from the database
-        $query = $this->db->get_where('projects', array('project_id' => $project_id));
+        // Retrieve a project from the database
+        $this->db->select('projects.*, clients.client_name, clients.client_id, clients.address');
+        $this->db->from('projects');
+        $this->db->join('clients', 'projects.client_id = clients.client_id'); //join with clients table to get client name
+        $this->db->where('project_id', $project_id);
+        $query = $this->db->get();
         return $query->row_array();
     }
 
