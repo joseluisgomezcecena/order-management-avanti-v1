@@ -337,6 +337,25 @@ https://cdn.datatables.net/buttons/3.0.1/js/buttons.html5.min.js
     $('.datepicker-input').datepicker();
 </script>
 
+<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+
+
+<script>
+
+$('.timepicker').timepicker({
+    timeFormat: 'm:mm p',
+    interval: 60,
+    minTime: '10',
+    maxTime: '6:00pm',
+    defaultTime: '11',
+    startTime: '10:00',
+    dynamic: false,
+    dropdown: true,
+    scrollbar: true
+});
+    
+
+</script>
 
 </body>
 

@@ -129,4 +129,59 @@ class Projects_model extends CI_Model
     }
 
 
+    public function insert_customfield($data)
+    {
+        // Insert a new custom field into the database
+        $this->db->insert('custom_filled', $data);
+    }
+
+
+    public function insert_sharedfields($data)
+    {
+        // Insert a new shared field into the database
+        $this->db->insert('operation_shared_fields', $data);
+    }
+
+    public function update_sharedfields($id, $data)
+    {
+        // Update shared fields in the database
+        $this->db->where('shared_id', $id);
+        $this->db->update('operation_shared_fields', $data);
+    }
+
+
+    public function get_saved_data($operation_id) {
+        $this->db->where('shared_operation_id', $operation_id);
+        $query = $this->db->get('operation_shared_fields');
+        return $query->row_array();
+    }
+    
+
+    public function get_saved_custom_field_value($operation_id, $custom_field_id) {
+        $this->db->where('cf_operation_id', $operation_id);
+        $this->db->where('cf_custom_field', $custom_field_id);
+        $query = $this->db->get('custom_filled');
+        //return $query->row()->value;
+        return $query->row_array();
+    }
+
+
+    public function check_if_record_exists($project_id, $operation_id) {
+        $this->db->where('shared_project_id', $project_id);
+        $this->db->where('shared_operation_id', $operation_id);
+        $query = $this->db->get('operation_shared_fields');
+        
+        if ($query->num_rows() > 0) {
+            return $query->row_array();     
+        } else {
+            return false;
+        }
+    }
+
+    public function delete_customfields($operation_id, $project_id) {
+        $this->db->where('cf_operation_id', $operation_id);
+        $this->db->where('cf_project_id', $project_id);
+        $this->db->delete('custom_filled');
+    }   
+
 }

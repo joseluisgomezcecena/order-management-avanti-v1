@@ -11,7 +11,7 @@
                 </a>
             </li>
             <li style="background-color: rgba(252, 186, 3, .15); border-right: 2px solid; border-color: #fc8c03;" class="nav-item active ">
-                <a class="dropdown-toggle" href="<?php echo base_url(); ?>">
+                <a class="dropdown-toggle" href="<?php echo base_url(); ?>workorders">
                     <span class="icon-holder">
                         <i class="anticon anticon-file"></i>
                     </span>

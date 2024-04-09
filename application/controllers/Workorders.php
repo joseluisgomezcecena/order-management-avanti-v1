@@ -1,6 +1,6 @@
 <?php
 
-class Workorders extends CI_Controller {
+class Workorders extends MY_Controller {
     
     public function __construct() {
         parent::__construct();
@@ -22,7 +22,8 @@ class Workorders extends CI_Controller {
     }
 
 
-    /*
+    
+
     public function update($id)
     {
         $data['title'] = "Llenar Orden de Trabajo";
@@ -30,17 +31,30 @@ class Workorders extends CI_Controller {
         $data['sharedfields'] = $this->Sharedfields_model->get_shared_fields();
         
         // Fetch the operations for the project
-        $data['operations'] = $this->Projects_model-> get_operations_by_project($id);
+        $data['operations'] = $this->Projects_model->get_operations_by_project($id);
+
+
+
+        /*
+        $data['project'] = $this->Projects_model->get_project($project_id);
+        $data['operations'] = $this->Projects_model->get_operations($project_id);
+
+        foreach ($data['operations'] as &$operation) {
+            $operation['saved_data'] = $this->Projects_model->get_saved_data($operation['po_operation_id']);
+            foreach ($operation['custom_fields'] as &$custom_field) {
+                $custom_field['saved_value'] = $this->Projects_model->get_saved_custom_field_value($operation['po_operation_id'], $custom_field['customfield_id']);
+            }
+        }
+        */
+
+
+
 
         // For each operation, fetch the custom fields
-        foreach ($data['operations'] as $operation) {
-            $data['custom_fields'] = $this->Operations_model->get_operation_customfields($operation['po_operation_id']);
+        foreach ($data['operations'] as &$operation) {
+            $operation['custom_fields'] = $this->Operations_model->get_operation_customfields($operation['po_operation_id']);
         }
                 
-                
-    
-
-
         $this->form_validation->set_rules('shared_project_id', 'Proyecto', 'required');
 
         if ($this->form_validation->run() == FALSE) 
@@ -58,53 +72,20 @@ class Workorders extends CI_Controller {
             $this->Projects_model->update_project($id);
             redirect('projects');
         }
-
     }
 
-    */
 
-
-    public function update($id)
-{
-    $data['title'] = "Llenar Orden de Trabajo";
-    $data['project'] = $this->Projects_model->get_project($id);
-    $data['sharedfields'] = $this->Sharedfields_model->get_shared_fields();
-    
-    // Fetch the operations for the project
-    $data['operations'] = $this->Projects_model->get_operations_by_project($id);
-
-    // For each operation, fetch the custom fields
-    foreach ($data['operations'] as &$operation) {
-        $operation['custom_fields'] = $this->Operations_model->get_operation_customfields($operation['po_operation_id']);
-    }
-            
-    $this->form_validation->set_rules('shared_project_id', 'Proyecto', 'required');
-
-    if ($this->form_validation->run() == FALSE) 
+    public function create($project_id) 
     {
-        // Validation failed, reload the update project form with validation errors
-        $this->load->view('_templates/header', $data);
-        $this->load->view('_templates/topnav');
-        $this->load->view('_templates/sidebar');
-        $this->load->view('workorders/update', $data);
-        $this->load->view('_templates/footer');
-    } 
-    else 
-    {
-        // Validation passed, update the project in the database
-        $this->Projects_model->update_project($id);
-        redirect('projects');
-    }
-}
-
-
-    public function create() {
-        // Create a new work order
+        $operation_id = $this->input->post('operation_id');
         
+
+        $check_if_record_exists = $this->Projects_model->check_if_record_exists($project_id, $operation_id);
+
         // Process shared fields
         $sharedData = array(
-            'shared_project_id' => $this->input->post('shared_project_id'),
-            'shared_operation_id' => $this->input->post('shared_operation_id'),
+            'shared_project_id' => $project_id,
+            'shared_operation_id' => $operation_id,
             'hora_inicio' => $this->input->post('hora_inicio'),
             'hora_termino' => $this->input->post('hora_termino'),
             'realizo' => $this->input->post('realizo'),
@@ -116,48 +97,40 @@ class Workorders extends CI_Controller {
             'hora_recibido' => $this->input->post('hora_recibido'),
             'observaciones' => $this->input->post('observaciones')
         );
-        
-        // Save shared fields to the database
-        
-        // Process custom fields
-        $customFields = $this->input->post('custom_fields');
-        foreach ($customFields as $customField) {
-            $customFieldData = array(
-                'customfield_operation_id' => $this->input->post('shared_operation_id'),
-                'customfield_label' => $customField['label'],
-                'customfield_name' => $customField['name'],
-                'customfield_type' => $customField['type'],
-                'created_at' => date('Y-m-d H:i:s'),
-                'updated_at' => date('Y-m-d H:i:s'),
-                'customfield_user' => $this->input->post('customfield_user')
-            );
-            
-            // Save custom field to the database
+
+        if ($check_if_record_exists) {
+            // Update shared fields in the database
+            $id = $check_if_record_exists['shared_id'];
+            $this->Projects_model->update_sharedfields($id, $sharedData);
+        } else {
+            // Save shared fields to the database
+            $this->Projects_model->insert_sharedfields($sharedData);
         }
         
-        // Redirect or display success message
+        
+            //delete all custom fields for this operation and project
+            $this->Projects_model->delete_customfields($operation_id, $project_id);
+
+            // Process custom fields
+            $customFields = $this->input->post('custom_fields');
+            foreach ($customFields as $customFieldId => $customFieldValue) {
+                $customFieldData = array(
+                    'cf_project_id' => $project_id,
+                    'cf_operation_id' => $operation_id,
+                    'cf_custom_field' => $customFieldId,
+                    'cf_data' => $customFieldValue['value']
+                );
+                
+                // Save custom field to the database
+                $this->Projects_model->insert_customfield($customFieldData);
+            }
+
+        
+        // Redirect or display success message.
+        $this->session->set_flashdata('success', 'Orden de trabajo creada exitosamente.');
+        redirect(base_url("workorders/update/$project_id"));
     }
     
-    public function edit($id) {
-        // Edit an existing work order
-        
-        // Retrieve shared fields from the database
-        
-        // Retrieve custom fields from the database
-        
-        // Display the edit form with the retrieved data
-    }
     
-  
-    
-    public function delete($id) {
-        // Delete a work order
-        
-        // Delete shared fields from the database
-        
-        // Delete custom fields from the database
-        
-        // Redirect or display success message
-    }
     
 }
