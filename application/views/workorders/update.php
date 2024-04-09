@@ -104,7 +104,7 @@
 
                     <td>Hora de salida: <input type="datetime-local" class="form-control"  name="hora_salida" placeholder="Hora de salida" value="<?php echo isset($saved_data['hora_salida']) ? $saved_data['hora_salida'] : "" ?>"></td>
                     <td>Hora de recibido: <input type="datetime-local" class="form-control"  name="hora_recibido" placeholder="Hora de recibido" value="<?php echo isset($saved_data['hora_recibido']) ? $saved_data['hora_recibido'] : "" ?>"></td>
-                    <td>Recibio: <input type="text" class="form-control" name="recibio" value="<?php echo isset($saved_data['recibido']) ? $saved_data['recibido'] : "" ?>"></td>
+                    <td>Recibio: <input type="text" class="form-control" name="recibio" value="<?php echo isset($saved_data['recibio']) ? $saved_data['recibio'] : "" ?>"></td>
                 </tr>
                
                 
@@ -126,7 +126,16 @@
                             <input type="hidden" name="operation_id" value="<?php echo $operation['po_operation_id'] ?>">
                             <td>
                                 <?php echo $custom_field['customfield_label']; ?>
-                                <input type="<?php echo $custom_field['customfield_type'] ?>" class="form-control" name="custom_fields[<?php echo $custom_field['customfield_id']; ?>][value]" value="<?php echo isset($saved_custom_field_value['cf_data']) ? $saved_custom_field_value['cf_data'] : ""; ?>">
+
+                                
+
+                                <?php 
+                                //check if custom field is checkbox.
+                                if ($custom_field['customfield_type'] == "checkbox"): ?>
+                                    <input type="checkbox" name="custom_fields[<?php echo $custom_field['customfield_id']; ?>][value]" value="on" <?php echo isset($saved_custom_field_value['cf_data'])  ? "checked" : ""; ?>>
+                                <?php else: ?>
+                                    <input type="<?php echo $custom_field['customfield_type'] ?>" class="form-control" name="custom_fields[<?php echo $custom_field['customfield_id']; ?>][value]" value="<?php echo isset($saved_custom_field_value['cf_data']) ? $saved_custom_field_value['cf_data'] : ""; ?>">
+                                <?php endif; ?>
                             </td>
                                
                 <?php endforeach; ?>
