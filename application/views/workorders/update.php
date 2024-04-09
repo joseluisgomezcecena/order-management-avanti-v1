@@ -64,9 +64,8 @@
             </tr>
         </table>
 
-
-        <?php foreach ($operations as $operation): ?>
-    <form action="<?php echo base_url("") ?>" method="post">
+    
+    <?php foreach ($operations as $operation): ?>
     <table style="font-size:12px;" class="table table-bordered mt-5 shadow">
         <thead>
             <tr style="background-color:orange;">
@@ -78,40 +77,54 @@
                 <td style="background-color:#c9c9c9" colspan="4">Area de procesos.</td>
                 <td style="background-color:rgba(235, 186, 52, .7)" colspan="3">Salida/Entrada de producto.</td>
             </tr>
-            <tr>
-                <td>Hora de inicio: <input type="text" class="form-control datepicker-input" id="date" name="date" placeholder="Fecha"></td>
-                <td>Hora de termino: <input type="text" class="form-control datepicker-input" id="date" name="date" placeholder="Fecha"> </td>
-                <td>Realizo: <input type="text" class="form-control"> </td>
-                <td>Reviso: <input type="text" class="form-control"></td>
+            
+            <!--shared fields form-->
+            <form action="<?php echo base_url("workorders/update/" . $project['project_id']) ?>" method="post">
+                <input type="hidden" name="operation_id" value="<?php echo $operation['po_operation_id'] ?>">
+                <tr>
+                    <td>Hora de inicio: <input type="text" class="form-control datepicker-input" id="date_<?php echo rand(1,100) ?>" name="hora_inicio" placeholder="Fecha"></td>
+                    <td>Hora de termino: <input type="text" class="form-control datepicker-input" id="date_<?php echo rand(1,100) ?>" name="hora_termino" placeholder="Fecha"> </td>
+                    <td>Realizo: <input type="text" class="form-control" name="realizo"> </td>
+                    <td>Reviso: <input type="text" class="form-control" name="reviso"></td>
 
-                <td>Fecha: <input type="text" class="form-control"></td>
-                <td>Entrego: <input type="text" class="form-control"></td>
-                <td colspan="3">Observaciones: <textarea class="form-control"></textarea></td>
-            </tr>
-            <tr>
-                <td colspan="4"></td>
-                <td>Hora de salida: <input type="text" class="form-control datepicker-input" id="date" name="date" placeholder="Fecha"></td>
-                <td>Hora de recibido: <input type="text" class="form-control datepicker-input" id="date" name="date" placeholder="Fecha"></td>
-                <td>Recibio</td>
-            </tr>
+                    <td>Fecha: <input type="text" class="form-control" name="fecha"></td>
+                    <td>Entrego: <input type="text" class="form-control" name="entrego"></td>
+                    <td colspan="3">Observaciones: <textarea class="form-control" name="observaciones"></textarea></td>
+                </tr>
+                <tr>
+                    <td colspan="4"></td>
+                    <td>Hora de salida: <input type="text" class="form-control datepicker-input" id="date_<?php echo rand(1,100) ?>" name="hora_salida" placeholder="Fecha"></td>
+                    <td>Hora de recibido: <input type="text" class="form-control datepicker-input" id="date_<?php echo rand(1,100) ?>" name="hora_recibido" placeholder="Fecha"></td>
+                    <td>Recibio: <input type="text" class="form-control" name="recibio"></td>
+                </tr>
+            </form>
+            <!--shared fields form-->
+
 
             <tr style="background-color:rgba(235, 213, 52, .7);">
                 <th colspan="7">Campos de operación</th>
             </tr>           
             <tr style="width: 100%">
                 <?php foreach ($operation['custom_fields'] as $custom_field): ?>
-                    
+                        <form action="<?php echo base_url("workorders/update/" . $project['project_id']) ?>" method="post">
+                            <input type="hidden" name="operation_id" value="<?php echo $operation['po_operation_id'] ?>">
+                            <td>
+                                <?php echo $custom_field['customfield_label']; ?>
+                                <input type="<?php echo $custom_field['customfield_type'] ?>" class="form-control" name="custom_fields[<?php echo $custom_field['customfield_id']; ?>][value]">
+                            </td>
+                        </form>
+                        <!--    
                         <td>
                             <?php echo $custom_field['customfield_label']; ?>
                             <input type="<?php echo $custom_field['customfield_type'] ?>" class="form-control" name="custom_fields[<?php echo $custom_field['customfield_id']; ?>][value]">
                         </td>
-                                       
+                        -->               
                 <?php endforeach; ?>
             </tr>
         </tbody>
     </table>
-    </form>
-<?php endforeach; ?>
+  
+    <?php endforeach; ?>
 
 
 
