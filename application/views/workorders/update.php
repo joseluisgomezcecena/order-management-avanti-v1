@@ -67,25 +67,47 @@
 
         <?php foreach ($operations as $operation): ?>
     <form action="<?php echo base_url("") ?>" method="post">
-    <table style="font-size:12px;" class="table table-bordered mt-5">
+    <table style="font-size:12px;" class="table table-bordered mt-5 shadow">
         <thead>
-            <tr>
-                <th><?php echo $operation['operation_name'] ?></th>
-                <th>Hora de inicio: <input type="text" class="form-control datepicker-input" id="date" name="date" placeholder="Fecha"></th>
-                <th>Hora de termino: <input type="text" class="form-control datepicker-input" id="date" name="date" placeholder="Fecha"> </th>
-                <th>Realizo: <input type="text" class="form-control"> </th>
-                <th>Reviso: <input type="text" class="form-control"></th>
-                <th>Fecha: <input type="text" class="form-control"></th>
-                <th>Entrego: <input type="text" class="form-control"></th>
-                <th>Observaciones: <textarea class="form-control"></textarea></th>
+            <tr style="background-color:orange;">
+                <th colspan="7"><?php echo $operation['operation_name'] ?></th>
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($operation['custom_fields'] as $custom_field): ?>
-                <tr>
-                    <td><?php echo $custom_field['customfield_label']; ?></td>
-                </tr>
-            <?php endforeach; ?>
+            <tr>
+                <td style="background-color:#c9c9c9" colspan="4">Area de procesos.</td>
+                <td style="background-color:rgba(235, 186, 52, .7)" colspan="3">Salida/Entrada de producto.</td>
+            </tr>
+            <tr>
+                <td>Hora de inicio: <input type="text" class="form-control datepicker-input" id="date" name="date" placeholder="Fecha"></td>
+                <td>Hora de termino: <input type="text" class="form-control datepicker-input" id="date" name="date" placeholder="Fecha"> </td>
+                <td>Realizo: <input type="text" class="form-control"> </td>
+                <td>Reviso: <input type="text" class="form-control"></td>
+
+                <td>Fecha: <input type="text" class="form-control"></td>
+                <td>Entrego: <input type="text" class="form-control"></td>
+                <td colspan="3">Observaciones: <textarea class="form-control"></textarea></td>
+            </tr>
+            <tr>
+                <td colspan="4"></td>
+                <td>Hora de salida: <input type="text" class="form-control datepicker-input" id="date" name="date" placeholder="Fecha"></td>
+                <td>Hora de recibido: <input type="text" class="form-control datepicker-input" id="date" name="date" placeholder="Fecha"></td>
+                <td>Recibio</td>
+            </tr>
+
+            <tr style="background-color:rgba(235, 213, 52, .7);">
+                <th colspan="7">Campos de operación</th>
+            </tr>           
+            <tr style="width: 100%">
+                <?php foreach ($operation['custom_fields'] as $custom_field): ?>
+                    
+                        <td>
+                            <?php echo $custom_field['customfield_label']; ?>
+                            <input type="<?php echo $custom_field['customfield_type'] ?>" class="form-control" name="custom_fields[<?php echo $custom_field['customfield_id']; ?>][value]">
+                        </td>
+                                       
+                <?php endforeach; ?>
+            </tr>
         </tbody>
     </table>
     </form>
