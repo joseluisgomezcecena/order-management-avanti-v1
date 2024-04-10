@@ -30,6 +30,17 @@ class Operations_model extends CI_Model {
         return $query->num_rows() > 0;
     }
     
+
+    public function check_operation_exists_for_update($operationName, $operation_id) {
+        // Check if the operation name exists in the database for a specific operation
+        $this->db->where('operation_name', $operationName);
+        $this->db->where('operation_id !=', $operation_id);
+        $query = $this->db->get('operations');
+        return $query->num_rows() > 0;
+    }
+
+
+
     
     public function insert_operation($data) {
         // Insert a new operation into the database

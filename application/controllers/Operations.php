@@ -142,8 +142,9 @@ class Operations extends CI_Controller {
 
             // Check if the operation name exists
             $operationName = $this->input->post('operation_name');
-            $exists = $this->Operations_model->check_operation_name_exists($operationName);
-            
+            //$exists = $this->Operations_model->check_operation_name_exists($operationName);
+            $exists = $this->Operations_model->check_operation_exists_for_update($operationName, $operation_id);
+
             if ($exists) 
             {
                 // Operation name already exists, show an error message
@@ -166,7 +167,8 @@ class Operations extends CI_Controller {
             // Show a success message
             $this->session->set_flashdata('success', 'El proceso u operación fue actualizado exitosamente.');
             
-            redirect('operations/update/' . $operation_id);
+            //redirect('operations/update/' . $operation_id);
+            redirect(base_url() . 'operations/customfields/' . $operation_id);
         }
     }
 
