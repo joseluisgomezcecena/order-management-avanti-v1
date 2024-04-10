@@ -11,6 +11,14 @@ class Pages extends CI_Controller
 
         $data['title'] = ucfirst($page); // Capitalize the first letter
 
+        if ($page == 'home') {
+            $data['chart_data'] = $this->Chart_model->fetch_data();
+        }
+
+        $data['recents'] = $this->Projects_model->get_recent_projects();
+
+
+
         $this->load->view('_templates/header', $data);
         $this->load->view('_templates/topnav', $data);
         $this->load->view('_templates/sidebar', $data);

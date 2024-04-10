@@ -3,12 +3,12 @@
 		<div class="card card-hover">
 			<div class="card-body">
 				<div class="media align-items-center">
-					<div class="avatar avatar-icon avatar-lg avatar-blue">
-						<i class="anticon anticon-dollar"></i>
+					<div class="avatar avatar-icon avatar-lg avatar-orange">
+						<i class="anticon anticon-tool"></i>
 					</div>
 					<div class="m-l-15">
 						<h2 class="m-b-0">1</h2>
-						<p class="m-b-0 text-muted">En Espera</p>
+						<p class="m-b-0 text-muted">Proyectos En Proceso</p>
 					</div>
 				</div>
 			</div>
@@ -19,11 +19,11 @@
 			<div class="card-body">
 				<div class="media align-items-center">
 					<div class="avatar avatar-icon avatar-lg avatar-cyan">
-						<i class="anticon anticon-line-chart"></i>
+						<i class="anticon anticon-check"></i>
 					</div>
 					<div class="m-l-15">
 						<h2 class="m-b-0">2</h2>
-						<p class="m-b-0 text-muted">Aceptadas</p>
+						<p class="m-b-0 text-muted">Proyectos Terminados</p>
 					</div>
 				</div>
 			</div>
@@ -34,11 +34,11 @@
 			<div class="card-body">
 				<div class="media align-items-center">
 					<div class="avatar avatar-icon avatar-lg avatar-gold">
-						<i class="anticon anticon-profile"></i>
+						<i class="anticon anticon anticon-solution"></i>
 					</div>
 					<div class="m-l-15">
 						<h2 class="m-b-0">2</h2>
-						<p class="m-b-0 text-muted">Premiadas</p>
+						<p class="m-b-0 text-muted">Clientes Registrados</p>
 					</div>
 				</div>
 			</div>
@@ -48,12 +48,12 @@
 		<div class="card card-hover">
 			<div class="card-body">
 				<div class="media align-items-center">
-					<div class="avatar avatar-icon avatar-lg avatar-purple">
-						<i class="anticon anticon-user"></i>
+					<div class="avatar avatar-icon avatar-lg avatar-red">
+						<i class="anticon anticon-setting"></i>
 					</div>
 					<div class="m-l-15">
 						<h2 class="m-b-0">3</h2>
-						<p class="m-b-0 text-muted">Recahzadas</p>
+						<p class="m-b-0 text-muted">Procesos Disponibles</p>
 					</div>
 				</div>
 			</div>
@@ -67,7 +67,7 @@
 		<div class="card sb-card-shadow">
 			<div class="card-body">
 				<div class="d-flex justify-content-between align-items-center mb-5">
-					<h5 class="font-weight-bolder">Ideas Recibidas Por Mes.</h5>
+					<h5 class="font-weight-bolder">Proyectos por mes.</h5>
 
 					<div>
 						<!--
@@ -95,10 +95,8 @@
 		<div class="card">
 			<div class="card-body">
 				<div class="d-flex justify-content-between align-items-center">
-					<h5 class="m-b-0">Mas Recientes (Últimas 5)</h5>
-					<div>
-						<a href="<?php echo base_url() ?>admin/evaluate" class="btn btn-sm btn-dark">Ver Todas</a>
-					</div>
+					<h5 class="m-b-0">Proyectos mas recientes</h5>
+					
 				</div>
 				<div class="m-t-30">
 					<?php foreach ($recents as $recent): ?>
@@ -106,13 +104,13 @@
 						<div class="d-flex align-items-center justify-content-between">
 							<div class="media align-items-center">
 								<div class="font-size-35">
-									<i class="anticon anticon-bulb text-primary"></i>
+									<i style="color:orange;" class="anticon anticon-tool"></i>
 								</div>
 								<div class="m-l-15">
 									<h6 class="m-b-0">
-										<a class="text-dark" href="javascript:void(0);"><?php echo $recent['title'] ?></a>
+										<a class="text-dark" href="javascript:void(0);"><?php echo $recent['project_name'] ?></a>
 									</h6>
-									<p class="text-muted m-b-0">Enviada: <?php echo $recent['fecha'] ?></p>
+									<p class="text-muted m-b-0">Registrado: <?php echo date_format(date_create($recent['created_at']), "M-d-Y")  ?></p>
 								</div>
 							</div>
 							<div class="dropdown dropdown-animated scale-left">
@@ -120,9 +118,9 @@
 									<i class="anticon anticon-ellipsis"></i>
 								</a>
 								<div class="dropdown-menu">
-									<a href="<?php echo base_url() ?>admin/evaluate/<?php echo $recent['id'] ?>" class="dropdown-item">
+									<a href="<?php echo base_url() ?>projects/<?php echo $recent['project_id'] ?>" class="dropdown-item">
 										<i class="anticon anticon-eye"></i>
-										<span class="m-l-10">Evaluar Idea</span>
+										<span class="m-l-10">Ver Proyecto</span>
 									</a>
 								</div>
 							</div>
@@ -160,7 +158,7 @@
 				labels: cData.label,
 				datasets: [
 					{
-						label: "Ideas Recibidas.",
+						label: "Proyectos.",
 						data: cData.data,
 						backgroundColor: [
 							"rgba(0,210,146,0.5)",

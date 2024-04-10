@@ -175,6 +175,11 @@
     <script src="<?php echo base_url(); ?>assets/js/app.min.js"></script>
 
 
+    <!-- chart js -->
+    <script src="<?php echo base_url(); ?>assets/vendors/chartjs/Chart.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/js/pages/chartjs.js"></script>
+
+
     <!-- Datatables Buttons -->
     <script src="https://cdn.datatables.net/buttons/1.7.1/js/dataTables.buttons.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.flash.min.js"></script>

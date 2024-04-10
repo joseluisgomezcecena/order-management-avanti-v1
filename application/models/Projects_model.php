@@ -27,6 +27,21 @@ class Projects_model extends CI_Model
     }
 
 
+
+    public function get_recent_projects()
+    {
+        // Retrieve the most recent projects from the database
+        $this->db->select('projects.*, clients.client_name, clients.client_id, clients.address');
+        $this->db->from('projects');
+        $this->db->join('clients', 'projects.client_id = clients.client_id'); //join with clients table to get client name
+        $this->db->order_by('created_at', 'DESC');
+        $this->db->limit(5);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+
+
     public function get_operations_by_project($project_id)
     {
         // Retrieve all operations for a project from the database
