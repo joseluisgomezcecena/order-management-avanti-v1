@@ -58,6 +58,20 @@
                         <input type="password" class="form-control" id="confirmPassword" name="password2" placeholder="Confirm Password" autocomplete="off">
                         <?php echo form_error('password2', '<div class="text-danger">', '</div>'); ?>
                     </div>
+
+
+                    <?php if ($this->session->userdata('is_admin') == 1): ?>
+                        <div class="form-group col-lg-6">
+                            <label class="font-weight-semibold" for="confirmPassword">Rol:</label>
+                            <select class="form-control" name="role">
+                                <option value="0" <?php echo ($user['is_admin'] == 0) ? 'selected' : ''; ?> >Usuario</option>
+                                <option value="1" <?php echo ($user['is_admin'] == 1) ? 'selected' : ''; ?>>Administrador</option>
+                            </select>
+                        </div>
+                    <?php endif; ?>
+
+
+
                     <div class="form-group col-lg-12">
                         <div class="d-flex align-items-center justify-content-between p-t-15">
                             <button type="submit" class="btn btn-primary">Actualizar</button>

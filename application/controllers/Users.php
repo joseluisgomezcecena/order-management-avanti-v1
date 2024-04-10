@@ -37,12 +37,19 @@ class Users extends MY_Controller
         } 
         else
         {
+
+            if ($this->session->userdata('is_admin') == 1) {
+                $is_admin = $this->input->post('is_admin');
+            } else {
+                $is_admin = 0;
+            }
+
             // Process registration data
             $data = array(
                 'username' => $this->input->post('username'),
                 'email' => $this->input->post('email'),
                 'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
-                
+                'is_admin' => $is_admin   
             );
 
             if ($this->auth_model->register_user($data))
@@ -85,11 +92,19 @@ class Users extends MY_Controller
         } 
         else
         {
+        
+            if ($this->session->userdata('is_admin') == 1) {
+                $is_admin = $this->input->post('is_admin');
+            } else {
+                $is_admin = 0;
+            }
+
             // Process registration data
             $data = array(
                 'username' => $this->input->post('username'),
                 'email' => $this->input->post('email'),
-                'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT)
+                'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
+                'is_admin' => $is_admin
             );
 
             if ($this->User_model->update_user($user_id, $data))

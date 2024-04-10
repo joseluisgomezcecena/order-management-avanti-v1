@@ -45,15 +45,30 @@
                     <div class="form-group col-lg-4">
                         <label class="font-weight-semibold" for="email">Email:</label>
                         <input type="email" class="form-control" id="email" name="email" placeholder="Email" autocomplete="off">
+                        <?php echo form_error('email', '<div class="text-danger">', '</div>'); ?>
                     </div>
                     <div class="form-group col-lg-6">
                         <label class="font-weight-semibold" for="password">Contraseña:</label>
                         <input type="password" class="form-control" id="password" name="password" placeholder="Password" autocomplete="off">
+                        <?php echo form_error('password', '<div class="text-danger">', '</div>'); ?>
                     </div>
                     <div class="form-group col-lg-6">
                         <label class="font-weight-semibold" for="confirmPassword">Confirmar Contraseña:</label>
                         <input type="password" class="form-control" id="confirmPassword" name="password2" placeholder="Confirm Password" autocomplete="off">
+                        <?php echo form_error('password2', '<div class="text-danger">', '</div>'); ?>
                     </div>
+
+                    <?php if ($this->session->userdata('is_admin') == 1): ?>
+                        <div class="form-group col-lg-6">
+                            <label class="font-weight-semibold" for="confirmPassword">Rol:</label>
+                            <select class="form-control" name="role">
+                                <option value="0">Usuario</option>
+                                <option value="1">Administrador</option>
+                            </select>
+                        </div>
+                    <?php endif; ?>
+
+
                     <div class="form-group col-lg-12">
                         <div class="d-flex align-items-center justify-content-between p-t-15">
                             <button type="submit" class="btn btn-primary">Registrar</button>
