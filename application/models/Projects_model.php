@@ -80,7 +80,14 @@ class Projects_model extends CI_Model
         $this->db->where('po_operation_id', $operation_id);
         $this->db->where('po_project_id', $project_id);
         $query = $this->db->get('project_operation');
-        return $query->num_rows() > 0;
+        $last_query = $this->db->last_query();
+        //print_r($last_query);
+        if ($query->num_rows() > 0) {
+            return $query->row_array();
+        } else {
+            return false;
+        }
+        //return $query->num_rows() > 0;
     }
 
 
