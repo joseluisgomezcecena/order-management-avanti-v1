@@ -9,7 +9,7 @@ class Operations_model extends CI_Model {
     }
 
     
-    public function get_operation_customfields($operation_id) {
+    public function get_operation_customfields($operation_id) { 
         // Retrieve all custom fields for a specific operation from the database
         $this->db->where('customfield_operation_id', $operation_id);
         $query = $this->db->get('operation_custom_field');

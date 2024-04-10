@@ -69,7 +69,7 @@
 
         <?php
             // Fetch saved data for this operation from the database
-            $saved_data = $this->Projects_model->get_saved_data($operation['po_operation_id']);
+            $saved_data = $this->Projects_model->get_saved_data($operation['po_operation_id'], $operation['po_project_id']); //Added po_project_id to the function call
         ?>
 
         <form action="<?php echo base_url("workorders/create/" . $project['project_id']) ?>" method="post">
@@ -120,7 +120,7 @@
 
                             <?php
                                 // Fetch saved data for this custom field from the database
-                                $saved_custom_field_value = $this->Projects_model->get_saved_custom_field_value($operation['po_operation_id'], $custom_field['customfield_id']);
+                                $saved_custom_field_value = $this->Projects_model->get_saved_custom_field_value($operation['po_operation_id'], $custom_field['customfield_id'], $project['project_id']);
                             ?>
                         
                             <input type="hidden" name="operation_id" value="<?php echo $operation['po_operation_id'] ?>">

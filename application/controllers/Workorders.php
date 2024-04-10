@@ -35,18 +35,6 @@ class Workorders extends MY_Controller {
 
 
 
-        /*
-        $data['project'] = $this->Projects_model->get_project($project_id);
-        $data['operations'] = $this->Projects_model->get_operations($project_id);
-
-        foreach ($data['operations'] as &$operation) {
-            $operation['saved_data'] = $this->Projects_model->get_saved_data($operation['po_operation_id']);
-            foreach ($operation['custom_fields'] as &$custom_field) {
-                $custom_field['saved_value'] = $this->Projects_model->get_saved_custom_field_value($operation['po_operation_id'], $custom_field['customfield_id']);
-            }
-        }
-        */
-
 
 
 
@@ -130,7 +118,6 @@ class Workorders extends MY_Controller {
         $this->session->set_flashdata('success', 'Orden de trabajo creada exitosamente.');
         redirect(base_url("workorders/update/$project_id"));
     }
-    
-    
-    
+
+
 }
