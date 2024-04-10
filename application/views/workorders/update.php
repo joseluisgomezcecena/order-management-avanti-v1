@@ -7,10 +7,18 @@
             <span class="breadcrumb-item active">Indexar</span>
         </nav>
     </div>
-    <!--button that floats to the right-->
-    <div class="float-right">
-        <a href="<?php echo base_url('projects/create') ?>" class="btn btn-primary">Actualizar información</a>
-    </div>
+    
+    <!--upload files-->
+    <form action="<?php echo base_url("workorders/upload_files/" . $project['project_id']) ?>" method="post" enctype="multipart/form-data">
+        <div class="custom-file mt-5">
+            <input type="file" class="custom-file-input" id="customFile" name="userfile">
+            <label class="custom-file-label" for="customFile">Subir Archivos</label>
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3" onclick="this.classList.add('is-loading')"><i class="anticon anticon-cloud"></i> Subir</button>
+        
+    </form>
+    
 </div>
 <div class="card mt-5">
     <div class="card-body">
@@ -26,16 +34,45 @@
             </div>
         <?php } ?>
 
-
-        <div class="row mb-5">
-            <div class="col-lg-3">
-                <?php echo $project['client_name'] ?>
+        <?php if ($this->session->flashdata('error')) { ?>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>¡Error!</strong> <?php echo $this->session->flashdata('error'); ?>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            <div class="col-lg-3">
-                <?php echo $project['project_name'] ?>
+        <?php } ?>
+
+
+        <div class="row mb-2">
+            <div class="col-lg-12">
+                Archivos adjuntos:
             </div>
         </div>
 
+        <div class="row">
+            <?php foreach ($files as $file): ?>
+            <div class="col-md-6 col-lg-3">
+                <a href="<?php echo base_url("uploads/project_uploads/") . $file['file_name'] ?>" target="_blank">
+                <div class="card card-hover">
+                    <div class="card-body">
+                        <div class="media align-items-center">
+                            <div class="avatar avatar-icon avatar-lg avatar-orange">
+                                <i class="anticon anticon-tool"></i>
+                            </div>
+                            <div class="m-l-15">
+                                <p style="font-size:12px;color:black;" class="m-b-0"><?php echo $file['file_name'] ?></p>
+                                <p style="font-size:12px;" class="m-b-0 text-muted">Subido por: <?php echo $file['file_user'] ?></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </a>
+            </div>
+            <?php endforeach; ?>
+        </div>
+
+       
 
         <table class="table table-bordered">
             <tr>
@@ -165,14 +202,3 @@
 
 
 
-
-
-
-<!--
-<?php // foreach ($sharedfields as $sharedfield): ?>
-                            <?php // if ($sharedfield['shared_operation_id'] == $operation['operation_id']): ?>
-                                <td><?php // echo $sharedfield['shared_id'] ?></td>
-                                <td><?php // echo $sharedfield['shared_id'] ?></td>
-                                <td><?php // echo $sharedfield['shared_id'] ?></td>
-                            <?php // endif; ?>
-                            -->

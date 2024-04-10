@@ -27,16 +27,18 @@ class Workorders extends MY_Controller {
     public function update($id)
     {
         $data['title'] = "Llenar Orden de Trabajo";
+        
+        // Fetch the project
         $data['project'] = $this->Projects_model->get_project($id);
+
+        // Fetch the uploaded files for the project.
+        $data['files'] = $this->Projects_model->get_files($id);
+        
+        // Fetch the shared fields for the project
         $data['sharedfields'] = $this->Sharedfields_model->get_shared_fields();
         
         // Fetch the operations for the project
         $data['operations'] = $this->Projects_model->get_operations_by_project($id);
-
-
-
-
-
 
         // For each operation, fetch the custom fields
         foreach ($data['operations'] as &$operation) {
@@ -117,6 +119,34 @@ class Workorders extends MY_Controller {
         // Redirect or display success message.
         $this->session->set_flashdata('success', 'Orden de trabajo creada exitosamente.');
         redirect(base_url("workorders/update/$project_id"));
+    }
+
+
+    public function upload_files($project_id)
+    {
+        $config['upload_path'] = './uploads/project_uploads/';
+        $config['allowed_types'] = 'gif|jpg|png|pdf|doc|docx|xls|xlsx|txt';
+        $config['max_size'] = 100000;
+
+        
+        $this->load->library('upload', $config);
+        
+        if (!$this->upload->do_upload('userfile')) {
+            $error = array('error' => $this->upload->display_errors());
+            $this->session->set_flashdata('error', $error['error']);
+            redirect(base_url("workorders/update/$project_id"));
+        } else {
+            $data = array('upload_data' => $this->upload->data());
+            $fileData = array(
+                'file_name' => $data['upload_data']['file_name'],
+                'file_path' => $data['upload_data']['full_path'],
+                'file_project_id' => $project_id,
+                'file_user' => $this->session->userdata('username')
+            );
+            $this->Projects_model->insert_file($fileData);
+            $this->session->set_flashdata('success', 'Archivo subido exitosamente.');
+            redirect(base_url("workorders/update/$project_id"));
+        }
     }
 
 

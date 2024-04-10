@@ -201,4 +201,20 @@ class Projects_model extends CI_Model
         $this->db->delete('custom_filled');
     }   
 
+
+    public function insert_file($data)
+    {
+        // Insert a new file into the database
+        $this->db->insert('upload_project', $data);
+    }
+
+
+    public function get_files($project_id)
+    {
+        // Retrieve all files for a project from the database
+        $this->db->where('file_project_id', $project_id);
+        $query = $this->db->get('upload_project');
+        return $query->result_array();
+    }
+
 }
