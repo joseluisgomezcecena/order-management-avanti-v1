@@ -149,10 +149,7 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li>
-                        <a href="chartist.html">Chartist</a>
-                    </li>
-                    <li>
-                        <a href="chartjs.html">ChartJs</a>
+                        <a href="<?php echo base_url() ?>reports">Generador De Reportes</a>
                     </li>
                 </ul>
             </li>

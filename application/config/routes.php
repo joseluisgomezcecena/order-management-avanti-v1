@@ -42,6 +42,9 @@ $route['users/update/(:any)'] = 'users/update/$1';
 $route['users/delete/(:any)'] = 'users/delete/$1';
 
 
+//reports routes.
+$route['reports'] = 'reports/index';
+
 //default routes.
 $route['(:any)'] = 'pages/view/$1';
 $route['default_controller'] = 'pages/view';
