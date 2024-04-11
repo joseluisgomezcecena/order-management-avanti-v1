@@ -18,7 +18,8 @@ $route['operations/create'] = 'operations/create';
 $route['operations/update/(:any)'] = 'operations/update/$1';
 $route['operations/delete/(:any)'] = 'operations/delete/$1';
 $route['operations/(:any)'] = 'operations/show/$1';
-$route['operations/customfields/(:any)'] = 'operations/customfields/$1';    
+$route['operations/customfields/(:any)'] = 'operations/customfields/$1';
+    
 
 //projects routes.
 $route['projects'] = 'projects/index';

@@ -113,7 +113,21 @@ class Operations extends CI_Controller {
             
             redirect(base_url() . 'operations/customfields/' . $operation_id);
         }
+    }
 
+
+    public function delete_customfield($customfield_id, $operation_id) {
+       
+        if (isset($_POST['confirm'])) 
+        {
+            // Delete the customfield from the database
+            $this->Operations_model->delete_customfield($customfield_id);
+            
+            // Show a success message
+            $this->session->set_flashdata('success', 'El campo personalizado fue eliminado exitosamente.');
+            
+            redirect(base_url() . 'operations/customfields/' . $operation_id);
+        }
     }
 
 

@@ -118,7 +118,10 @@
                                         }
                                         ?>
                                     </small>
-                                    <a href="<?php echo base_url("projects/delete_operation/" . $customfield['customfield_id']) ?>" class="btn btn-sm btn-danger float-right">Eliminar</a>
+                                    <form action="<?php echo base_url() ?>operations/delete_customfield/<?php echo $customfield['customfield_id'] ?>/<?php echo $operation['operation_id'] ?>" method="post">
+                                        <button type="submit" name="confirm" class="btn btn-sm btn-danger float-right">Eliminar</button>
+                                    </form>
+                                    
                                 </li>
                             <?php endforeach; ?>
                         </ul>                    

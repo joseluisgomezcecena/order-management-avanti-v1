@@ -5,7 +5,7 @@ class Clients extends MY_Controller
     
     public function show($client_id) {
         // Retrieve the client from the database
-        $data['client'] = $this->clients_model->get_client($client_id);
+        $data['client'] = $this->Clients_model->get_client($client_id);
         
         // Load the view to display the client details
         $this->load->view('clients/show', $data);
@@ -14,7 +14,7 @@ class Clients extends MY_Controller
     public function index() 
     {
         // Retrieve all clients from the database
-        $data['clients'] = $this->clients_model->get_clients();
+        $data['clients'] = $this->Clients_model->get_clients();
         $data['title'] = 'Clientes';
         
         // Load the view to display the clients list
@@ -53,7 +53,7 @@ class Clients extends MY_Controller
         {
             //check if the client name already exists.
             $client_name = $this->input->post('client_name');
-            $client = $this->clients_model->get_client_by_name($client_name);
+            $client = $this->Clients_model->get_client_by_name($client_name);
 
             if ($client) 
             {
@@ -77,7 +77,7 @@ class Clients extends MY_Controller
             );
             
             // Insert the new client into the database
-            $this->clients_model->create_client($client_data);
+            $this->Clients_model->create_client($client_data);
             
             //set flash message
             $this->session->set_flashdata('success', 'Cliente creado exitosamente.');
@@ -101,7 +101,7 @@ class Clients extends MY_Controller
         if ($this->form_validation->run() == FALSE) 
         {
             // Validation failed, reload the update client form with validation errors
-            $data['client'] = $this->clients_model->get_client($client_id);
+            $data['client'] = $this->Clients_model->get_client($client_id);
             
             $this->load->view('_templates/header', $data);
             $this->load->view('_templates/topnav');
@@ -114,14 +114,14 @@ class Clients extends MY_Controller
         {
             //check if the client name already exists.
             $client_name = $this->input->post('client_name');
-            $client = $this->clients_model->get_client_by_name_and_id($client_name, $client_id);
+            $client = $this->Clients_model->get_client_by_name_and_id($client_name, $client_id);
 
             if ($client) 
             {
                 //set flash message.
                 $this->session->set_flashdata('error', 'El cliente ya existe, edite al cliente o registre con un nombre diferente.');
                 //loading views again.
-                $data['client'] = $this->clients_model->get_client($client_id);
+                $data['client'] = $this->Clients_model->get_client($client_id);
                 
                 $this->load->view('_templates/header', $data);
                 $this->load->view('_templates/topnav');
@@ -140,7 +140,7 @@ class Clients extends MY_Controller
             );
             
             // Update the client in the database
-            $this->clients_model->update_client($client_id, $client_data);
+            $this->Clients_model->update_client($client_id, $client_data);
             
             //set flash message.
             $this->session->set_flashdata('success', 'Cliente actualizado exitosamente.');
@@ -154,13 +154,13 @@ class Clients extends MY_Controller
 
     public function delete($client_id) {
         //before deleting the client show a view to confirm the delete
-        $data['client'] = $this->clients_model->get_client($client_id);
+        $data['client'] = $this->Clients_model->get_client($client_id);
         $data['title'] = 'Eliminar Cliente.';
 
         if (!isset($_POST['confirm']))
         {
             // Validation failed, reload the delete client form with validation errors
-            $data['client'] = $this->clients_model->get_client($client_id);
+            $data['client'] = $this->Clients_model->get_client($client_id);
             
             $this->load->view('_templates/header', $data);
             $this->load->view('_templates/topnav');
@@ -171,7 +171,7 @@ class Clients extends MY_Controller
         else 
         {
             // Validation passed, delete the client
-            $this->clients_model->delete_client($client_id);
+            $this->Clients_model->delete_client($client_id);
 
             //set flash message.
             $this->session->set_flashdata('success', 'Cliente eliminado exitosamente.');

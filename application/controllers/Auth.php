@@ -31,7 +31,7 @@ class Auth extends CI_Controller {
                 'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT)
             );
 
-            if ($this->auth_model->register_user($data))
+            if ($this->Auth_model->register_user($data))
             {
                 // Registration successful set flash message.
                 $this->session->set_flashdata('success', 'Se ha registrado al usuario '.$this->input->post('username').'. Ya puede iniciar sesion.');
@@ -70,7 +70,7 @@ class Auth extends CI_Controller {
             $username = $this->input->post('username');
             $password = $this->input->post('password');
 
-            if ($user = $this->auth_model->login_user($username, $password)) 
+            if ($user = $this->Auth_model->login_user($username, $password)) 
             {
                 //retrieve the user object
                 

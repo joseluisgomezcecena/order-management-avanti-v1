@@ -70,4 +70,13 @@ class Operations_model extends CI_Model {
         $this->db->delete('operations');
     }
     
+
+    public function delete_customfield($customfield_id) {
+        // Delete a custom field from the database
+        $this->db->where('customfield_id', $customfield_id);
+        $this->db->delete('operation_custom_field');
+    }
+
+
+
 }

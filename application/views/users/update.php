@@ -63,7 +63,7 @@
                     <?php if ($this->session->userdata('is_admin') == 1): ?>
                         <div class="form-group col-lg-6">
                             <label class="font-weight-semibold" for="confirmPassword">Rol:</label>
-                            <select class="form-control" name="role">
+                            <select class="form-control" name="is_admin">
                                 <option value="0" <?php echo ($user['is_admin'] == 0) ? 'selected' : ''; ?> >Usuario</option>
                                 <option value="1" <?php echo ($user['is_admin'] == 1) ? 'selected' : ''; ?>>Administrador</option>
                             </select>

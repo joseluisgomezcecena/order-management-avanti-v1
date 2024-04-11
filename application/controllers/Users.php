@@ -52,7 +52,7 @@ class Users extends MY_Controller
                 'is_admin' => $is_admin   
             );
 
-            if ($this->auth_model->register_user($data))
+            if ($this->User_model->create_user($data))
             {
                 // Registration successful set flash message.
                 $this->session->set_flashdata('success', 'Se ha registrado al usuario '.$this->input->post('username').'. Ya puede iniciar sesion.');
