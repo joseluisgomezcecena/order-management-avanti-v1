@@ -1,13 +1,13 @@
  <!-- Header START -->
  <div class="header">
     <div class="logo logo-dark">
-        <a href="index.html">
+        <a href="<?php echo base_url(); ?>">
             <img style="width:200px;" src="<?php echo base_url(); ?>assets/images/logowide.png" alt="Logo">
             <img style="width:70px;" class="logo-fold" src="<?php echo base_url(); ?>assets/images/logosquare.png" alt="Logo">
         </a>
     </div>
     <div class="logo logo-white">
-        <a href="index.html">
+        <a href="<?php echo base_url(); ?>">
             <img style="width:200px;" src="<?php echo base_url(); ?>assets/images/logowide.png" alt="Logo">
             <img style="width:70px;" class="logo-fold" src="<?php echo base_url(); ?>assets/images/logosquare.png" alt="Logo">
         </a>

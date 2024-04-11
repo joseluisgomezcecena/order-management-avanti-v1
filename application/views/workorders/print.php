@@ -1,84 +1,6 @@
-<div class="page-header">
-    <h2 class="header-title">Ordenes de trabajo</h2>
-    <div class="header-sub-title">
-        <nav class="breadcrumb breadcrumb-dash">
-            <a href="<?php echo base_url(); ?>" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Inicio</a>
-            <a class="breadcrumb-item" href="#">Ordenes de trabajo</a>
-            <span class="breadcrumb-item active">Indexar</span>
-        </nav>
-    </div>
-    
-    <!--upload files-->
-    <form action="<?php echo base_url("workorders/upload_files/" . $project['project_id']) ?>" method="post" enctype="multipart/form-data">
-        <div class="custom-file mt-5">
-            <input type="file" class="custom-file-input" id="customFile" name="userfile">
-            <label class="custom-file-label" for="customFile">Subir Archivos</label>
-        </div>
 
-        <button type="submit" class="btn btn-primary mt-3" onclick="this.classList.add('is-loading')"><i class="anticon anticon-cloud"></i> Subir</button>
-        
-    </form>
-    
-</div>
 <div class="card mt-5">
     <div class="card-body">
-        <h4>Orden: WO-<?php echo $project['project_id'] ?>&nbsp; <a href="<?php echo base_url() ?>workorders/print/<?php echo $project['project_id'] ?>" target="_blank"><i class="anticon anticon-printer"></i></a></h4>
-
-        <!-- echo flash messages -->
-        <?php if ($this->session->flashdata('success')) { ?>
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>¡Operación exitosa!</strong> <?php echo $this->session->flashdata('success'); ?>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        <?php } ?>
-
-        <?php if ($this->session->flashdata('error')) { ?>
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <strong>¡Error!</strong> <?php echo $this->session->flashdata('error'); ?>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        <?php } ?>
-
-
-        <div class="row mb-2">
-            <div class="col-lg-12">
-                Archivos adjuntos:
-            </div>
-        </div>
-
-        <div class="row">
-            <?php foreach ($files as $file): ?>
-            <div class="col-md-6 col-lg-3">
-                <a href="<?php echo base_url("uploads/project_uploads/") . $file['file_name'] ?>" target="_blank">
-                <div class="card card-hover">
-                    <div class="card-body">
-                        <div class="media align-items-center">
-                            <div class="avatar avatar-icon avatar-lg avatar-orange">
-                                <i class="anticon anticon-tool"></i>
-                            </div>
-                            <div class="m-l-15">
-                                <p style="font-size:12px;color:black;" class="m-b-0">
-                                <?php 
-                                //print only the first 20 characters of the file name
-                                echo substr($file['file_name'], 0, 20); 
-                                ?>
-                                </p>
-                                <p style="font-size:12px;" class="m-b-0 text-muted">Subido por: <?php echo $file['file_user'] ?></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                </a>
-            </div>
-            <?php endforeach; ?>
-        </div>
-
-       
-
         <table class="table table-bordered">
             <tr>
                 <td class=""><b style="font-size:18px;">HOJA DE TALLER</b></td>
@@ -182,11 +104,7 @@
                                
                 <?php endforeach; ?>
             </tr>
-            <tr>
-                <td colspan="7">
-                    <button type="submit" class="btn btn-primary">Guardar</button>
-                </td>
-            </tr>
+           
         </tbody>
     </table>
     </form>
@@ -201,7 +119,10 @@
 
 
 
-
+<script>
+    //print page
+    window.print();
+</script>
 
 
 

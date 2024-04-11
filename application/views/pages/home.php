@@ -118,7 +118,7 @@
 									<i class="anticon anticon-ellipsis"></i>
 								</a>
 								<div class="dropdown-menu">
-									<a href="<?php echo base_url() ?>projects/<?php echo $recent['project_id'] ?>" class="dropdown-item">
+									<a href="<?php echo base_url() ?>workorders/update/<?php echo $recent['project_id'] ?>" class="dropdown-item">
 										<i class="anticon anticon-eye"></i>
 										<span class="m-l-10">Ver Proyecto</span>
 									</a>

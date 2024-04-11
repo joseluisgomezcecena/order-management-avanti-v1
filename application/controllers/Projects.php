@@ -284,8 +284,8 @@ class Projects extends MY_Controller
 
 
             // Redirect to the projects list page
-            redirect(base_url() . 'projects/update/' . $project_id);
-
+            //redirect(base_url() . 'projects/update/' . $project_id);
+            redirect(base_url() . 'projects/' . $project_id . '/operations');
         }
     }
 

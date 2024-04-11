@@ -33,6 +33,7 @@ $route['projects/update_order'] = 'projects/update_order';
 //workorders routes.
 $route['workorders'] = 'workorders/index';
 $route['workorders/update/(:any)'] = 'workorders/update/$1';
+$route['workorders/print/(:any)'] = 'workorders/print/$1';
 
 
 //users routes.
