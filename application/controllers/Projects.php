@@ -30,7 +30,7 @@ class Projects extends MY_Controller
     public function create() 
     {
         $data['title'] = 'Proyecto Nuevo.';
-        $data['clients'] = $this->clients_model->get_clients();
+        $data['clients'] = $this->Clients_model->get_clients();
         // Handle the form submission to store a new project
         $this->form_validation->set_rules('project_name', 'Proyecto o nombre del proyecto', 'required');
         $this->form_validation->set_rules('client_id', 'Cliente', 'required|integer');
@@ -190,7 +190,7 @@ class Projects extends MY_Controller
     public function update($project_id) 
     {
         $data['title'] = 'Actualizar Proyecto.';
-        $data['clients'] = $this->clients_model->get_clients();
+        $data['clients'] = $this->Clients_model->get_clients();
         $data['project'] = $this->Projects_model->get_project($project_id);
         
         // Handle the form submission to update a project
@@ -295,6 +295,20 @@ class Projects extends MY_Controller
     {
         $order = $this->input->post('order');
         $this->Projects_model->update_order($order);
+    }
+
+
+
+    public function delete_operation($project_id, $po_id) 
+    {
+        // Delete the operation from the project
+        $this->Projects_model->delete_operation($po_id);
+        
+        // Set flash message
+        $this->session->set_flashdata('success', 'Operacion eliminada del proyecto con exito.');
+        
+        // Redirect to the project operations page
+        redirect(base_url() . "projects/$project_id/operations");
     }
 
 

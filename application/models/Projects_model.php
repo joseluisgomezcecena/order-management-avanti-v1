@@ -224,4 +224,12 @@ class Projects_model extends CI_Model
         return $query->result_array();
     }
 
+
+    public function delete_operation($po_id)
+    {
+        // Delete an operation from the project
+        $this->db->where('po_id', $po_id);
+        $this->db->delete('project_operation');
+    }
+
 }

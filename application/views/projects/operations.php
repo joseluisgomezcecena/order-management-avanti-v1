@@ -76,8 +76,10 @@
                 <ul class="list-group list-group-flush">
                     <?php foreach ($project_ops as $project_op): ?>
                         <li class="list-group-item" id="<?php echo $project_op['po_id']; ?>">
-                            <?php echo $project_op['operation_name']; ?>
-                            <a href="<?php echo base_url("projects/delete_operation/" . $project_op['po_id']) ?>" class="btn btn-sm btn-danger float-right">Eliminar</a>
+                            <form action="<?php echo base_url("projects/delete_operation/" . $project['project_id'] . "/" . $project_op['po_id']) ?>" method="post">
+                                <?php echo $project_op['operation_name']; ?>
+                                <button type="submit" class="btn btn-sm btn-danger float-right">Eliminar</a>
+                            </form>
                         </li>
                     <?php endforeach; ?>
                 </ul>
