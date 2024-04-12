@@ -84,7 +84,7 @@
                 <td class=""><b style="font-size:18px;">HOJA DE TALLER</b></td>
                 <td>No. <b><?php echo $project['project_id'] ?></b></td>
                 <td><?php echo date_format(date_create($project['date']), "M-d-Y")  ?></td>
-                <td><img style="width:150px;" class="img-fluid" src="<?php echo base_url("uploads/") . $project['main_image'] ?>" alt=""></td>
+                <td><img style="width:150px;" class="img-fluid" src="<?php echo base_url("uploads/projects/") . $project['main_image'] ?>" alt=""></td>
             </tr>
             <tr>
                 <td class="bold">Cliente: <?php echo $project['client_name'] ?> </td>
