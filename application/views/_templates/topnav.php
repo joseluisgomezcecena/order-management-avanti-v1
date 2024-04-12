@@ -24,15 +24,18 @@
                     <i class="anticon"></i>
                 </a>
             </li>
+            <!--
             <li>
                 <a href="javascript:void(0);" data-toggle="modal" data-target="#search-drawer">
                     <i class="anticon anticon-search"></i>
                 </a>
             </li>
+            -->
         </ul>
 
 
         <ul class="nav-right">
+            <!--
             <li class="dropdown dropdown-animated scale-left">
                 <a href="javascript:void(0);" data-toggle="dropdown">
                     <i class="anticon anticon-bell notification-badge"></i>
@@ -97,7 +100,7 @@
                     </div>
                 </div>
             </li>
-
+            -->
             <li class="dropdown dropdown-animated scale-left">
                 <div class="pointer" data-toggle="dropdown">
                     <div style="background-color:orange;" class="avatar avatar-image m-h-10 m-r-15">
@@ -122,6 +125,7 @@
                             </div>
                         </div>
                     </div>
+                    <!--
                     <a href="javascript:void(0);" class="dropdown-item d-block p-h-15 p-v-10">
                         <div class="d-flex align-items-center justify-content-between">
                             <div>
@@ -149,6 +153,7 @@
                             <i class="anticon font-size-10 anticon-right"></i>
                         </div>
                     </a>
+                    -->
                     <a href="<?php echo base_url() ?>auth/logout" class="dropdown-item d-block p-h-15 p-v-10">
                     <div class="d-flex align-items-center justify-content-between">
                         <div>
