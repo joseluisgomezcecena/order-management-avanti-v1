@@ -1,27 +1,60 @@
+<!-- Core css -->
+<link href="<?php // echo base_url() ?>assets/css/app.min.css" rel="stylesheet">
+<style>
+    @media print {
+        body {
+            width: 8.5in;
+            height: 11in;
+            padding: 0.2in; /* Adjust as needed */
+            box-sizing: border-box;
+            font-size:10px;
+        }
+        .card {
+            page-break-inside: avoid;
+        }
+        .table {
+            width: 100%;
+            table-layout: fixed;
+            border:solid 1px;
+        }
+        .orange-print{
+            background-color:orange;
+        }
+        td{
+            border-right:solid 1px;
+        }
+    }
+</style>
 
 <div class="card mt-5">
     <div class="card-body">
+
+    
+
         <table class="table table-bordered">
             <tr>
-                <td class=""><b style="font-size:18px;">HOJA DE TALLER</b></td>
-                <td>No. <b><?php echo $project['project_id'] ?></b></td>
-                <td><?php echo date_format(date_create($project['date']), "M-d-Y")  ?></td>
-                <td><img style="width:150px;" class="img-fluid" src="<?php echo base_url("uploads/projects/") . $project['main_image'] ?>" alt=""></td>
+                <td class="orange-print"><b style="font-size:18px;">HOJA DE TALLER</b></td>
             </tr>
+        </table>
+        <table class="table table-bordered">
             <tr>
-                <td class="bold">Cliente: <?php echo $project['client_name'] ?> </td>
-                <td colspan="3">Requiere instalación: <?php echo ($project['installation_required'] == 1) ? "Si" : "No"; ?></td>
+                <td >No. <b><?php echo $project['project_id'] ?></b></td>
+                <td ><?php echo date_format(date_create($project['date']), "M-d-Y")  ?></td>
+                <td colspan="3" class="bold">Cliente: <?php echo $project['client_name'] ?> </td>
+                <td colspan="3"><img style="width:150px;" class="img-fluid" src="<?php echo base_url("uploads/projects/") . $project['main_image'] ?>" alt=""></td>
             </tr>
-            <tr>
-                <td class="bold">Usuario: <?php echo $project['user'] ?> </td>
-                <td colspan="3">Dirección: <?php echo ($project['address'] != "") ? $project['address'] : "N/A"; ?></td>
-            </tr>
+        </table>
+        <table class="table table-bordered">
             <tr>
                 <td class="bold">Proyecto: <?php echo $project['project_name'] ?> </td>
-                <td colspan="3">Area: <?php echo $project['area'] ?></td>
-                
+                <td colspan="1">Requiere instalación: <?php echo ($project['installation_required'] == 1) ? "Si" : "No"; ?></td>
+                <td colspan="1">Dirección: <?php echo ($project['address'] != "") ? $project['address'] : "N/A"; ?></td>
+                <td class="bold">Usuario: <?php echo $project['user'] ?> </td>
             </tr>
+        </table>
+            
             <tr>
+                <td colspan="1">Area: <?php echo $project['area'] ?></td>
                 <td>Cantidad de piezas: <?php echo $project['qty'] ?></td>
                 <td>Unidades de trabajo a relizar/fabricar: <?php echo $project['work_units'] ?></td>
                 <td>Aprobo: <?php echo $project['approved_by'] ?></td>
