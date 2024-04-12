@@ -74,11 +74,11 @@ class Projects extends MY_Controller
             }
 
             //upload the image
-            $config['upload_path'] = './uploads/projects';
+            $config['upload_path'] = './uploads/projects/';
             $config['allowed_types'] = 'gif|jpg|png';
-            $config['max_size'] = 2048;
-            $config['max_width'] = 1024;
-            $config['max_height'] = 768;
+            $config['max_size'] = 20048;
+            $config['max_width'] = 10024;
+            $config['max_height'] = 7680;
             $config['file_name'] = 'project_' . time();
             $this->load->library('upload', $config);
 
@@ -252,9 +252,9 @@ class Projects extends MY_Controller
             // Check if the main_image input is not empty
             if (!empty($_FILES['main_image']['name'])) {
                 // Upload the image
-                $config['upload_path'] = './uploads/';
+                $config['upload_path'] = './uploads/projects/';
                 $config['allowed_types'] = 'gif|jpg|png';
-                $config['max_size'] = 2048; // 2MB
+                $config['max_size'] = 20048; // 2MB
                 $config['encrypt_name'] = TRUE;
 
                 $this->load->library('upload', $config);
