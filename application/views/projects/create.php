@@ -36,14 +36,25 @@
 
             <form action="<?php echo base_url("projects/create") ?>" method="post" enctype="multipart/form-data">
                 <div class="row">
-                    
+                
+                    <div class="form-group col-lg-3">
+                        <label for="project_name">Tipo de Proyecto</label>
+                        <select  class="form-control" id="project_type" name="project_type" required>
+                            <option value="">Selecctione una opción</option>
+                            <option value="t" <?php echo set_select('project_type', 't'); ?>>Taller</option>
+                            <option value="m" <?php echo set_select('project_type', 'm'); ?>>Mantenimiento</option>
+                        </select>
+                        <?php echo form_error('project_type', '<div class="text-danger">', '</div>'); ?>
+                    </div>
+
+
                     <div class="form-group col-lg-6">
                         <label for="project_name">Proyecto o nombre del proyecto</label>
                         <input type="text" class="form-control" id="project_name" name="project_name" placeholder="Proyecto o nombre del proyecto" value="<?php echo set_value('project_name'); ?>">
                         <?php echo form_error('project_name', '<div class="text-danger">', '</div>'); ?>
                     </div>
 
-                    <div class="form-group col-lg-6">
+                    <div class="form-group col-lg-3">
                         <label for="client_id">Cliente</label>
                         <select class="select2" id="client_id" name="client_id">
                             <?php foreach ($clients as $client): ?>
