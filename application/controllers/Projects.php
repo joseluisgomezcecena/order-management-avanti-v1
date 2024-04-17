@@ -41,6 +41,7 @@ class Projects extends MY_Controller
         $this->form_validation->set_rules('area', 'Area', 'required');
         $this->form_validation->set_rules('work_units', 'Unidades de trabajo a realizar/fabricar', 'required|numeric');
         $this->form_validation->set_rules('approved_by', 'Aprobado por', 'required|max_length[255]');
+        $this->form_validation->set_rules('project_type', 'Tipo de proyecto', 'required');
         
         
         
@@ -113,7 +114,8 @@ class Projects extends MY_Controller
                 'approved_by' => $this->input->post('approved_by'),
                 'area' => $this->input->post('area'),
                 'user_name' => $this->session->userdata('username'),
-                'main_image' => $data['upload_data']['file_name']
+                'main_image' => $data['upload_data']['file_name'],
+                'project_type' => $this->input->post('project_type')
             );
             
             // Insert the new project into the database
@@ -203,6 +205,8 @@ class Projects extends MY_Controller
         $this->form_validation->set_rules('area', 'Area', 'required');
         $this->form_validation->set_rules('work_units', 'Unidades de trabajo a realizar/fabricar', 'required|numeric');
         $this->form_validation->set_rules('approved_by', 'Aprobado por', 'required|max_length[255]');
+        $this->form_validation->set_rules('project_type', 'Tipo de proyecto', 'required');
+
         
         if ($this->form_validation->run() == FALSE) 
         {
@@ -246,7 +250,8 @@ class Projects extends MY_Controller
                 'work_units' => $this->input->post('work_units'),
                 'approved_by' => $this->input->post('approved_by'),
                 'area' => $this->input->post('area'),
-                'user_name' => $this->session->userdata('username')
+                'user_name' => $this->session->userdata('username'),
+                'project_type' => $this->input->post('project_type')
             );
 
             // Check if the main_image input is not empty
