@@ -194,6 +194,8 @@
 
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.js"></script>
+
     <!--
     https://cdn.datatables.net/buttons/3.0.1/js/dataTables.buttons.js
 https://cdn.datatables.net/buttons/3.0.1/js/buttons.dataTables.js
@@ -384,6 +386,93 @@ $('.timepicker').timepicker({
     
 
 </script>
+
+
+
+<script>
+$(document).ready(function() {
+   
+    /*
+    var canvas = document.getElementById('signature-pad');
+    var context = canvas.getContext('2d');
+
+    var isDrawing = false;
+    canvas.addEventListener('mousedown', function() {
+        isDrawing = true;
+    });
+    canvas.addEventListener('mouseup', function() {
+        isDrawing = false;
+    });
+    canvas.addEventListener('mousemove', function(event) {
+        if (isDrawing) {
+            var rect = canvas.getBoundingClientRect();
+            var x = event.clientX - rect.left;
+            var y = event.clientY - rect.top;
+            context.lineTo(x, y);
+            context.stroke();
+        }
+    });
+    */
+
+        var canvas = document.getElementById('signature-pad');
+        var context = canvas.getContext('2d');
+
+        var isDrawing = false;
+
+        function startDrawing(e) {
+            isDrawing = true;
+            draw(e);
+        }
+
+        function stopDrawing() {
+            isDrawing = false;
+            context.beginPath();
+        }
+
+        function draw(e) {
+            if (!isDrawing) return;
+            var rect = canvas.getBoundingClientRect();
+            var x = (e.clientX || e.touches[0].clientX) - rect.left;
+            var y = (e.clientY || e.touches[0].clientY) - rect.top;
+            context.lineTo(x, y);
+            context.stroke();
+            context.beginPath();
+            context.moveTo(x, y);
+        }
+
+        // For mouse events
+        canvas.addEventListener('mousedown', startDrawing);
+        canvas.addEventListener('mouseup', stopDrawing);
+        canvas.addEventListener('mouseout', stopDrawing);
+        canvas.addEventListener('mousemove', draw);
+
+        // For touch events
+        canvas.addEventListener('touchstart', startDrawing);
+        canvas.addEventListener('touchend', stopDrawing);
+        canvas.addEventListener('touchcancel', stopDrawing);
+        canvas.addEventListener('touchmove', draw);
+
+
+
+   
+    $('#save-signature-btn').click(function() {
+        html2canvas(canvas).then(function(canvas) {
+            var imgData = canvas.toDataURL('image/png');
+            $.ajax({
+                type: 'POST',
+                url: '<?php echo base_url("users/upload_signature/") . $user['user_id'] ?>',
+                data: { imgData: imgData },
+                success: function(response) {
+                    // Handle the response from the server
+                }
+            });
+        });
+    });
+   
+});
+</script>
+
+
 
 </body>
 

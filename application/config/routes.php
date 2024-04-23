@@ -42,6 +42,7 @@ $route['users'] = 'users/index';
 $route['users/create'] = 'users/create';
 $route['users/update/(:any)'] = 'users/update/$1';
 $route['users/delete/(:any)'] = 'users/delete/$1';
+$route['users/signature/(:any)'] = 'users/signature/$1';
 
 
 //reports routes.

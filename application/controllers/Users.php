@@ -158,4 +158,67 @@ class Users extends MY_Controller
         }
     }
 
+
+
+    public function signature($user_id) {
+        $data['title'] = ucfirst("Firma de usuario"); // Capitalize the first letter
+        $data['user'] = $this->User_model->get_user($user_id);
+
+        // Validate form data
+        $this->form_validation->set_rules('signature', 'Signature', 'required');
+
+        if ($this->form_validation->run() == FALSE) 
+        {
+            // Display registration form with validation errors
+            $this->load->view('_templates/header', $data);
+            $this->load->view('_templates/topnav');
+            $this->load->view('_templates/sidebar');
+            $this->load->view('users/signature', $data);
+            $this->load->view('_templates/footer');
+        } 
+        else
+        {
+            // Process registration data
+            $data = array(
+                'signature' => $this->input->post('signature')
+            );
+
+            if ($this->User_model->update_user($user_id, $data))
+            {
+                // Registration successful set flash message.
+                $this->session->set_flashdata('success', 'Se ha actualizado la firma del usuario '.$this->input->post('username').'. Ya puede iniciar sesion.');
+
+                // Registration successful, redirect to login page
+                redirect(base_url() . 'users');
+            } else {
+                // Registration failed, display error message
+                $data['error'] = 'Registration failed. Please try again.';
+                redirect(base_url() . 'users');
+
+            }
+        }
+    }
+
+
+
+   
+    public function upload_signature() {
+        $imgData = $this->input->post('imgData');
+        $imgData = str_replace('data:image/png;base64,', '', $imgData);
+        $imgData = str_replace(' ', '+', $imgData);
+        $imgData = base64_decode($imgData);
+
+        $user_id = $this->session->userdata('user_id'); // Assuming you have user_id in session data
+
+        // Save the image to a file
+        $filePath = './uploads/signatures/' . $user_id . rand() . '.png';
+        file_put_contents($filePath, $imgData);
+
+        // Save the file path to the database
+        $this->user_model->update_signature($user_id, $filePath);
+    }
+
+
+
+
 }
