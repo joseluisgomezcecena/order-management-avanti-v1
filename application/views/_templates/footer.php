@@ -217,22 +217,45 @@ https://cdn.datatables.net/buttons/3.0.1/js/buttons.html5.min.js
     });
     
     $(document).ready(function() {
-    $('#data-projects').DataTable({
-        scrollX: true,
-        scrollCollapse: true,
-        dom: 'Bfrtip',
-        buttons: [
-            'excel', 'pdf', 'print', 'copy', 'csv'
-        ],
-        columnDefs: [
-            { width: '15px', targets: [0] },
-            { width: '150px', targets: [1, 2,  5, 6, 7,8,9,10, 11,12,13] },
-            { width: '100px', targets: [3] },
-            { width: '75px', targets: [4] },
-            { width: '200px', targets: [14] }
-        ]
+        $('#data-projects').DataTable({
+            scrollX: true,
+            scrollCollapse: true,
+            dom: 'Bfrtip',
+            buttons: [
+                'excel', 'pdf', 'print', 'copy', 'csv'
+            ],
+            columnDefs: [
+                { width: '15px', targets: [0] },
+                { width: '150px', targets: [1, 2,  5, 6, 7,8,9,10, 11,12,13] },
+                { width: '100px', targets: [3] },
+                { width: '75px', targets: [4] },
+                { width: '200px', targets: [14] }
+            ]
+        });
     });
-});
+
+
+    $(document).ready(function() {
+        $('#data-projects-client').DataTable({
+            scrollX: true,
+            scrollCollapse: true,
+            dom: 'Bfrtip',
+            buttons: [
+                'excel', 'pdf', 'print', 'copy', 'csv'
+            ],
+            columnDefs: [
+                { width: '15px', targets: [0] },
+                { width: '150px', targets: [1, 2,  5, 6, 7,8,9,10] },
+                { width: '100px', targets: [3] },
+                { width: '75px', targets: [4] }
+                
+            ]
+        });
+    });
+
+
+
+
 </script>
 
 <script>

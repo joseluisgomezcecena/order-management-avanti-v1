@@ -6,10 +6,19 @@ class Clients extends MY_Controller
     public function show($client_id) {
         // Retrieve the client from the database
         $data['client'] = $this->Clients_model->get_client($client_id);
+        #check projects for this client
+        $data['projects'] = $this->Clients_model->get_projects_by_client($client_id);
         
+        $data['title'] = 'Cliente: ' . $data['client']['client_name'] . ' - Detalles.';
+
         // Load the view to display the client details
+        $this->load->view('_templates/header', $data);
+        $this->load->view('_templates/topnav');
+        $this->load->view('_templates/sidebar');
         $this->load->view('clients/show', $data);
+        $this->load->view('_templates/footer');
     }
+
 
     public function index() 
     {

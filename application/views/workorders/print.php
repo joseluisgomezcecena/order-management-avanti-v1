@@ -21,7 +21,7 @@
             background-color:orange;
         }
         td{
-            border-right:solid 1px;
+            /*border-right:solid 1px;*/
         }
     }
 </style>

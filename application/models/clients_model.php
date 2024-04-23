@@ -17,6 +17,7 @@ class Clients_model extends CI_Model
         $query = $this->db->get_where('clients', array('client_id' => $client_id));
         return $query->row_array();
     }
+
     
     public function create_client($client_data) 
     {
@@ -26,6 +27,7 @@ class Clients_model extends CI_Model
         return $query;
     }
     
+
     public function update_client($client_id, $client_data) 
     {
         // Update an existing client in the database
@@ -34,6 +36,7 @@ class Clients_model extends CI_Model
         return $query;
     }
     
+
     public function delete_client($client_id) 
     {
         // Delete a client from the database
@@ -50,12 +53,21 @@ class Clients_model extends CI_Model
         return $query->row_array();
     }
 
+
     public function get_client_by_name_and_id($client_name, $client_id) 
     {
         // Retrieve a specific client by name and id from the database
         // Implement your logic here
         $query = $this->db->get_where('clients', array('client_name' => $client_name, 'client_id !=' => $client_id));
         return $query->row_array();
+    }
+
+    public function get_projects_by_client($client_id) 
+    {
+        // Retrieve all projects for a specific client from the database
+        // Implement your logic here
+        $query = $this->db->get_where('projects', array('client_id' => $client_id));
+        return $query->result_array();
     }
 
 }
