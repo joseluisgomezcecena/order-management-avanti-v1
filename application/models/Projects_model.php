@@ -64,6 +64,7 @@ class Projects_model extends CI_Model
         $this->db->join('clients', 'projects.client_id = clients.client_id'); //join with clients table to get client name
         $this->db->join('project_operation', 'projects.project_id = project_operation.po_project_id'); //join with project_operation table to get project id
         $this->db->where('po_operation_id', $operation_id);
+        $this->db->order_by('project_id', 'ASC');
         $query = $this->db->get();
         return $query->result_array();
     }
