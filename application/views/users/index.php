@@ -34,6 +34,7 @@
                     <th>Fecha de Registro</th>
                     <th>Actualizado</th>
                     <th style="width:200px;">Acciones</th>
+                    <th>Firma</th>
                 </tr>
             </thead>
             <tbody>
@@ -47,6 +48,9 @@
                         <td>
                             <a href="<?php echo base_url('users/update/'.$user['user_id']); ?>" class="btn btn-sm btn-primary"  >Editar</a>
                             <a href="<?php echo base_url('users/delete/'.$user['user_id']); ?>" class="btn btn-sm btn-danger <?php echo ($user['username'] == 'administrator') ? 'disabled' : ' ';  ?>"  >Eliminar</a>
+                        </td>
+                        <td>
+                            <a href="<?php echo base_url('users/signature/'.$user['user_id']); ?>" class="btn btn-sm btn-primary"  >Actualizar</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>

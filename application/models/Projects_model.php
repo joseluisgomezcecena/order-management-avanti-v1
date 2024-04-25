@@ -55,6 +55,22 @@ class Projects_model extends CI_Model
     }
 
 
+
+    public function get_projects_by_operation($operation_id)
+    {
+        // Retrieve all projects that use an operation from the database
+        $this->db->select('projects.*, clients.client_name, clients.client_id, clients.address');
+        $this->db->from('projects');
+        $this->db->join('clients', 'projects.client_id = clients.client_id'); //join with clients table to get client name
+        $this->db->join('project_operation', 'projects.project_id = project_operation.po_project_id'); //join with project_operation table to get project id
+        $this->db->where('po_operation_id', $operation_id);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+
+
+
     public function check_project_name_exists($project_name)
     {
         // Check if the project name exists in the database
@@ -74,7 +90,7 @@ class Projects_model extends CI_Model
     }
 
 
-    public function check_operation_exists($operation_id, $project_id)
+    public function check_operation_exists( $project_id, $operation_id)
     {
         // Check if the operation exists in the project
         $this->db->where('po_operation_id', $operation_id);

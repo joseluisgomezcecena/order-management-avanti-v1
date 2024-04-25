@@ -35,10 +35,11 @@
 
             <!--autocomplete="off"-->
 
-            <form action="<?php echo base_url("users/update/") . $user['user_id'] ?>" method="post" autocomplete="off">
+            
+                <input type="text" name="user_id" id="userid" value="<?php echo $user['user_id']; ?>">
                 <canvas style="border:solid;" id="signature-pad" width="400" height="200"></canvas>
                 <button id="save-signature-btn">Save Signature</button>
-            </form>
+            
         </div>
     </div>
 </div>

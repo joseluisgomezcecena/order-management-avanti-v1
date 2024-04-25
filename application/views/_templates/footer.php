@@ -458,12 +458,18 @@ $(document).ready(function() {
     $('#save-signature-btn').click(function() {
         html2canvas(canvas).then(function(canvas) {
             var imgData = canvas.toDataURL('image/png');
+            var userId = $('#userid').val();
+
             $.ajax({
                 type: 'POST',
                 url: '<?php echo base_url("users/upload_signature/") . $user['user_id'] ?>',
-                data: { imgData: imgData },
+                data: { imgData: imgData, userId: userId},
                 success: function(response) {
                     // Handle the response from the server
+                    alert('Firma guardada con éxito');
+                },
+                error: function() {
+                    alert('Error al guardar la firma');
                 }
             });
         });

@@ -208,17 +208,16 @@ class Users extends MY_Controller
         $imgData = str_replace(' ', '+', $imgData);
         $imgData = base64_decode($imgData);
 
-        $user_id = $this->session->userdata('user_id'); // Assuming you have user_id in session data
+        //$user_id = $this->session->userdata('user_id'); // Assuming you have user_id in session data
+
+        $user_id = $this->input->post('userid');
 
         // Save the image to a file
         $filePath = './uploads/signatures/' . $user_id . rand() . '.png';
         file_put_contents($filePath, $imgData);
 
         // Save the file path to the database
-        $this->user_model->update_signature($user_id, $filePath);
+        $this->User_model->update_signature($user_id, $filePath);
     }
-
-
-
 
 }

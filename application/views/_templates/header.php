@@ -41,6 +41,9 @@
 
 	<link href="<?php echo base_url() ?>assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet">
 
+	<link rel="manifest" href="<?php echo base_url() ?>manifest.json">
+	<script src="<?php echo base_url() ?>service_worker.js" ></script>
+
 	<style>
 		/* Hide scrollbar for Chrome, Safari and Opera */
 		.table-responsive::-webkit-scrollbar {

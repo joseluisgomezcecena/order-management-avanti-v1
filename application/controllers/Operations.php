@@ -15,6 +15,28 @@ class Operations extends CI_Controller {
         $this->load->view('operations/index', $data);
         $this->load->view('_templates/footer');
     }
+
+
+
+    public function show($operation_id) {
+        // Title of the page.
+        $data['title'] = 'Proceso u Operación.';
+        // Retrieve the operation from the database
+        $data['operation'] = $this->Operations_model->get_operation($operation_id);
+        // Retrieve all custom fields for the operation from the database
+        $data['customfields'] = $this->Operations_model->get_operation_customfields($operation_id);
+       
+        $data['operation_id'] = $operation_id;
+
+        //get a list of projects that use this operation.
+        $data['projects'] = $this->Projects_model->get_projects_by_operation($operation_id);
+
+        $this->load->view('_templates/header', $data);
+        $this->load->view('_templates/topnav');
+        $this->load->view('_templates/sidebar');
+        $this->load->view('operations/show', $data);
+        $this->load->view('_templates/footer');
+    }
     
 
     public function create() {

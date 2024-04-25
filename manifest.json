@@ -1,0 +1,23 @@
+{
+    "name": "order-App",
+    "short_name": "Order Manager", 
+    "start_url": "https://hgorthosupply.com/construccionesymantenimiento2/auth/login",
+    "theme_color": "#dc8235",
+    "background_color": "#ffffff",
+    "display": "standalone",
+    "icons":[
+      {
+        "src":"images/logo192.png",
+        "sizes": "192x192",
+        "type": "image/png"
+      },
+      {
+        "src":"images/logo512.png", 
+        "sizes": "512x512", 
+        "type": "image/png" 
+
+       
+      }
+    ]
+  
+  }
