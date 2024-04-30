@@ -32,10 +32,11 @@
                 <tr>
                     <th >Id</th>
                     <th >Proyecto</th>
+                    <th>Status</th>
                     <th >Cliente</th>
                     <th >Usuario</th>
                     <th >Fecha</th>
-                    <th >Requiere instalación</th>
+                    <th >Instalación</th>
                     <th >Dirección</th>
                     <th >Area</th>
                     <th >Cantidad de piezas</th>
@@ -52,6 +53,7 @@
                 <tr>
                     <td><?php echo $project['project_id'] ?></td>
                     <td><a href="<?php echo base_url('projects/' . $project['project_id']) ?>"><?php echo $project['project_name']; ?></a></td>
+                    <td><?php echo $project['project_status'] ?></td>
                     <td><?php echo $project['client_name'] ?></td>
                     <td><?php echo $project['user'] ?></td>
                     <td><?php echo date_format(date_create($project['date']), "M-d-Y");  ?></td>

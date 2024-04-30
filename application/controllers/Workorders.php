@@ -149,6 +149,20 @@ class Workorders extends MY_Controller {
         }
     }
 
+
+
+    public function update_status($project_id)
+    {
+        $status = $this->input->post('status');
+        $this->Projects_model->update_status($project_id, $status);
+        $this->session->set_flashdata('success', 'Estado de la orden de trabajo actualizado.');
+        redirect(base_url("workorders/update/$project_id"));
+
+    }
+
+
+
+
     public function print($id)
     {
         $data['title'] = "Llenar Orden de Trabajo";

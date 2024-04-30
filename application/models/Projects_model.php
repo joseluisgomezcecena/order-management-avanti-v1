@@ -125,6 +125,16 @@ class Projects_model extends CI_Model
         $this->db->update('projects', $project_data);
     }
 
+
+
+    public function update_status($project_id, $status)
+    {
+        // Update the status of a project in the database
+        $this->db->where('project_id', $project_id);
+        $this->db->update('projects', array('project_status' => $status));
+    }
+
+
     
     public function delete_project($project_id)
     {

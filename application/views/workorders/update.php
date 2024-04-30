@@ -194,6 +194,25 @@
     <?php endforeach; ?>
 
 
+        <div class="mt-5">
+            <form action="<?php echo base_url("workorders/update_status/" . $project['project_id']) ?>" method="post">
+                
+                <div class="form-group">
+                    <label for="status">Status</label>
+                    <select name="status" id="status" class="form-control">
+                    <option value="">Seleccione una opción</option>    
+                    <option value="Registrado" <?php echo ($project['project_status'] == "Registrado") ? "selected" : ""; ?> >Registrado</option>                        
+                    <option value="En Espera" <?php echo ($project['project_status'] == "En Espera") ? "selected" : ""; ?> >En Espera</option>
+                    <option value="En Proceso" <?php echo ($project['project_status'] == "En Proceso") ? "selected" : ""; ?> >En Proceso</option>
+                    <option value="Terminado" <?php echo ($project['project_status'] == "Terminado") ? "selected" : ""; ?> >Terminado</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary right float-right">Actualizar Status</button>
+            </form>
+        </div>
+        
+
 
     </div>
 </div>
