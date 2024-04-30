@@ -154,6 +154,7 @@
 
 
 			//bar chart data
+			/*
 			var data = {
 				labels: cData.label,
 				datasets: [
@@ -188,6 +189,27 @@
 							"#00c085",
 						],
 						borderWidth: [1, 1, 1, 1, 1,1,1,1, 1, 1, 1,1,1]
+					}
+				]
+			};
+			*/
+
+			var data = {
+				labels: cData.label,
+				datasets: [
+					{
+						label: "Mantenimiento",
+						data: cData.data_m,
+						backgroundColor: "rgba(0,210,146,0.5)",
+						borderColor: "#00c085",
+						borderWidth: 1
+					},
+					{
+						label: "Taller",
+						data: cData.data_t,
+						backgroundColor: "rgba(210,0,0,0.5)",
+						borderColor: "#c00000",
+						borderWidth: 1
 					}
 				]
 			};
