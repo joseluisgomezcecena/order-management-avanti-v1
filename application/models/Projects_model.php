@@ -41,10 +41,13 @@ class Projects_model extends CI_Model
             $this->db->where('projects.client_id', $client);
         }
         if ($start) {
-            $this->db->where('created_at >=', $start);
+            $start = date('Y-m-d', strtotime($start));
+            $this->db->where('projects.created_at >=', $start." 00:00:00");
         }
         if ($end) {
-            $this->db->where('created_at <=', $end);
+            //turn the date into a timestamp
+            $end = date('Y-m-d', strtotime($end));
+            $this->db->where('projects.created_at <=', $end." 23:59:59");
         }
         $this->db->order_by('project_id', 'DESC');
         $query = $this->db->get();
