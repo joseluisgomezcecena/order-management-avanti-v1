@@ -21,10 +21,39 @@ class Projects_model extends CI_Model
         $this->db->select('projects.*, clients.client_name, clients.client_id, clients.address');
         $this->db->from('projects');
         $this->db->join('clients', 'projects.client_id = clients.client_id'); //join with clients table to get client name
+        $this->db->order_by('project_id', 'DESC');
         $query = $this->db->get();
         return $query->result_array();
         
     }
+
+
+    public function search_projects($status, $client, $start, $end)
+    {
+        // Retrieve all projects from the database
+        $this->db->select('projects.*, clients.client_name, clients.client_id, clients.address');
+        $this->db->from('projects');
+        $this->db->join('clients', 'projects.client_id = clients.client_id'); //join with clients table to get client name
+        if ($status) {
+            $this->db->where('project_status', $status);
+        }
+        if ($client) {
+            $this->db->where('projects.client_id', $client);
+        }
+        if ($start) {
+            $this->db->where('created_at >=', $start);
+        }
+        if ($end) {
+            $this->db->where('created_at <=', $end);
+        }
+        $this->db->order_by('project_id', 'DESC');
+        $query = $this->db->get();
+        //$last_query = $this->db->last_query();
+        #print_r($last_query);
+        return $query->result_array();
+    }
+
+
 
 
 

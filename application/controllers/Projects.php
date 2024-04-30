@@ -16,7 +16,18 @@ class Projects extends MY_Controller
     {
         // Retrieve all projects from the database
         $data['projects'] = $this->Projects_model->get_projects();
+        $data['clients'] = $this->Clients_model->get_clients();
         $data['title'] = 'Projects';
+
+        if (isset($_POST['search'])) {
+            $data['projects'] = $this->Projects_model->search_projects(
+                $this->input->post('status'),
+                $this->input->post('client'),
+                $this->input->post('start'),
+                $this->input->post('end')
+            );
+        }
+
         
         // Load the view to display the projects list
         $this->load->view('_templates/header', $data);

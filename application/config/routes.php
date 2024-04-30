@@ -27,9 +27,11 @@ $route['projects'] = 'projects/index';
 $route['projects/create'] = 'projects/create';
 $route['projects/update/(:any)'] = 'projects/update/$1';
 $route['projects/delete/(:any)'] = 'projects/delete/$1';
+$route['projects/search'] = 'projects/search';
 //$route['projects/(:any)'] = 'projects/show/$1';
 $route['projects/(:any)/operations'] = 'projects/operations/$1';
 $route['projects/update_order'] = 'projects/update_order';
+
 
 
 //workorders routes.

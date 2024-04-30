@@ -222,6 +222,7 @@ https://cdn.datatables.net/buttons/3.0.1/js/buttons.html5.min.js
         $('#data-projects').DataTable({
             scrollX: true,
             scrollCollapse: true,
+            bSort: false,
             dom: 'Bfrtip',
             buttons: [
                 'excel', 'pdf', 'print', 'copy', 'csv'
@@ -229,8 +230,8 @@ https://cdn.datatables.net/buttons/3.0.1/js/buttons.html5.min.js
             columnDefs: [
                 { width: '15px', targets: [0] },
                 { width: '150px', targets: [1, 2, 3, 7, 8,9,10,11, 12,13,14] },
-                { width: '100px', targets: [4,6] },
-                { width: '75px', targets: [5] },
+                { width: '100px', targets: [4,6,5] },
+                //{ width: '75px', targets: [5] },
                 { width: '200px', targets: [15] }
             ]
         });

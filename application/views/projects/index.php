@@ -14,6 +14,40 @@
         <a href="<?php echo base_url('projects/create') ?>" class="btn btn-primary">Nuevo Proyecto</a>
     </div>
 </div>
+
+<div class="">
+    <!--inline search form-->
+    <form class="form-inline" action="<?php echo base_url('projects') ?>" method="post">
+        <div class="form-group m-2">
+            <select type="text" class="form-control" name="status" >
+                <option value="">Todos los status</option>
+                <option value="En proceso">En proceso</option>
+                <option value="Pendiente">En Espera</option>
+                <option value="Terminado">Completado</option>
+            </select>
+        </div>
+        <div class="form-group m-2">
+            <select type="text" class="form-control" name="client" >
+                <option value="">Todos los clientes</option>
+                <?php foreach ($clients as $client): ?>
+                    <option value="<?php echo $client['client_id'] ?>"><?php echo $client['client_name'] ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+        <div class="form-group m-2">
+            <input type="text" class="form-control datepicker-input" name="start" placeholder="Fecha Inicial" autocomplete="off">
+        </div>
+        <div class="form-group m-2">
+            hasta
+        </div>
+        <div class="form-group m-2">
+            <input type="text" class="form-control datepicker-input" name="end" placeholder="Fecha Final" autocomplete="off">
+        </div>
+        <button type="submit" name="search" class="btn btn-primary">Aplicar Filtro</button>
+    </form>
+</div>
+
+
 <div class="card mt-5">
     <div class="card-body">
 
