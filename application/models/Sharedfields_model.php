@@ -29,5 +29,14 @@ class Sharedfields_model extends CI_Model {
     public function delete_shared_field($shared_id) {
         return $this->db->delete($this->table, array('shared_id' => $shared_id));
     }
+
+    //get shared fields by operation id
+    public function get_shared_fields_by_operation_id($operation_id) {
+        $this->db->select('operation_shared_fields.*, operations.operation_name');
+        $this->db->from('operation_shared_fields');
+        $this->db->join('operations', 'operations.operation_id = operation_shared_fields.shared_operation_id');
+        $this->db->where('shared_operation_id', $operation_id);
+        return $this->db->get()->result();
+    }
     
 }

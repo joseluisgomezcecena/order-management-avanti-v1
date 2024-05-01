@@ -21,6 +21,7 @@
         <div class="form-group m-2">
             <select type="text" class="form-control" name="status" >
                 <option value="">Todos los status</option>
+                <option value="Registrado">Registrado</option>
                 <option value="En proceso">En proceso</option>
                 <option value="Pendiente">En Espera</option>
                 <option value="Terminado">Completado</option>
@@ -86,7 +87,7 @@
                 <?php foreach ($projects as $project):?>
                 <tr>
                     <td><?php echo $project['project_id'] ?></td>
-                    <td><a href="<?php echo base_url('projects/' . $project['project_id']) ?>"><?php echo $project['project_name']; ?></a></td>
+                    <td><a href="<?php echo base_url('projects/show/' . $project['project_id']) ?>"><?php echo $project['project_name']; ?></a></td>
                     <td><?php echo $project['project_status'] ?></td>
                     <td><?php echo $project['client_name'] ?></td>
                     <td><?php echo $project['user'] ?></td>

@@ -7,8 +7,29 @@ class Projects extends MY_Controller
         // Retrieve the project from the database
         $data['project'] = $this->Projects_model->get_project($project_id);
         
+        // Fetch the uploaded files for the project.
+        $data['files'] = $this->Projects_model->get_files($project_id);
+        
+        // Fetch the shared fields for the project
+        $data['sharedfields'] = $this->Sharedfields_model->get_shared_fields();
+        
+        // Fetch the operations for the project
+        $data['operations'] = $this->Projects_model->get_operations_by_project($project_id);
+
+        // For each operation, fetch the custom fields
+        foreach ($data['operations'] as &$operation) {
+            $operation['custom_fields'] = $this->Operations_model->get_operation_customfields($operation['po_operation_id']);
+            $data['shared'] = $this->Sharedfields_model->get_shared_fields_by_operation_id($operation['po_operation_id']);
+        }
+
+        $data['title'] = "Proyecto: " . $data['project']['project_name'];
+        
         // Load the view to display the project details
+        $this->load->view('_templates/header', $data);
+        $this->load->view('_templates/topnav');
+        $this->load->view('_templates/sidebar');
         $this->load->view('projects/show', $data);
+        $this->load->view('_templates/footer');
     }
 
 
