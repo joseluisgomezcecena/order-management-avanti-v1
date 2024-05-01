@@ -70,15 +70,53 @@
                 <div class="tab-content m-t-15 p-25">
                     <div class="tab-pane fade show active" id="project-details-tasks">
                     
-                        <div class="">
-                            <h6>Tipo de Proyecto:</h6>
-                            <p><?php echo ($project['project_type']=='m') ? "Mantenimiento" : "Taller/Construcción" ?></p>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <h6>Tipo de Proyecto:</h6>
+                                <p><?php echo ($project['project_type']=='m') ? "Mantenimiento" : "Taller/Construcción" ?></p>
+                            </div>
+                            <div class="col-lg-4">
+                                <h6>Cliente:</h6>
+                                <p><?php echo $project['client_name'] ?></p>
+                            </div>
+                            <div class="col-lg-4">
+                                <h6>Require Instalación:</h6>
+                                <p><?php echo ($project['installation_required']== 1) ? "Si" : "No" ?></p>
+                            </div>
 
-                            <h6>Cliente:</h6>
-                            <p><?php echo $project['client_name'] ?></p>
+                            
 
-                            <h6>Require Instalación:</h6>
-                            <p><?php echo ($project['installation_required']== 1) ? "Si" : "No" ?></p>
+                            <div class="col-lg-4">
+                                <h6>Area:</h6>
+                                <p><?php echo $project['area'] ?></p>
+                            </div>
+                            <div class="col-lg-4">
+                                <h6>Cantidad:</h6>
+                                <p><?php echo $project['qty'] ?></p>
+                            </div>
+                            <div class="col-lg-4">
+                                <h6>Unidades de trabajo a realizar:</h6>
+                                <p><?php echo $project['work_units'] ?></p>
+                            </div>
+
+
+                            <div class="col-lg-4">
+                                <h6>Aprobado Por:</h6>
+                                <p><?php echo $project['approved_by'] ?></p>
+                            </div>
+                            <div class="col-lg-4">
+                                <h6>Usuario:</h6>
+                                <p><?php echo $project['user_name'] ?></p>
+                            </div>
+                            <div class="col-lg-4">
+                                <h6>Registro Creado:</h6>
+                                <p><?php echo date('M/d/Y H:i:s', strtotime($project['created_at'])); ?></p>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <h6>Ultima Actualización:</h6>
+                                <p><?php echo date('M/d/Y H:i:s', strtotime($project['updated_at'])); ?></p>
+                            </div>
 
 
                         </div>
@@ -149,39 +187,20 @@
                         </ul>
                     </div>
                     <div class="tab-pane fade" id="project-details-attachment">
-                        <div class="file" style="min-width: 200px;">
-                            <div class="media align-items-center">
-                                <div class="avatar avatar-icon avatar-cyan rounded m-r-15">
-                                    <i class="anticon anticon-file-exclamation font-size-20"></i>
-                                </div>
-                                <div>
-                                    <h6 class="mb-0">Mockup.zip</h6>
-                                    <span class="font-size-13 text-muted">7MB</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="file" style="min-width: 200px;">
-                            <div class="media align-items-center">
-                                <div class="avatar avatar-icon avatar-blue rounded m-r-15">
-                                    <i class="anticon anticon-file-word font-size-20"></i>
-                                </div>
-                                <div>
-                                    <h6 class="mb-0">Guideline.doc</h6>
-                                    <span class="font-size-13 text-muted">128 KB</span>
+                        <?php foreach ($files as $file): ?>
+                            <div class="file" style="min-width: 200px;">
+                                <div class="media align-items-center">
+                                    <div class="avatar avatar-icon avatar-cyan rounded m-r-15">
+                                        <i class="anticon anticon-file-exclamation font-size-20"></i>
+                                    </div>
+                                    <div>
+                                        <h6 class="mb-0"><?php echo $file['file_name'] ?></h6>
+                                        <a href="<?php echo base_url("uploads/project_uploads/" . $file['file_name']) ?>"><span class="font-size-13 text-primary">Descargar</span></a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="file" style="min-width: 200px;">
-                            <div class="media align-items-center">
-                                <div class="avatar avatar-icon avatar-gold rounded m-r-15">
-                                    <i class="anticon anticon-file-image font-size-20"></i>
-                                </div>
-                                <div>
-                                    <h6 class="mb-0">Logo.png</h6>
-                                    <span class="font-size-13 text-muted">128 KB</span>
-                                </div>
-                            </div>
-                        </div>
+                        <?php endforeach; ?>
+                        
                     </div>
                 </div>
             </div>
