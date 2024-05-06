@@ -112,4 +112,31 @@ class Chart_model extends CI_Model
     }
 
 
+    //info for panels.
+    public function count_projects()
+    {
+        return $this->db->count_all('projects');
+    }
+
+
+    public function count_projects_by_type($type)
+    {
+        $this->db->where('project_type', $type);
+        return $this->db->count_all_results('projects');
+    }
+
+
+    public function count_projects_by_status($status)
+    {
+        $this->db->where('project_status', $status);
+        return $this->db->count_all_results('projects');
+    }
+
+
+    public function count_clients()
+    {
+        return $this->db->count_all('clients');
+    }
+    
+
 }

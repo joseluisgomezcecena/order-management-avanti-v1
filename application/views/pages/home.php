@@ -7,7 +7,7 @@
 						<i class="anticon anticon-tool"></i>
 					</div>
 					<div class="m-l-15">
-						<h2 class="m-b-0">1</h2>
+						<h2 class="m-b-0"><?php echo $unfinished_projects; ?></h2>
 						<p class="m-b-0 text-muted">Proyectos En Proceso</p>
 					</div>
 				</div>
@@ -22,7 +22,7 @@
 						<i class="anticon anticon-check"></i>
 					</div>
 					<div class="m-l-15">
-						<h2 class="m-b-0">2</h2>
+						<h2 class="m-b-0"><?php echo $finished_projects; ?></h2>
 						<p class="m-b-0 text-muted">Proyectos Terminados</p>
 					</div>
 				</div>
@@ -37,8 +37,8 @@
 						<i class="anticon anticon anticon-solution"></i>
 					</div>
 					<div class="m-l-15">
-						<h2 class="m-b-0">2</h2>
-						<p class="m-b-0 text-muted">Clientes Registrados</p>
+						<h2 class="m-b-0"><?php echo $maintenance_projects ?></h2>
+						<p class="m-b-0 text-muted">Mantenimiento</p>
 					</div>
 				</div>
 			</div>
@@ -52,8 +52,8 @@
 						<i class="anticon anticon-setting"></i>
 					</div>
 					<div class="m-l-15">
-						<h2 class="m-b-0">3</h2>
-						<p class="m-b-0 text-muted">Procesos Disponibles</p>
+						<h2 class="m-b-0"><?php echo $shop_projects ?></h2>
+						<p class="m-b-0 text-muted">Taller</p>
 					</div>
 				</div>
 			</div>
