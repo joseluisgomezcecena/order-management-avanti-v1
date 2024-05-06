@@ -25,24 +25,35 @@
             </div>
         <?php } ?>
 
-        <table style="font-size:12px; width:100%" id="data-tables" class="table">
+        <table style="font-size:12px;" id="data-clients" class="table">
             <thead>
                 <tr>
                     <th>Cliente</th>
                     <th>Direccion</th>
+                    <th>Ultimo Proyecto</th>
                     <th>Creado</th>
                     <th>Actualizado</th>
                     <th>Registro</th>
-                    <th style="width:200px;">Acciones</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($clients as $client):?>
                 <tr>
                     <td><a href="<?php echo base_url('clients/' . $client['client_id']) ?>"><?php echo $client['client_name']; ?></a></td>
+                    <td><?php echo empty($client['address']) ? 'N/A' : $client['address']; //ternary operator to check if the address is empty.?></td>
+                    
                     <td>
-                        <?php echo empty($client['address']) ? 'N/A' : $client['address']; //ternary operator to check if the address is empty.?>
+                        <?php  
+                            $last_project = $this->Clients_model->get_last_project_by_client($client['client_id']);
+                            if (empty($last_project)) {
+                                echo 'N/A';
+                            } else{
+                            echo '<a href="'. base_url("projects/show/" . $last_project['project_id']) .'">' . $last_project['project_name'] . '</a> <br>Fecha: ' . date_format(date_create($last_project['created_at']), "M-d-Y");
+                        }
+                        ?>
                     </td>
+                    
                     <td><?php echo date_format(date_create($client['created_at']), "M-d-Y H:i:s"); ?></td>
                     <td><?php echo date_format(date_create($client['updated_at']), "M-d-Y H:i:s"); ?></td>
                     <td><?php echo $client['user_name']; ?></td>

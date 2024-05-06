@@ -24,6 +24,7 @@ class Clients extends MY_Controller
     {
         // Retrieve all clients from the database
         $data['clients'] = $this->Clients_model->get_clients();
+        //$data['last_project'] = $this->Clients_model->get_last_project();
         $data['title'] = 'Clientes';
         
         // Load the view to display the clients list

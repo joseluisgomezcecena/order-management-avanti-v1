@@ -4,7 +4,7 @@ class Clients_model extends CI_Model
 {
     public function get_clients() 
     {
-        // Retrieve all clients from the database
+        //Retrieve all clients from the database
         $query = $this->db->get('clients');
         return $query->result_array();
         
@@ -68,6 +68,16 @@ class Clients_model extends CI_Model
         // Implement your logic here
         $query = $this->db->get_where('projects', array('client_id' => $client_id));
         return $query->result_array();
+    }
+
+
+    public function get_last_project_by_client($client_id) 
+    {
+        // Retrieve the last project for a specific client from the database
+        // Implement your logic here
+        $this->db->order_by('created_at', 'DESC');
+        $query = $this->db->get_where('projects', array('client_id' => $client_id), 1);
+        return $query->row_array();
     }
 
 }
