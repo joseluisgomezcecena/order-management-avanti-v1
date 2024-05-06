@@ -28,6 +28,13 @@
             </select>
         </div>
         <div class="form-group m-2">
+            <select type="text" class="form-control" name="type" >
+                <option value="">Taller Y Mantenimiento</option>
+                <option value="t">Taller</option>
+                <option value="m">Mantenimiento</option>
+            </select>
+        </div>
+        <div class="form-group m-2">
             <select type="text" class="form-control" name="client" >
                 <option value="">Todos los clientes</option>
                 <?php foreach ($clients as $client): ?>
@@ -44,7 +51,7 @@
         <div class="form-group m-2">
             <input type="text" class="form-control datepicker-input" name="end" placeholder="Fecha Final" autocomplete="off">
         </div>
-        <button type="submit" name="search" class="btn btn-primary">Aplicar Filtro</button>
+        <button type="submit" name="search" class="btn btn-primary m-2">Aplicar Filtro</button>
     </form>
 </div>
 
@@ -67,6 +74,7 @@
                 <tr>
                     <th >Id</th>
                     <th >Proyecto</th>
+                    <th >Tipo</th>
                     <th>Status</th>
                     <th >Cliente</th>
                     <th >Usuario</th>
@@ -88,6 +96,7 @@
                 <tr>
                     <td><?php echo $project['project_id'] ?></td>
                     <td><a href="<?php echo base_url('projects/show/' . $project['project_id']) ?>"><?php echo $project['project_name']; ?></a></td>
+                    <td><?php echo ($project['project_type'] == "t") ? "Taller" : "Mantenimiento"  ?></td>
                     <td><?php echo $project['project_status'] ?></td>
                     <td><?php echo $project['client_name'] ?></td>
                     <td><?php echo $project['user'] ?></td>

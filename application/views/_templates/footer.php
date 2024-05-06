@@ -229,10 +229,10 @@ https://cdn.datatables.net/buttons/3.0.1/js/buttons.html5.min.js
             ],
             columnDefs: [
                 { width: '15px', targets: [0] },
-                { width: '150px', targets: [1, 2, 3, 7, 8,9,10,11, 12,13,14] },
-                { width: '100px', targets: [4,6,5] },
+                { width: '150px', targets: [1, 2, 3, 4,  8,9,10,11, 12,13,14, 15] },
+                { width: '100px', targets: [6,7,8] },
                 //{ width: '75px', targets: [5] },
-                { width: '200px', targets: [15] }
+                { width: '200px', targets: [16] }
             ]
         });
     });

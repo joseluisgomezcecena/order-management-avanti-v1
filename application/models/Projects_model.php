@@ -28,7 +28,7 @@ class Projects_model extends CI_Model
     }
 
 
-    public function search_projects($status, $client, $start, $end)
+    public function search_projects($status, $client, $start, $end, $type)
     {
         // Retrieve all projects from the database
         $this->db->select('projects.*, clients.client_name, clients.client_id, clients.address');
@@ -36,6 +36,9 @@ class Projects_model extends CI_Model
         $this->db->join('clients', 'projects.client_id = clients.client_id'); //join with clients table to get client name
         if ($status) {
             $this->db->where('project_status', $status);
+        }
+        if ($type) {
+            $this->db->where('project_type', $type);
         }
         if ($client) {
             $this->db->where('projects.client_id', $client);

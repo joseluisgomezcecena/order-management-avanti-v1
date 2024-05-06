@@ -45,7 +45,8 @@ class Projects extends MY_Controller
                 $this->input->post('status'),
                 $this->input->post('client'),
                 $this->input->post('start'),
-                $this->input->post('end')
+                $this->input->post('end'),
+                $this->input->post('type')
             );
         }
 
