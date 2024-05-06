@@ -45,6 +45,7 @@
 
 
                     <div class=" col-lg-6" >
+                        <h4 class="mb-5 mt-2">Campos Personalizados De La Operación</h4>
                         <table class="table">
                             <thead>
                                 <tr>
@@ -68,6 +69,7 @@
 
 
                     <div class=" col-lg-6" >
+                    <h4 class="mb-5 mt-2">Proyectos Con Esta Operación</h4>
                         <table class="table">
                             <thead>
                                 <tr>
@@ -79,7 +81,7 @@
                                 <?php foreach ($projects as $project) { ?>
                                     <tr>
                                         <td><?php echo $project['project_id'] ?></td>
-                                        <td><?php echo $project['project_name'] ?></td>
+                                        <td><a href="<?php echo base_url("projects/show/" . $project['project_id'] ) ?>" target="_blank"><?php echo $project['project_name'] ?></a></td>
                                     </tr>
                                 <?php } ?>
                             </tbody>
