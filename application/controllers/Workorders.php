@@ -117,7 +117,7 @@ class Workorders extends MY_Controller {
 
         
         // Redirect or display success message.
-        $this->session->set_flashdata('success', 'Orden de trabajo creada exitosamente.');
+        $this->session->set_flashdata('success', 'Orden de trabajo actualizada exitosamente.');
         redirect(base_url("workorders/update/$project_id"));
     }
 
