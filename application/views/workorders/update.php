@@ -175,6 +175,8 @@
                                 //check if custom field is checkbox.
                                 if ($custom_field['customfield_type'] == "checkbox"): ?>
                                     <input type="checkbox" name="custom_fields[<?php echo $custom_field['customfield_id']; ?>][value]" value="on" <?php echo isset($saved_custom_field_value['cf_data'])  ? "checked" : ""; ?>>
+                                <?php elseif($custom_field['customfield_type'] == "number"): ?>
+                                    <input type="<?php echo $custom_field['customfield_type'] ?>" step="any" class="form-control" name="custom_fields[<?php echo $custom_field['customfield_id']; ?>][value]" value="<?php echo isset($saved_custom_field_value['cf_data']) ? $saved_custom_field_value['cf_data'] : ""; ?>">
                                 <?php else: ?>
                                     <input type="<?php echo $custom_field['customfield_type'] ?>" class="form-control" name="custom_fields[<?php echo $custom_field['customfield_id']; ?>][value]" value="<?php echo isset($saved_custom_field_value['cf_data']) ? $saved_custom_field_value['cf_data'] : ""; ?>">
                                 <?php endif; ?>
