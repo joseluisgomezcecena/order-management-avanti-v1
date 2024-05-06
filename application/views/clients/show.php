@@ -10,7 +10,7 @@
 </div>
 <div class="card">
     <div class="card-body">
-        <h4>Cliente</h4>
+        <h4>Datos Del Cliente</h4>
         <div class="m-t-25">
 
             <!-- echo flash messages -->
@@ -52,6 +52,8 @@
 
 
                 <div class="col-lg-12 mt-5">
+                <h4 class="mb-5">Lista De Proyectos Del Cliente</h4>
+
                 <table style="font-size:12px;" id="data-projects-client" class="table ">
                     <thead>
                         <tr>
@@ -73,7 +75,7 @@
                         <?php foreach ($projects as $project):?>
                         <tr>
                             <td><?php echo $project['project_id'] ?></td>
-                            <td><a href="<?php echo base_url('projects/' . $project['project_id']) ?>"><?php echo $project['project_name']; ?></a></td>
+                            <td><a href="<?php echo base_url('projects/show/' . $project['project_id']) ?>"><?php echo $project['project_name']; ?></a></td>
                             <td><?php echo $project['user'] ?></td>
                             <td><?php echo date_format(date_create($project['date']), "M-d-Y");  ?></td>
                             <td><?php echo ($project['installation_required'] == 1) ? 'Si' : 'No'; ?></td>
