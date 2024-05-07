@@ -18,12 +18,8 @@
         <button type="submit" class="btn btn-primary mt-3" onclick="this.classList.add('is-loading')"><i class="anticon anticon-cloud"></i> Subir</button>
         
     </form>
+    
 </div>
-<!--emd header and file upload form-->
-
-
-
-
 <div class="card mt-5">
     <div class="card-body">
         <h4>Orden: WO-<?php echo $project['project_id'] ?>&nbsp; <a href="<?php echo base_url() ?>workorders/print/<?php echo $project['project_id'] ?>" target="_blank"><i class="anticon anticon-printer"></i></a></h4>
@@ -83,35 +79,30 @@
 
        
 
-
-
-
-
-
-        <!--shop order form-->
         <table class="table table-bordered">
             <tr>
-                <td colspan="2"><b style="font-size:18px;">HOJA DE TALLER</b></td>
+                <td class=""><b style="font-size:18px;">HOJA DE TALLER</b></td>
                 <td>No. <b><?php echo $project['project_id'] ?></b></td>
                 <td><?php echo date_format(date_create($project['date']), "M-d-Y")  ?></td>
                 <td><img style="width:150px;" class="img-fluid" src="<?php echo base_url("uploads/projects/") . $project['main_image'] ?>" alt=""></td>
             </tr>
             <tr>
-                <td colspan="2" class="bold">Cliente: <?php echo $project['client_name'] ?> </td>
-                <td>Requiere instalación: <?php echo ($project['installation_required'] == 1) ? "Si" : "No"; ?></td>
-                <td colspan="2" class="bold">Usuario: <?php echo $project['user'] ?> </td>
+                <td class="bold">Cliente: <?php echo $project['client_name'] ?> </td>
+                <td colspan="3">Requiere instalación: <?php echo ($project['installation_required'] == 1) ? "Si" : "No"; ?></td>
+            </tr>
+            <tr>
+                <td class="bold">Usuario: <?php echo $project['user'] ?> </td>
+                <td colspan="3">Dirección: <?php echo ($project['address'] != "") ? $project['address'] : "N/A"; ?></td>
+            </tr>
+            <tr>
+                <td class="bold">Proyecto: <?php echo $project['project_name'] ?> </td>
+                <td colspan="3">Area: <?php echo $project['area'] ?></td>
                 
             </tr>
             <tr>
-                <td colspan="2">Dirección: <?php echo ($project['address'] != "") ? $project['address'] : "N/A"; ?></td>
-                <td colspan="2" class="bold">Proyecto: <?php echo $project['project_name'] ?> </td>
-                <td>Area: <?php echo $project['area'] ?></td>
-                
-            </tr>
-            <tr>
-                <td colspan="2">Cantidad de piezas: <?php echo $project['qty'] ?></td>
+                <td>Cantidad de piezas: <?php echo $project['qty'] ?></td>
                 <td>Unidades de trabajo a relizar/fabricar: <?php echo $project['work_units'] ?></td>
-                <td colspan="2">Aprobo: <?php echo $project['approved_by'] ?></td>
+                <td>Aprobo: <?php echo $project['approved_by'] ?></td>
             </tr>
         </table>
 
@@ -131,7 +122,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr >
+            <tr>
                 <td style="background-color:#c9c9c9" colspan="2">Area de procesos.</td>
                 <td style="background-color:rgba(235, 186, 52, .7)" colspan="5">Salida/Entrada de producto.</td>
             </tr>
@@ -143,8 +134,10 @@
                     <td>Hora de inicio: <input type="datetime-local" class="form-control"  name="hora_inicio" placeholder="Hora de inicio" value="<?php echo isset($saved_data['hora_inicio']) ? $saved_data['hora_inicio'] : "" ?>"></td>
                     <td>Hora de termino:<input type="datetime-local" class="form-control"  name="hora_termino" placeholder="Hora de termino" value="<?php echo isset($saved_data['hora_termino']) ? $saved_data['hora_termino'] : "" ?>" > </td>
                     
-                   
-                    <td colspan="1">Entrego: <input type="text" class="form-control" name="entrego" value="<?php echo isset($saved_data['entrego']) ? $saved_data['entrego'] : "" ; ?>"></td>
+                    <!--
+                    <td>Fecha: <input type="text" class="form-control datepicker-input" name="fecha"></td>
+                    -->
+                    <td>Entrego: <input type="text" class="form-control" name="entrego" value="<?php echo isset($saved_data['entrego']) ? $saved_data['entrego'] : "" ; ?>"></td>
                     <td colspan="2">Observaciones: <textarea class="form-control" name="observaciones"><?php echo isset($saved_data['observaciones']) ? $saved_data['observaciones'] : "" ?></textarea></td>
                 </tr>
                 <tr>
@@ -165,22 +158,12 @@
                 <th colspan="7">Campos de operación</th>
             </tr>           
             <tr style="width: 100%">
-                <?php 
-                $counter = 0;
-                ?>
                 <?php foreach ($operation['custom_fields'] as $custom_field): ?>
 
                             <?php
-                                $counter++;
                                 // Fetch saved data for this custom field from the database
                                 $saved_custom_field_value = $this->Projects_model->get_saved_custom_field_value($operation['po_operation_id'], $custom_field['customfield_id'], $project['project_id']);
-
-                                if ($counter == 1) {
-                                    echo "<tr>";
-                                }
-
                             ?>
-                            
                         
                             <input type="hidden" name="operation_id" value="<?php echo $operation['po_operation_id'] ?>">
                             <td>
@@ -198,13 +181,6 @@
                                     <input type="<?php echo $custom_field['customfield_type'] ?>" class="form-control" name="custom_fields[<?php echo $custom_field['customfield_id']; ?>][value]" value="<?php echo isset($saved_custom_field_value['cf_data']) ? $saved_custom_field_value['cf_data'] : ""; ?>">
                                 <?php endif; ?>
                             </td>
-
-                            <?php
-                                if ($counter == 4) {
-                                    echo "</tr>";
-                                    $counter = 0;
-                                }
-                            ?>
                                
                 <?php endforeach; ?>
             </tr>
@@ -220,10 +196,6 @@
     <?php endforeach; ?>
 
 
-       
-    
-    
-    
         <div class="mt-5">
             <form action="<?php echo base_url("workorders/update_status/" . $project['project_id']) ?>" method="post">
                 
@@ -241,6 +213,9 @@
                 <button type="submit" class="btn btn-primary right float-right">Actualizar Status</button>
             </form>
         </div>
+        
+
+
     </div>
 </div>
 
