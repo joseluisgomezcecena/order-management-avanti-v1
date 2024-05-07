@@ -1,3 +1,18 @@
+<style>
+    @media only screen and (max-width: 600px) {
+    body {
+        overflow: hidden;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+    }
+
+    #signature-pad{
+        width: 100% !important;
+        height: 100% !important;
+    }
+}
+</style>
 <div class="page-header">
     <h2 class="header-title">Firma De Usuario</h2>
     <div class="header-sub-title">
@@ -10,7 +25,7 @@
 </div>
 <div class="card">
     <div class="card-body">
-        <h4>Usuario</h4>
+        <h4>Firma Electronica</h4>
         <div class="m-t-25">
 
             <!-- echo flash messages -->
@@ -32,13 +47,19 @@
                 </div>
             <?php } ?>
 
-
-            <!--autocomplete="off"-->
-
-            
-                <input type="text" name="user_id" id="userid" value="<?php echo $user['user_id']; ?>">
-                <canvas style="border:solid;" id="signature-pad" width="400" height="200"></canvas>
-                <button id="save-signature-btn">Save Signature</button>
+            <div class="row">
+                <div class="col-lg-6">
+                    <h4>Actualizar Firma Electronica</h4>    
+                    <input type="hidden" name="userid" id="userid" value="<?php echo $user['user_id']; ?>">
+                    <canvas style="border:solid;" id="signature-pad" width="400" height="200"></canvas>
+                    <br><br/>
+                    <button class="btn btn-primary" id="save-signature-btn">Save Signature</button>
+                </div>
+                <div id="signature" class="col-lg-6">
+                    <h4>Firma Actual</h4>
+                    <img src="<?php echo base_url() .  $user['signature']; ?>" alt="Firma" style="width: 200px; height: 100px;">    
+                </div>
+            </div>
             
         </div>
     </div>

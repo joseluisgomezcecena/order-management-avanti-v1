@@ -486,6 +486,10 @@ $(document).ready(function() {
                 success: function(response) {
                     // Handle the response from the server
                     alert('Firma guardada con éxito');
+                    //refresh a div with id 'signature' to show the updated signature
+                    $('#signature').load(document.URL +  ' #signature');
+                    //clear the canvas
+                    context.clearRect(0, 0, canvas.width, canvas.height);
                 },
                 error: function() {
                     alert('Error al guardar la firma');

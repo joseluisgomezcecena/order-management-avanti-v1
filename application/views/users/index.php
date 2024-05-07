@@ -50,7 +50,7 @@
                             <a href="<?php echo base_url('users/delete/'.$user['user_id']); ?>" class="btn btn-sm btn-danger <?php echo ($user['username'] == 'administrator') ? 'disabled' : ' ';  ?>"  >Eliminar</a>
                         </td>
                         <td>
-                            <a href="<?php echo base_url('users/signature/'.$user['user_id']); ?>" class="btn btn-sm btn-primary"  >Actualizar</a>
+                            <a href="<?php echo base_url('users/signature/'.$user['user_id']); ?>" class="btn btn-sm btn-primary"  target="_blank">Actualizar</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
