@@ -5,6 +5,7 @@ class Users extends MY_Controller
 
     public function index()
     {
+        $data['active'] = 'users';
         $data['title'] = ucfirst("Usuarios"); // Capitalize the first letter
         $data['users'] = $this->User_model->get_users();
 
@@ -18,6 +19,7 @@ class Users extends MY_Controller
 
 
     public function create() {
+        $data['active'] = 'users';
         // Validate form data
         $this->form_validation->set_rules('username', 'Username', 'required');
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
@@ -71,6 +73,7 @@ class Users extends MY_Controller
 
     public function update($user_id)
     {
+        $data['active'] = 'users';
         $data['title'] = ucfirst("Actualizar usuario"); // Capitalize the first letter
         $data['user'] = $this->User_model->get_user($user_id);
 
@@ -125,6 +128,7 @@ class Users extends MY_Controller
 
 
     public function delete($user_id) {
+        $data['active'] = 'users';
         // Before deleting the user, show a view to confirm the delete
         $data['user'] = $this->User_model->get_user($user_id);
         $data['title'] = 'Eliminar Usuario.';
@@ -161,6 +165,7 @@ class Users extends MY_Controller
 
 
     public function signature($user_id) {
+        $data['active'] = 'users';
         $data['title'] = ucfirst("Firma de usuario"); // Capitalize the first letter
         $data['user'] = $this->User_model->get_user($user_id);
 
@@ -203,6 +208,7 @@ class Users extends MY_Controller
 
    
     public function upload_signature() {
+        $data['active'] = 'users';
         $imgData = $this->input->post('imgData');
         $imgData = str_replace('data:image/png;base64,', '', $imgData);
         $imgData = str_replace(' ', '+', $imgData);

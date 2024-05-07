@@ -2,7 +2,7 @@
 <div class="side-nav">
     <div class="side-nav-inner">
         <ul class="side-nav-menu scrollable">
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown" <?php echo ($active == 'home') ? "style='background-color: rgba(252, 186, 3, .15); border-right: 2px solid; border-color: #fc8c03;'" : "" ?> >
                 <a class="dropdown-toggle" href="<?php echo base_url(); ?>">
                     <span class="icon-holder">
                         <i class="anticon anticon-home"></i>
@@ -10,7 +10,7 @@
                     <span class="title">Inicio</span>
                 </a>
             </li>
-            <li style="background-color: rgba(252, 186, 3, .15); border-right: 2px solid; border-color: #fc8c03;" class="nav-item active ">
+            <li <?php echo ($active == 'workorders') ? "style='background-color: rgba(252, 186, 3, .15); border-right: 2px solid; border-color: #fc8c03;'" : "" ?> class="nav-item active ">
                 <a class="dropdown-toggle" href="<?php echo base_url(); ?>workorders">
                     <span class="icon-holder">
                         <i class="anticon anticon-file"></i>
@@ -18,7 +18,7 @@
                     <span class="title">Ordenes De Trabajo</span>
                 </a>
             </li>
-            <li class="nav-item dropdown">
+            <li <?php echo ($active == 'projects') ? "style='background-color: rgba(252, 186, 3, .15); border-right: 2px solid; border-color: #fc8c03;'" : "" ?> class="nav-item dropdown">
                 <a class="dropdown-toggle" href="javascript:void(0);">
                     <span class="icon-holder">
                         <i class="anticon anticon-tool"></i>
@@ -37,7 +37,7 @@
                     </li>
                 </ul>
             </li>
-            <li class="nav-item dropdown">
+            <li <?php echo ($active == 'clients') ? "style='background-color: rgba(252, 186, 3, .15); border-right: 2px solid; border-color: #fc8c03;'" : "" ?> class="nav-item dropdown">
                 <a class="dropdown-toggle" href="javascript:void(0);">
                     <span class="icon-holder">
                         <i class="anticon anticon-solution"></i>
@@ -56,7 +56,7 @@
                     </li>
                 </ul>
             </li>
-            <li class="nav-item dropdown">
+            <li <?php echo ($active == 'operations') ? "style='background-color: rgba(252, 186, 3, .15); border-right: 2px solid; border-color: #fc8c03;'" : "" ?> class="nav-item dropdown">
                 <a class="dropdown-toggle" href="javascript:void(0);">
                     <span class="icon-holder">
                         <i class="anticon anticon-setting"></i>
@@ -75,7 +75,7 @@
                     </li>
                 </ul>
             </li>
-            <li class="nav-item dropdown">
+            <li <?php echo ($active == 'users') ? "style='background-color: rgba(252, 186, 3, .15); border-right: 2px solid; border-color: #fc8c03;'" : "" ?> class="nav-item dropdown">
                 <a class="dropdown-toggle" href="javascript:void(0);">
                     <span class="icon-holder">
                         <i class="anticon anticon-user-add"></i>
@@ -137,7 +137,7 @@
                 </ul>
             </li>
 -->
-            <li class="nav-item dropdown">
+            <li <?php echo ($active == 'reports') ? "style='background-color: rgba(252, 186, 3, .15); border-right: 2px solid; border-color: #fc8c03;'" : "" ?> class="nav-item dropdown">
                 <a class="dropdown-toggle" href="javascript:void(0);">
                     <span class="icon-holder">
                         <i class="anticon anticon-pie-chart"></i>

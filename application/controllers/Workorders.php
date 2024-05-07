@@ -8,6 +8,7 @@ class Workorders extends MY_Controller {
     }
     
     public function index() {
+        $data['active'] = 'workorders';
         // Display a list of work orders
         //workorders are the same as projects
         $data['title'] = "Ordenes de Trabajo";
@@ -26,6 +27,7 @@ class Workorders extends MY_Controller {
 
     public function update($id)
     {
+        $data['active'] = 'workorders';
         $data['title'] = "Llenar Orden de Trabajo";
         
         // Fetch the project
@@ -67,6 +69,7 @@ class Workorders extends MY_Controller {
 
     public function create($project_id) 
     {
+        $data['active'] = 'workorders';
         $operation_id = $this->input->post('operation_id');
         
 
@@ -124,6 +127,8 @@ class Workorders extends MY_Controller {
 
     public function upload_files($project_id)
     {
+        $data['active'] = 'workorders';
+
         $config['upload_path'] = './uploads/project_uploads/';
         $config['allowed_types'] = 'gif|jpg|png|pdf|doc|docx|xls|xlsx|txt';
         $config['max_size'] = 100000;
@@ -165,6 +170,7 @@ class Workorders extends MY_Controller {
 
     public function print($id)
     {
+        $data['active'] = 'workorders';
         $data['title'] = "Llenar Orden de Trabajo";
         
         // Fetch the project

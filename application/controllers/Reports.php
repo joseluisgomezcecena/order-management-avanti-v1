@@ -10,6 +10,7 @@ class Reports extends MY_Controller
 
     public function index()
     {
+        $data['active'] = 'reports';
         $data['title'] = 'Generador De Reportes.';
 
         $data['projects'] = $this->projects_model->get_projects();

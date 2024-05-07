@@ -4,6 +4,7 @@ class Projects extends MY_Controller
 {
     
     public function show($project_id) {
+        $data['active'] = 'projects';
         // Retrieve the project from the database
         $data['project'] = $this->Projects_model->get_project($project_id);
         
@@ -35,6 +36,7 @@ class Projects extends MY_Controller
 
     public function index() 
     {
+        $data['active'] = 'projects';
         // Retrieve all projects from the database
         $data['projects'] = $this->Projects_model->get_projects();
         $data['clients'] = $this->Clients_model->get_clients();
@@ -62,6 +64,7 @@ class Projects extends MY_Controller
 
     public function create() 
     {
+        $data['active'] = 'projects';
         $data['title'] = 'Proyecto Nuevo.';
         $data['clients'] = $this->Clients_model->get_clients();
         // Handle the form submission to store a new project
@@ -166,6 +169,7 @@ class Projects extends MY_Controller
 
     public function operations($project_id) 
     {
+        $data['active'] = 'projects';
         //Title.
         $data['title'] = 'Procesos u Operaciones del Proyecto.';
         //Get all operations available
@@ -224,6 +228,7 @@ class Projects extends MY_Controller
 
     public function update($project_id) 
     {
+        $data['active'] = 'projects';
         $data['title'] = 'Actualizar Proyecto.';
         $data['clients'] = $this->Clients_model->get_clients();
         $data['project'] = $this->Projects_model->get_project($project_id);

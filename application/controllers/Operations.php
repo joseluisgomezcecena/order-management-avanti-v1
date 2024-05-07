@@ -5,6 +5,7 @@ class Operations extends CI_Controller {
 
     
     public function index() {
+        $data['active'] = 'operations';
         $data['title'] = 'Procesos u Operaciones.';
         // Retrieve all operations from the database
         $data['operations'] = $this->Operations_model->get_all_operations();
@@ -19,6 +20,7 @@ class Operations extends CI_Controller {
 
 
     public function show($operation_id) {
+        $data['active'] = 'operations';
         // Title of the page.
         $data['title'] = 'Proceso u Operación.';
         // Retrieve the operation from the database
@@ -40,6 +42,7 @@ class Operations extends CI_Controller {
     
 
     public function create() {
+        $data['active'] = 'operations';
         // Title of the page.
         $data['title'] = 'Nuevo Proceso u Operación.';
         // Validate the operation name
@@ -91,6 +94,7 @@ class Operations extends CI_Controller {
 
 
     public function customfields($operation_id) {
+        $data['active'] = 'operations';
         // Title of the page.
         $data['title'] = 'Campos Personalizados.';
         $data['operation'] = $this->Operations_model->get_operation($operation_id);
@@ -139,7 +143,7 @@ class Operations extends CI_Controller {
 
 
     public function delete_customfield($customfield_id, $operation_id) {
-       
+        $data['active'] = 'operations';
         if (isset($_POST['confirm'])) 
         {
             // Delete the customfield from the database
@@ -156,6 +160,7 @@ class Operations extends CI_Controller {
     
 
     public function update($operation_id) {
+        $data['active'] = 'operations';
         // Title of the page.
         $data['title'] = 'Actualizar Proceso u Operación';
         $data['operation'] = $this->Operations_model->get_operation($operation_id);
@@ -210,6 +215,7 @@ class Operations extends CI_Controller {
 
 
     public function delete($operation_id) {
+        $data['active'] = 'operations';
         //before deleting the operation show a view to confirm the delete
         $data['operation'] = $this->Operations_model->get_operation($operation_id);
         

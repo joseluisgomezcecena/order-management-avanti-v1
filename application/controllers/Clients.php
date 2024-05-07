@@ -3,7 +3,9 @@
 class Clients extends MY_Controller 
 {
     
+    
     public function show($client_id) {
+        $data['active'] = 'clients';
         // Retrieve the client from the database
         $data['client'] = $this->Clients_model->get_client($client_id);
         #check projects for this client
@@ -22,6 +24,7 @@ class Clients extends MY_Controller
 
     public function index() 
     {
+        $data['active'] = 'clients';
         // Retrieve all clients from the database
         $data['clients'] = $this->Clients_model->get_clients();
         //$data['last_project'] = $this->Clients_model->get_last_project();
@@ -38,6 +41,7 @@ class Clients extends MY_Controller
 
     public function create() 
     {
+        $data['active'] = 'clients';
         // Handle the form submission to store a new client
         $this->form_validation->set_rules('client_name', 'Nombre del cliente', 'required');
         
@@ -99,6 +103,7 @@ class Clients extends MY_Controller
 
 
     public function update($client_id) {
+        $data['active'] = 'clients';
         // Handle the form submission to update an existing client
         $this->form_validation->set_rules('client_name', 'Client Name', 'required');
         //check only if the address is not empty
@@ -163,6 +168,7 @@ class Clients extends MY_Controller
 
 
     public function delete($client_id) {
+        $data['active'] = 'clients';
         //before deleting the client show a view to confirm the delete
         $data['client'] = $this->Clients_model->get_client($client_id);
         $data['title'] = 'Eliminar Cliente.';

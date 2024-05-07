@@ -4,6 +4,8 @@ class Pages extends MY_Controller
 {
     public function view($page = 'home')
     {
+        $data['active'] = 'home';
+
         if (!file_exists(APPPATH . 'views/pages/' . $page . '.php')) {
             // Whoops, we don't have a page for that!
             show_404();
