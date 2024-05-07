@@ -118,9 +118,17 @@
 									<i class="anticon anticon-ellipsis"></i>
 								</a>
 								<div class="dropdown-menu">
-									<a href="<?php echo base_url() ?>workorders/update/<?php echo $recent['project_id'] ?>" class="dropdown-item">
+									<a href="<?php echo base_url() ?>projects/show/<?php echo $recent['project_id'] ?>" class="dropdown-item" target="_blank">
 										<i class="anticon anticon-eye"></i>
 										<span class="m-l-10">Ver Proyecto</span>
+									</a>
+									<a href="<?php echo base_url() ?>workorders/update/<?php echo $recent['project_id'] ?>" class="dropdown-item" target="_blank">
+										<i class="anticon anticon-file"></i>
+										<span class="m-l-10">Orden De Trabajo</span>
+									</a>
+									<a href="<?php echo base_url() ?>workorders/print/<?php echo $recent['project_id'] ?>" class="dropdown-item" target="_blank">
+										<i class="anticon anticon-printer"></i>
+										<span class="m-l-10">Imprimir Orden De Trabajo</span>
 									</a>
 								</div>
 							</div>
