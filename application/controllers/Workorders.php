@@ -29,6 +29,7 @@ class Workorders extends MY_Controller {
     {
         $data['active'] = 'workorders';
         $data['title'] = "Llenar Orden de Trabajo";
+        $data['users'] = $this->User_model->get_users();
         
         // Fetch the project
         $data['project'] = $this->Projects_model->get_project($id);
