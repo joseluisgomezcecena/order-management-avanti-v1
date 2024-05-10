@@ -249,8 +249,19 @@
                                                 <option value="<?php echo $user['username'] ?>" <?php echo isset($saved_data['reviso']) && $saved_data['reviso'] == $user['username'] ? "selected" : "" ?>><?php echo $user['username'] ?></option>
                                             <?php endforeach; ?>
                                         </select>
-                                        <input type="password" class="form-control mt-3" id="password" name="password" placeholder="Firma con tu contraseña">
+                                        <input type="password" class="form-control mt-3" id="password" name="password_reviso" placeholder="Firma con tu contraseña">
                                         <small>* Ingresa tu contraseña para firmar.</small>
+                                        <?php 
+                                            //get the signature image of the user
+                                            $signature = $this->User_model->get_user_signature($saved_data['reviso']);
+
+                                            if ($signature) {
+                                                echo "<img src='" . base_url() . $signature['signature'] . "' style='width:100px; height:100px;'>";
+                                            }
+
+                                        ?>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -269,8 +280,17 @@
                                                 <option value="<?php echo $user['username'] ?>" <?php echo isset($saved_data['entrego']) && $saved_data['entrego'] == $user['username'] ? "selected" : "" ?>><?php echo $user['username'] ?></option>
                                             <?php endforeach; ?>
                                         </select>
-                                        <input type="password" class="form-control mt-3" id="password" name="password" placeholder="Firma con tu contraseña">
+                                        <input type="password" class="form-control mt-3" id="password" name="password_entrego" placeholder="Firma con tu contraseña">
                                         <small>* Ingresa tu contraseña para firmar.</small>
+                                        <?php 
+                                            //get the signature image of the user
+                                            $signature = $this->User_model->get_user_signature($saved_data['entrego']);
+
+                                            if ($signature) {
+                                                echo "<img src='" . base_url() . $signature['signature'] . "' style='width:100px; height:100px;'>";
+                                            }
+                                        ?>
+
                                     </div>
                                 </div>
                                 <div class="col-lg-8">
@@ -310,8 +330,17 @@
                                                 <option value="<?php echo $user['username'] ?>" <?php echo isset($saved_data['recibio']) && $saved_data['recibio'] == $user['username'] ? "selected" : "" ?>><?php echo $user['username'] ?></option>
                                             <?php endforeach; ?>
                                         </select>
-                                        <input type="password" class="form-control mt-3" id="password" name="password" placeholder="Firma con tu contraseña">
+                                        <input type="password" class="form-control mt-3" id="password" name="password_recibio" placeholder="Firma con tu contraseña">
                                         <small>* Ingresa tu contraseña para firmar.</small>
+                                        <?php 
+                                            //get the signature image of the user
+                                            $signature = $this->User_model->get_user_signature($saved_data['recibio']);
+
+                                            if ($signature) {
+                                                echo "<img src='" . base_url() . $signature['signature'] . "' style='width:100px; height:100px;'>";
+                                            }
+                                        ?>
+
                                     </div>
                                 </div>
                             </div>

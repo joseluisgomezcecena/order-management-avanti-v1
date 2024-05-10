@@ -80,15 +80,46 @@ class Workorders extends MY_Controller {
 
 
 
+        // Check if the user is authorized to sign the work order Realizo field.
         $realizo_user = $this->input->post('realizo');
         $password_realizo = $this->input->post('password_realizo');
-        //check if realizo_user and password_realizo match
         $check_realizo = $this->User_model->check_user_signature($realizo_user, $password_realizo);
         
         if (!$check_realizo && !empty($password_realizo)) {
             $this->session->set_flashdata('error', 'Usuario y/o contraseña incorrectos. No se puede firmar la orden de trabajo.');
             redirect(base_url("workorders/update/$project_id"));
         }
+
+        // Check if the user is authorized to sign the work order Reviso field.
+        $reviso_user = $this->input->post('reviso');
+        $password_reviso = $this->input->post('password_reviso');
+        $check_reviso = $this->User_model->check_user_signature($reviso_user, $password_reviso);
+
+        if (!$check_reviso && !empty($password_reviso)) {
+            $this->session->set_flashdata('error', 'Usuario y/o contraseña incorrectos. No se puede firmar la orden de trabajo.');
+            redirect(base_url("workorders/update/$project_id"));
+        }
+
+        // Check if the user is authorized to sign the work order Entrego field.
+        $entrego_user = $this->input->post('entrego');
+        $password_entrego = $this->input->post('password_entrego');
+        $check_entrego = $this->User_model->check_user_signature($entrego_user, $password_entrego);
+
+        if (!$check_entrego && !empty($password_entrego)) {
+            $this->session->set_flashdata('error', 'Usuario y/o contraseña incorrectos. No se puede firmar la orden de trabajo.');
+            redirect(base_url("workorders/update/$project_id"));
+        }
+
+        // Check if the user is authorized to sign the work order Recibio field.
+        $recibio_user = $this->input->post('recibio');
+        $password_recibio = $this->input->post('password_recibio');
+        $check_recibio = $this->User_model->check_user_signature($recibio_user, $password_recibio);
+
+        if (!$check_recibio && !empty($password_recibio)) {
+            $this->session->set_flashdata('error', 'Usuario y/o contraseña incorrectos. No se puede firmar la orden de trabajo.');
+            redirect(base_url("workorders/update/$project_id"));
+        }
+        
 
 
 
