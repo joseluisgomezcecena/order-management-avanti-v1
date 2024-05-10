@@ -224,8 +224,18 @@
                                                 <option value="<?php echo $user['username'] ?>" <?php echo isset($saved_data['realizo']) && $saved_data['realizo'] == $user['username'] ? "selected" : "" ?>><?php echo $user['username'] ?></option>
                                             <?php endforeach; ?>
                                         </select>
-                                        <input type="password" class="form-control mt-3" id="password" name="password" placeholder="Firma con tu contraseña">
+                                        <input type="password" class="form-control mt-3" id="password" name="password_realizo" placeholder="Firma con tu contraseña">
                                         <small>* Ingresa tu contraseña para firmar.</small>
+                                        
+                                        <?php 
+                                            //get the signature image of the user
+                                            $signature = $this->User_model->get_user_signature($saved_data['realizo']);
+
+                                            if ($signature) {
+                                                echo "<img src='" . base_url() . $signature['signature'] . "' style='width:100px; height:100px;'>";
+                                            }
+
+                                        ?>
                                         
                                     </div>
                                 </div>
@@ -355,6 +365,9 @@
                         <?php endforeach; ?>
                         </div>
                         <!--end custom fields form-->
+                                        <div class="form-group mt-5">
+                                            <button type="submit" class="btn btn-primary">Guardar</button>
+                                        </div>
                         </form>
                         
                     </div>
@@ -380,112 +393,7 @@
       
 
     
-    <?php foreach ($operations as $operation): ?>
-
-        <?php
-            // Fetch saved data for this operation from the database
-            $saved_data = $this->Projects_model->get_saved_data($operation['po_operation_id'], $operation['po_project_id']); //Added po_project_id to the function call
-        ?>
-
-        <form action="<?php echo base_url("workorders/create/" . $project['project_id']) ?>" method="post">
-        <table style="font-size:12px;" class="table table-bordered mt-5 shadow">
-        <thead>
-            <tr style="background-color:orange;">
-                <th colspan="7"><?php echo $operation['operation_name'] ?></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr >
-                <td style="background-color:#c9c9c9" colspan="2">Area de procesos.</td>
-                <td style="background-color:rgba(235, 186, 52, .7)" colspan="5">Salida/Entrada de producto.</td>
-            </tr>
-            
-            <!--shared fields form-->
-            
-                <input type="hidden" name="operation_id" value="<?php echo $operation['po_operation_id'] ?>">
-                <tr>
-                    <td>Hora de inicio: <input type="datetime-local" class="form-control"  name="hora_inicio" placeholder="Hora de inicio" value="<?php echo isset($saved_data['hora_inicio']) ? $saved_data['hora_inicio'] : "" ?>"></td>
-                    <td>Hora de termino:<input type="datetime-local" class="form-control"  name="hora_termino" placeholder="Hora de termino" value="<?php echo isset($saved_data['hora_termino']) ? $saved_data['hora_termino'] : "" ?>" > </td>
-                    
-                   
-                    <td colspan="1">Entrego: <input type="text" class="form-control" name="entrego" value="<?php echo isset($saved_data['entrego']) ? $saved_data['entrego'] : "" ; ?>"></td>
-                    <td colspan="2">Observaciones: <textarea class="form-control" name="observaciones"><?php echo isset($saved_data['observaciones']) ? $saved_data['observaciones'] : "" ?></textarea></td>
-                </tr>
-                <tr>
-                    <td>
-                        Realizo: <input type="text" class="form-control" name="realizo" value="<?php echo isset($saved_data['realizo']) ? $saved_data['realizo'] : "" ?>">
-                        <a class="btn btn-primary" href="<?php echo base_url('sign/' . $project['project_id'] . '/' . $operation['po_operation_id']) ?>">Firmar</a>
-                    </td>
-                    <td>Reviso: <input type="text" class="form-control" name="reviso" value="<?php echo isset($saved_data['reviso']) ? $saved_data['reviso'] : "" ?>"></td>
-
-                    <td>Hora de salida: <input type="datetime-local" class="form-control"  name="hora_salida" placeholder="Hora de salida" value="<?php echo isset($saved_data['hora_salida']) ? $saved_data['hora_salida'] : "" ?>"></td>
-                    <td>Hora de recibido: <input type="datetime-local" class="form-control"  name="hora_recibido" placeholder="Hora de recibido" value="<?php echo isset($saved_data['hora_recibido']) ? $saved_data['hora_recibido'] : "" ?>"></td>
-                    <td>Recibio: <input type="text" class="form-control" name="recibio" value="<?php echo isset($saved_data['recibio']) ? $saved_data['recibio'] : "" ?>"></td>
-                </tr>
-               
-                
-            
-            <!--shared fields form-->
-
-
-            <tr style="background-color:rgba(235, 213, 52, .7);">
-                <th colspan="7">Campos de operación</th>
-            </tr>           
-            <tr style="width: 100%">
-                <?php 
-                $counter = 0;
-                ?>
-                <?php foreach ($operation['custom_fields'] as $custom_field): ?>
-
-                            <?php
-                                $counter++;
-                                // Fetch saved data for this custom field from the database
-                                $saved_custom_field_value = $this->Projects_model->get_saved_custom_field_value($operation['po_operation_id'], $custom_field['customfield_id'], $project['project_id']);
-
-                                if ($counter == 1) {
-                                    echo "<tr>";
-                                }
-
-                            ?>
-                            
-                        
-                            <input type="hidden" name="operation_id" value="<?php echo $operation['po_operation_id'] ?>">
-                            <td>
-                                <?php echo $custom_field['customfield_label']; ?>
-
-                                
-
-                                <?php 
-                                //check if custom field is checkbox.
-                                if ($custom_field['customfield_type'] == "checkbox"): ?>
-                                    <input type="checkbox" name="custom_fields[<?php echo $custom_field['customfield_id']; ?>][value]" value="on" <?php echo isset($saved_custom_field_value['cf_data'])  ? "checked" : ""; ?>>
-                                <?php elseif($custom_field['customfield_type'] == "number"): ?>
-                                    <input type="<?php echo $custom_field['customfield_type'] ?>" step="any" class="form-control" name="custom_fields[<?php echo $custom_field['customfield_id']; ?>][value]" value="<?php echo isset($saved_custom_field_value['cf_data']) ? $saved_custom_field_value['cf_data'] : ""; ?>">
-                                <?php else: ?>
-                                    <input type="<?php echo $custom_field['customfield_type'] ?>" class="form-control" name="custom_fields[<?php echo $custom_field['customfield_id']; ?>][value]" value="<?php echo isset($saved_custom_field_value['cf_data']) ? $saved_custom_field_value['cf_data'] : ""; ?>">
-                                <?php endif; ?>
-                            </td>
-
-                            <?php
-                                if ($counter == 4) {
-                                    echo "</tr>";
-                                    $counter = 0;
-                                }
-                            ?>
-                               
-                <?php endforeach; ?>
-            </tr>
-            <tr>
-                <td colspan="7">
-                    <button type="submit" class="btn btn-primary">Guardar</button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    </form>
-  
-    <?php endforeach; ?>
-
+   
 
        
     

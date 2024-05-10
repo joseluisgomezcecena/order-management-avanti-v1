@@ -237,6 +237,9 @@ class Projects_model extends CI_Model
     public function get_saved_data($operation_id, $project_id) {
         $this->db->where('shared_operation_id', $operation_id);
         $this->db->where('shared_project_id', $project_id);//added this line
+
+        
+        
         $query = $this->db->get('operation_shared_fields');
         return $query->row_array();
     }

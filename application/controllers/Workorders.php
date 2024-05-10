@@ -68,6 +68,8 @@ class Workorders extends MY_Controller {
     }
 
 
+
+
     public function create($project_id) 
     {
         $data['active'] = 'workorders';
@@ -75,6 +77,20 @@ class Workorders extends MY_Controller {
         
 
         $check_if_record_exists = $this->Projects_model->check_if_record_exists($project_id, $operation_id);
+
+
+        
+        $realizo_user = $this->input->post('realizo');
+        $password_realizo = $this->input->post('password_realizo');
+        //check if realizo_user and password_realizo match
+        $check_realizo = $this->User_model->check_user_signature($realizo_user, $password_realizo);
+        
+        if (!$check_realizo) {
+            $this->session->set_flashdata('error', 'Usuario y/o contraseña incorrectos. No se puede firmar la orden de trabajo.');
+            redirect(base_url("workorders/update/$project_id"));
+        }
+
+
 
         // Process shared fields
         $sharedData = array(
