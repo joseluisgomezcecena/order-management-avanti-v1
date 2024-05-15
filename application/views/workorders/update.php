@@ -254,10 +254,11 @@
                                         <small>* Ingresa tu contraseña para firmar.</small>
                                         <?php 
                                             //get the signature image of the user
-                                            $signature = $this->User_model->get_user_signature($saved_data['reviso']);
-
-                                            if ($signature) {
-                                                echo "<img src='" . base_url() . $signature['signature'] . "' style='width:100px; height:100px;'>";
+                                            if (isset($saved_data['reviso'])) {
+                                                $signature = $this->User_model->get_user_signature($saved_data['reviso']);
+                                                if ($signature) {
+                                                    echo "<img src='" . base_url() . $signature['signature'] . "' style='width:100px; height:100px;'>";
+                                                }
                                             }
 
                                         ?>
@@ -285,11 +286,13 @@
                                         <small>* Ingresa tu contraseña para firmar.</small>
                                         <?php 
                                             //get the signature image of the user
-                                            $signature = $this->User_model->get_user_signature($saved_data['entrego']);
-
-                                            if ($signature) {
-                                                echo "<img src='" . base_url() . $signature['signature'] . "' style='width:100px; height:100px;'>";
+                                            if (isset($saved_data['entrego'])) {
+                                                $signature = $this->User_model->get_user_signature($saved_data['entrego']);
+                                                if ($signature) {
+                                                    echo "<img src='" . base_url() . $signature['signature'] . "' style='width:100px; height:100px;'>";
+                                                }
                                             }
+
                                         ?>
 
                                     </div>
@@ -335,11 +338,13 @@
                                         <small>* Ingresa tu contraseña para firmar.</small>
                                         <?php 
                                             //get the signature image of the user
-                                            $signature = $this->User_model->get_user_signature($saved_data['recibio']);
-
-                                            if ($signature) {
-                                                echo "<img src='" . base_url() . $signature['signature'] . "' style='width:100px; height:100px;'>";
+                                            if (isset($saved_data['rebibio'])) {
+                                                $signature = $this->User_model->get_user_signature($saved_data['rebibio']);
+                                                if ($signature) {
+                                                    echo "<img src='" . base_url() . $signature['signature'] . "' style='width:100px; height:100px;'>";
+                                                }
                                             }
+
                                         ?>
 
                                     </div>
