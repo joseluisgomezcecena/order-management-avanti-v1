@@ -1,13 +1,21 @@
 <!-- Core css -->
 <link href="<?php // echo base_url() ?>assets/css/app.min.css" rel="stylesheet">
 <style>
+    body{
+        font-family: Arial, sans-serif;
+        font-size: 7px;
+        display: none;
+    }
+    
     @media print {
         body {
+            display: block;
             width: 8.5in;
             height: 11in;
             padding: 0.2in; /* Adjust as needed */
             box-sizing: border-box;
-            font-size:10px;
+            font-size:7px !important;
+            font-family: Arial, sans-serif;
         }
         .card {
             page-break-inside: avoid;
@@ -15,51 +23,81 @@
         .table {
             width: 100%;
             table-layout: fixed;
-            border:solid 1px;
+            border-collapse: collapse;
+            border: 1px solid black;
+
         }
         .orange-print{
             background-color:orange;
         }
         td{
-            /*border-right:solid 1px;*/
+            border: 1px solid black;
+            padding-top: 6px;
+            padding-bottom: 6px;
+            font-size:9px;
         }
     }
 </style>
 
-<div class="card mt-5">
-    <div class="card-body">
+<div style="text-align:center" class="text-center">
+    <p style="font-size:9px; padding-top:1px; padding-bottom:1px;">Procedimiento del sistema de calidad</p>
+    <p style="font-size:10px; font-weight:800; padding-top:1px;" class="bolder">Proceso de preparación de nuevas ordenes de trabajo</p>
+</div>
 
+
+
+<img src="<?php echo base_url() ?>assets/images/logowide.png" alt="logo" style="width: 300px; margin-bottom:10px;">
+<!--
+<img style="width:150px; float-right" class="img-fluid" src="<?php echo base_url("uploads/projects/") . $project['main_image'] ?>" alt=""></td>
+-->
+
+
+<table class="table talbe-bordered">
+    <tr>
+        <td colspan="8" class="orange-print" style="padding-top: 5px; padding-bottom: 5px; text-bolder"><b style="font-size:14px; padding:10px;">HOJA DE TALLER</b></td>
+    </tr>
+    
+    <tr>
+        <td colspan="2">No.<b><?php echo $project['project_id'] ?></b></td>
+        <td colspan="2" >Fecha: <?php echo date_format(date_create($project['date']), "M/d/Y")  ?></td>
+        <td colspan="4" class="bold">Cliente: <?php echo $project['client_name'] ?> </td>
+    </tr>
+
+    <tr>
+        <td colspan="4">Proyecto: <?php echo $project['project_name'] ?> </td>
+        <td colspan="4">Requiere instalación: Si <span style="display: inline-block; width:10px; height:10px; border:solid 1px;"><?php echo ($project['installation_required'] == 1) ? "&nbsp;X" : "&nbsp;"; ?></span>  No <span style="display: inline-block; width:10px; height:10px; border:solid 1px;"><?php echo ($project['installation_required'] != 1) ? "&nbsp;X" : "&nbsp;"; ?></span></td>
+    </tr>
+    
+    <tr>
+        <td colspan="4">Dirección: <?php echo ($project['address'] != "") ? $project['address'] : "N/A"; ?></td>
+        <td colspan="4">Usuario: <?php echo $project['user'] ?> </td>
+    </tr>
+
+    <tr>
+        <td colspan="2">Area: <?php echo $project['area'] ?></td>
+        <td colspan="2">Cantidad de piezas: <?php echo $project['qty'] ?></td>
+        <td colspan="2">Unidades de trabajo: <?php echo $project['work_units'] ?></td>
+        <td colspan="2">Aprobo: <?php echo $project['approved_by'] ?></td>
+    </tr>
+    <tr>
+        <td colspan="4" class="" style="padding-top: 5px; padding-bottom: 5px; text-bolder; background-color:#c9c9c9"><b style="font-size:14px; padding:10px;">Area de procesos</b></td>
+        <td colspan="4"  style="padding-top: 5px; padding-bottom: 5px; text-bolder;background-color:rgba(235, 186, 52, .7)"><b style="font-size:14px; padding:10px;">Salida/Entrada de producto</b></td>
+    </tr>
+</table>
     
 
-        <table class="table table-bordered">
-            <tr>
-                <td class="orange-print"><b style="font-size:18px;">HOJA DE TALLER</b></td>
-            </tr>
-        </table>
-        <table class="table table-bordered">
-            <tr>
-                <td >No. <b><?php echo $project['project_id'] ?></b></td>
-                <td ><?php echo date_format(date_create($project['date']), "M-d-Y")  ?></td>
-                <td colspan="3" class="bold">Cliente: <?php echo $project['client_name'] ?> </td>
-                <td colspan="3"><img style="width:150px;" class="img-fluid" src="<?php echo base_url("uploads/projects/") . $project['main_image'] ?>" alt=""></td>
-            </tr>
-        </table>
-        <table class="table table-bordered">
-            <tr>
-                <td class="bold">Proyecto: <?php echo $project['project_name'] ?> </td>
-                <td colspan="1">Requiere instalación: <?php echo ($project['installation_required'] == 1) ? "Si" : "No"; ?></td>
-                <td colspan="1">Dirección: <?php echo ($project['address'] != "") ? $project['address'] : "N/A"; ?></td>
-                <td class="bold">Usuario: <?php echo $project['user'] ?> </td>
-            </tr>
-        </table>
-            
-            <tr>
-                <td colspan="1">Area: <?php echo $project['area'] ?></td>
-                <td>Cantidad de piezas: <?php echo $project['qty'] ?></td>
-                <td>Unidades de trabajo a relizar/fabricar: <?php echo $project['work_units'] ?></td>
-                <td>Aprobo: <?php echo $project['approved_by'] ?></td>
-            </tr>
-        </table>
+<br><br/>
+
+<table class="table" colspan="10">
+    
+    <tr>
+    <td colspan="1">freui</td>
+    <td colspan="2">freui</td>
+    <td colspan="2">freui</td>
+    <td colspan="2">freui</td>
+    <td colspan="3">freui</td>
+    </tr>
+</table>
 
     
     <?php foreach ($operations as $operation): ?>
@@ -69,16 +107,27 @@
             $saved_data = $this->Projects_model->get_saved_data($operation['po_operation_id'], $operation['po_project_id']); //Added po_project_id to the function call
         ?>
 
-        <form action="<?php echo base_url("workorders/create/" . $project['project_id']) ?>" method="post">
+        <table class="table" colspan="10">
+            
+            <tr>
+            <td colspan="1">freui</td>
+            <td colspan="2">freui</td>
+            <td colspan="2">freui</td>
+            <td colspan="2">freui</td>
+            <td colspan="3">freui</td>
+            </tr>
+        </table>
+
+       
         <table style="font-size:12px;" class="table table-bordered mt-5 shadow">
         <thead>
             <tr style="background-color:orange;">
-                <th colspan="7"><?php echo $operation['operation_name'] ?></th>
+                <th colspan="8"><?php echo $operation['operation_name'] ?></th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td style="background-color:#c9c9c9" colspan="2">Area de procesos.</td>
+                <td style="background-color:#c9c9c9" colspan="3">Area de procesos.</td>
                 <td style="background-color:rgba(235, 186, 52, .7)" colspan="5">Salida/Entrada de producto.</td>
             </tr>
             
@@ -140,14 +189,10 @@
            
         </tbody>
     </table>
-    </form>
+  
   
     <?php endforeach; ?>
 
-
-
-    </div>
-</div>
 
 
 
