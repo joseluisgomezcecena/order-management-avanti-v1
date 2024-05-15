@@ -229,10 +229,11 @@
                                         
                                         <?php 
                                             //get the signature image of the user
-                                            $signature = $this->User_model->get_user_signature($saved_data['realizo']);
-
-                                            if ($signature) {
-                                                echo "<img src='" . base_url() . $signature['signature'] . "' style='width:100px; height:100px;'>";
+                                            if (isset($saved_data['realizo'])) {
+                                                $signature = $this->User_model->get_user_signature($saved_data['realizo']);
+                                                if ($signature) {
+                                                    echo "<img src='" . base_url() . $signature['signature'] . "' style='width:100px; height:100px;'>";
+                                                }
                                             }
 
                                         ?>
@@ -428,7 +429,7 @@
     
     
     
-        <div class="mt-5">
+        <div class="mt-5 col-lg-12 mb-5">
             <form action="<?php echo base_url("workorders/update_status/" . $project['project_id']) ?>" method="post">
                 
                 <div class="form-group">
