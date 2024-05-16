@@ -95,7 +95,7 @@
         
         <h4 class="mb-5">
             Hoja de taller electrónica 
-            <a href="<?php echo base_url() ?>workorders/print/<?php echo $project['project_id'] ?>" class="btn btn-dark float-right mr-2 ml-2" target="_blank">
+            <a href="<?php echo base_url() ?>workorders/print_template/<?php echo $project['project_id'] ?>" class="btn btn-dark float-right mr-2 ml-2" target="_blank">
                 <i class="anticon anticon-edit"></i>&nbsp;Imprimir Plantilla
             </a>
             <a href="<?php echo base_url() ?>workorders/print/<?php echo $project['project_id'] ?>" class="btn btn-primary float-right" target="_blank">

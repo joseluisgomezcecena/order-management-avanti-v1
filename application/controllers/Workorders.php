@@ -241,4 +241,31 @@ class Workorders extends MY_Controller {
     }
 
 
+
+
+    public function print_template($id)
+    {
+        $data['active'] = 'workorders';
+        $data['title'] = "Llenar Orden de Trabajo";
+        
+        // Fetch the project
+        $data['project'] = $this->Projects_model->get_project($id);
+
+        // Fetch the uploaded files for the project.
+        $data['files'] = $this->Projects_model->get_files($id);
+        
+        // Fetch the shared fields for the project
+        $data['sharedfields'] = $this->Sharedfields_model->get_shared_fields();
+        
+        // Fetch the operations for the project
+        $data['operations'] = $this->Projects_model->get_operations_by_project($id);
+
+        // For each operation, fetch the custom fields
+        foreach ($data['operations'] as &$operation) {
+            $operation['custom_fields'] = $this->Operations_model->get_operation_customfields($operation['po_operation_id']);
+        }
+        $this->load->view('workorders/print_template', $data);
+    }
+
+
 }
