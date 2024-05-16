@@ -313,7 +313,7 @@
                                     <?php echo form_error('hora_salida') ? 'has-error' : '' ?>">
                                         <label for="realizo">Hora de Salida</label>
                                         <input type="datetime-local" class="form-control"  name="hora_salida" placeholder="Hora de salida" value="<?php echo isset($saved_data['hora_salida']) ? $saved_data['hora_salida'] : "" ?>">
-                                        <span class="text-danger"><?php echo form_error('rhora_salida'); ?></span>
+                                        <span class="text-danger"><?php echo form_error('hora_salida'); ?></span>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
